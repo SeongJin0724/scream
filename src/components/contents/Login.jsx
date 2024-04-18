@@ -23,22 +23,29 @@ export default function Login() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>로그인</h2>
+    <form onSubmit={handleSubmit} className="login">
+      <h2 className="login-header">로그인</h2>
+
+      <label for="email">이메일 주소</label>
       <input
+        id="email"
         type="email"
         name="email"
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
         required
       />
+
+      <label for="password">비밀번호</label>
       <input
+        id="password"
         type="password"
         name="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+
       <button type="submit">로그인</button>
     </form>
   );

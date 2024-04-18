@@ -1,0 +1,37 @@
+.header {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #ebebeb;
+
+  .user-menu {
+    display: flex;
+    justify-content: end;
+    padding: 8px 40px;
+
+    li {
+      margin-right: 30px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .logo {
+    font-size: 30px;
+    text-align: center;
+    padding: 20px 40px;
+  }
+
+  .category {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    li {
+      padding: 15px 6px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
