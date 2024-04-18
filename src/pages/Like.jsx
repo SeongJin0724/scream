@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "../components/section/Main";
 
-export default function MyPage() {
+export default function Like() {
   return (
     <Main>
       {" "}
@@ -13,7 +13,7 @@ export default function MyPage() {
           padding: "0 40px",
         }}
       >
-        Mypage
+        Like
       </div>
     </Main>
   );

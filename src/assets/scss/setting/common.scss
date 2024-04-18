@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -21,4 +22,7 @@
     padding: 20px;
     border-radius: 5px;
   }
+}
+body {
+  margin-top: 220px;
 }
