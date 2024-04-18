@@ -1,10 +1,9 @@
 import React from "react";
 import Main from "../components/section/Main";
 
-export default function MyPage() {
+export default function Woman() {
   return (
     <Main>
-      {" "}
       <div
         style={{
           width: "100%",
@@ -13,7 +12,7 @@ export default function MyPage() {
           padding: "0 40px",
         }}
       >
-        Mypage
+        Woman
       </div>
     </Main>
   );
