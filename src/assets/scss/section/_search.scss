@@ -1,4 +1,6 @@
 .search-pop {
+  width: 50%;
+  height: 150px;
   position: absolute;
   top: 20%;
   left: 50%;
@@ -6,26 +8,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 100px;
   background-color: #fff;
-  background-color: bisque;
   z-index: 100;
 
-  .search-pop_form {
-    display: flex;
-    justify-content: center;
+  .search-form {
+    position: relative;
+    width: 95%;
+    height: auto;
+    background-color: #fff;
+    border-bottom: 3px solid black;
   }
 
   .search_input {
-    width: 100%;
+    width: 93%;
     height: 40px;
+    font-size: 18px;
+    padding: 8px;
     border: none;
-    border-bottom: 3px solid black;
     outline: none;
   }
 
   .resetIcon {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #808080;
+    cursor: pointer;
+  }
+
+  .closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 30px;
+    cursor: pointer;
   }
 }

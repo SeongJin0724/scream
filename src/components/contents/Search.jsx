@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import { AiOutlineCloseSquare } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
 
 export default function Search(props) {
   const [content, setContent] = useState("");
@@ -15,18 +15,20 @@ export default function Search(props) {
 
   return (
     <div className="search-pop">
-      <form className="search-pop_form">
+      <form className="search-form">
         <input
           className="search_input"
           type="text"
           value={content}
+          placeholder="상품 검색"
           onChange={(e) => {
             setContent(e.target.value);
           }}
         />
-        <IoMdCloseCircle onClick={onReset} className="resetIcon" />
+        {content && <IoMdCloseCircle onClick={onReset} className="resetIcon" />}
       </form>
-      <AiOutlineCloseSquare onClick={onClose} />
+
+      <IoClose onClick={onClose} className="closeIcon" />
     </div>
   );
 }
