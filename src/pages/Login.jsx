@@ -7,34 +7,33 @@ export default function Login() {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  //   const response = await fetch("/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ email, password }),
-  //   });
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-  //   const data = await response.json();
-  //   if (response.ok) {
-  //     navigate("/");
-  //   } else {
-  //     alert(data.message);
-  //   }
-  // };
+    const data = await response.json();
+    if (response.ok) {
+      navigate("/");
+    } else {
+      alert(data.message);
+    }
+  };
   return (
     <Main>
       <div className="login_wrap">
         <h2 className="login_logo">
           <img src={Logo} alt="LSJ LOGO" />
         </h2>
-        {/* <form onSubmit={handleSubmit}> */}
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form_inner">
             <label className="form_title">이메일 주소</label>
             <input
