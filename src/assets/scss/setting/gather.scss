@@ -1,0 +1,41 @@
+.div2 {
+  position: relative;
+  left: 780px;
+  top: 150px;
+  width: 320px;
+  height: 210px;
+  resize: none;
+}
+.userjoin_msg {
+  width: 360px;
+  height: 177px;
+  resize: none;
+  max-height: 100px;
+  border: 1px solid #d6d6d6;
+  margin: 9px 0 0 16px;
+  padding: 15px;
+}
+.userjoin_msg2 {
+  width: 360px;
+  height: 177px;
+  resize: none;
+  max-height: 100px;
+  border: 1px solid #d6d6d6;
+  margin: 9px 0 0 16px;
+  padding: 15px;
+}
+.userjoin_msg3 {
+  width: 360px;
+  height: 120px;
+  resize: none;
+  max-height: 100px;
+  border: 1px solid #d6d6d6;
+  margin: 9px 0 0 16px;
+  padding: 15px;
+}
+input[type="checkbox"].my-checkbox {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}
+input[type="checkbox"]#selectAll {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}

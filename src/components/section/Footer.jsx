@@ -53,9 +53,9 @@ export default function Footer() {
           </div>
           <div className="footer_info3">
             {uldata3.map((item, index) => (
-              <p className="p_wrap" key={index}>
+              <div className="p_wrap" key={index}>
                 {item.content}
-              </p>
+              </div>
             ))}
 
             <Link className="p9" to={"/question"}>
@@ -93,16 +93,16 @@ export default function Footer() {
             </div>
 
             {uldata5.map((item, index) => (
-              <p className="p_wrap" key={index}>
+              <div className="p_wrap" key={index}>
                 {item.content}
-              </p>
+              </div>
             ))}
           </nav>
           <div className="footer_nav4">
             {uldata6.map((item, index) => (
-              <p className="p_wrap2" key={index}>
+              <div className="p_wrap2" key={index}>
                 {item.content}
-              </p>
+              </div>
             ))}
           </div>
         </div>

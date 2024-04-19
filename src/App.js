@@ -24,6 +24,7 @@ const Terms = lazy(() => import("./pages/Terms"));
 const Personal = lazy(() => import("./pages/Personal"));
 const Question = lazy(() => import("./pages/Question"));
 const Detailpage = lazy(() => import("./pages/Detailpage"));
+const Gather = lazy(() => import("./pages/Gather"));
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/personal" element={<Personal />} />
           <Route path="/question" element={<Question />} />
           <Route path="/detail" element={<Detailpage />} />
+          <Route path="/gather" element={<Gather />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
