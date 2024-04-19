@@ -26,29 +26,31 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer_container">
         <div className="footer_top">
-          <nav className="footer_nav">
-            <ul className="footer_info">
-              <strong className="menu_title">이용안내</strong>
-              {uldata1.map((item, index) => (
-                <li key={index} onClick={() => openModal(item.src)}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ModalContent isOpen={modal} onClose={() => setModal(false)}>
-              <div>{modalContents}</div>
-            </ModalContent>
-          </nav>
-          <nav className="footer_nav2">
-            <ul className="footer_info2">
-              <strong className="menu_title2">고객지원</strong>
-              {uldata2.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.src}>{item.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="footer_top_inner">
+            <nav className="footer_nav">
+              <ul className="footer_info">
+                <strong className="menu_title">이용안내</strong>
+                {uldata1.map((item, index) => (
+                  <li key={index} onClick={() => openModal(item.src)}>
+                    {item.title}
+                  </li>
+                ))}
+              </ul>
+              <ModalContent isOpen={modal} onClose={() => setModal(false)}>
+                <div>{modalContents}</div>
+              </ModalContent>
+            </nav>
+            <nav className="footer_nav2">
+              <ul className="footer_info2">
+                <strong className="menu_title2">고객지원</strong>
+                {uldata2.map((item, index) => (
+                  <li key={index}>
+                    <Link to={item.src}>{item.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
           <div className="footer_info3">
             {uldata3.map((item, index) => (
               <p className="p_wrap" key={index}>
