@@ -1,48 +1,46 @@
-.search-pop {
-  width: 50%;
-  height: 150px;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.search_wrap {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   background-color: #fff;
-  z-index: 100;
-
-  .search-form {
+  .search_inner {
     position: relative;
-    width: 95%;
-    height: auto;
-    background-color: #fff;
-    border-bottom: 3px solid black;
-  }
-
-  .search_input {
-    width: 93%;
-    height: 40px;
-    font-size: 18px;
-    padding: 8px;
-    border: none;
-    outline: none;
-  }
-
-  .resetIcon {
-    position: absolute;
-    top: 50%;
-    right: 2%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #808080;
-    cursor: pointer;
-  }
-
-  .closeIcon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 30px;
-    cursor: pointer;
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+    margin: 40px auto;
+    form {
+      width: 80%;
+      height: 50px;
+      border-bottom: 2px solid #000;
+      input {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 10px;
+        &::placeholder {
+          font-size: 18px;
+          color: rgb(175, 175, 175);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .close_icon {
+      position: relative;
+      top: 0;
+      right: 0;
+      display: block;
+      margin-left: 20px;
+      .close_btn {
+        font-size: 31px;
+        background-color: transparent;
+        cursor: pointer;
+      }
+    }
   }
 }
