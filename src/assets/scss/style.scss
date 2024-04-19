@@ -1,14 +1,19 @@
-@charset "UTF-8";
+@charset 'UTF-8';
+
 // setting
 @import "setting/vars";
 @import "setting/reset";
 @import "setting/mixin";
 @import "setting/common";
-//section
-@import "section/layout";
+
+// section
 @import "section/header";
-@import "section/search";
+@import "section/main";
+@import "section/layout";
 @import "section/home";
-@import "section/carousel";
-@import "section/product";
-@import "section/searchres";
+@import "section/search";
+@import "section/footer";
+// @import "section/login";
+// @import "section/carousel";
+// @import "section/product";
+// @import "section/searchres";
