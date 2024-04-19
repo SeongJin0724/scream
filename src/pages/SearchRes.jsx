@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Main from "../components/section/Main";
+// import axios from "axios";
 
-const SearchResults = () => {
+const SearchRes = () => {
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
@@ -13,13 +14,17 @@ const SearchResults = () => {
 
     if (term) {
       setSearchTerm(term);
-      fetch(`/search?term=${encodeURIComponent(term)}`)
+      fetch(
+        `${process.env.REACT_APP_API_URL}/api/search?term=${encodeURIComponent(
+          term
+        )}`
+      )
         .then((response) => response.json())
         .then((data) => setResults(data))
         .catch((error) => console.error("Error:", error));
     }
   }, [location.search]);
-
+  console.log(results);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };
@@ -33,14 +38,14 @@ const SearchResults = () => {
           </h3>
           <div className="result_inner">
             {results.map((product) => (
-              <div className="result_card" key={product.id}>
-                <img src={product.imageUrl} alt={product.productName} />
+              <div className="result_card" key={product.itemKey}>
+                <img src={product.img} alt={product.title} />
                 <p className="brandName">
-                  {capitalizeFirstLetter(product.brandNameEng)}
+                  {capitalizeFirstLetter(product.brand)}
                 </p>
-                <h3 className="productName">{product.productName}</h3>
+                <h3 className="productName">{product.title}</h3>
                 <p className="price">
-                  {new Intl.NumberFormat("ko-KR").format(product.price)}원
+                  {new Intl.NumberFormat("ko-KR").format(product.launchPrice)}원
                 </p>
               </div>
             ))}
@@ -55,4 +60,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default SearchRes;

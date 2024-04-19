@@ -11,10 +11,10 @@ const Search = () => {
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // if (searchTerm.trim()) {
-    //   navigate(`/searchres?term=${encodeURIComponent(searchTerm)}`);
-    //   setIsVisible(false);
-    // }
+    if (searchTerm.trim()) {
+      navigate(`/searchres?term=${encodeURIComponent(searchTerm)}`);
+      setIsVisible(false);
+    }
   };
 
   const handleClose = () => {
