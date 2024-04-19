@@ -7,6 +7,7 @@ const Join = lazy(() => import("./pages/Join"));
 const Login = lazy(() => import("./pages/Login"));
 const Man = lazy(() => import("./pages/Man"));
 const Woman = lazy(() => import("./pages/Woman"));
+const SearchRes = lazy(() => import("./pages/SearchRes"));
 const MyPage = lazy(() => import("./pages/MyPage"));
 const Standards = lazy(() => import("./pages/Standards"));
 const Policy = lazy(() => import("./pages/Policy"));
@@ -34,6 +35,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/man" element={<Man />} />
           <Route path="/woman" element={<Woman />} />
+          <Route path="/searchres" element={<SearchRes />} />
           <Route path="/standards" element={<Standards />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/penalty" element={<Penalty />} />
