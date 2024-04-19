@@ -30,45 +30,79 @@ export const uldata1 = [
     src: <Guideline />,
   },
 ];
-
 export const uldata2 = [
   {
-    title: "notice",
-    src: <Notice />,
+    title: "공지사항",
+    src: "/notice",
   },
   {
-    title: "service",
-    src: <Service />,
+    title: "서비스 소개",
+    src: "/service",
   },
   {
-    title: "storeinfo",
-    src: <Storeinfo />,
+    title: "스토어 안내",
+    src: "/storeinfo",
   },
   {
-    title: "Acceptance",
-    src: <Acceptance />,
+    title: "판매자 방문접수",
+    src: "/acceptance",
   },
 ];
-
 export const uldata3 = [
   {
-    title: "company",
-    src: <Company />,
+    content: <p className="p6">고객센터 1234-5678</p>,
   },
   {
-    title: "talented",
-    src: <Talented />,
+    content: (
+      <p className="p7">
+        운영시간 평일 10:00 - 18:00(토∙일, 공휴일휴무) 점심시간 평일 13:00 -
+        14:00
+      </p>
+    ),
   },
+
   {
-    title: "partnership",
-    src: <Partnership />,
-  },
-  {
-    title: "terms",
-    src: <Terms />,
-  },
-  {
-    title: "personal",
-    src: <Personal />,
+    content: <p className="p9"> 1:1 문의하기는 앱에서만 가능합니다.</p>,
   },
 ];
+// export const uldata2 = [
+//   {
+//     title: "notice",
+//     src: <Notice />,
+//   },
+//   {
+//     title: "service",
+//     src: <Service />,
+//   },
+//   {
+//     title: "storeinfo",
+//     src: <Storeinfo />,
+//   },
+//   {
+//     title: "Acceptance",
+//     src: <Acceptance />,
+//   },
+// ];
+
+// export const uldata3 = [
+//   {
+//     title: "company",
+//     src: <Company />,
+//   },
+//   {
+//     title: "talented",
+//     src: <Talented />,
+//   },
+//   {
+//     title: "partnership",
+//     src: <Partnership />,
+//   },
+//   {
+//     title: "terms",
+//     src: <Terms />,
+//   },
+//   {
+//     title: "personal",
+//     src: <Personal />,
+//   },
+// ];
