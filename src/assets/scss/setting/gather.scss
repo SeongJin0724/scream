@@ -62,3 +62,9 @@
   height: 16px;
   content: "";
 }
+input[type="checkbox"].my-checkbox {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}
+input[type="checkbox"]#selectAll {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}

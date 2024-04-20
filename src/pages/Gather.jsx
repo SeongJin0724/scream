@@ -1,21 +1,29 @@
 import React, { useEffect } from "react";
-import { testFunction } from "../components/data/test";
+import { checkAll } from "../components/data/gather";
+import { validateAllChecked } from "../components/data/gather";
+import { submitForm } from "../components/data/gather";
 import { Link } from "react-router-dom";
 export default function Gather() {
   useEffect(() => {
-    testFunction();
+    checkAll();
+  }, []);
+  useEffect(() => {
+    validateAllChecked();
+  }, []);
+  useEffect(() => {
+    submitForm();
   }, []);
 
   return (
     <div className="div">
       <div className="div2">
-        <input type="checkbox" id="selectAll"></input>
+        <input type="checkbox" id="selectAll" onchange="checkAll(this)"></input>
         <label> 전체 동의하기</label>
         <textarea
           className="userjoin_msg"
           defaultValue="실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・혜택 정보 수신(선택) 동의를 포함합니다."
         ></textarea>
-        <input type="checkbox" className="my-checkbox"></input>
+        <input type="checkbox" className="my-checkbox" required />
         <label> [필수] 이용약관</label>
         <textarea
           className="userjoin_msg2"
@@ -137,7 +145,7 @@ export default function Gather() {
           적용 일자: 2018년 5월 1일
           네이버 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표번호: 1588 – 3820/ 평일 09:00~18:00)로 문의 주시기 바랍니다."
         ></textarea>
-        <input type="checkbox" className="my-checkbox"></input>
+        <input type="checkbox" className="my-checkbox" required />
         <label> [필수] 개인정보 수집 및 이용</label>
         <textarea
           className="userjoin_msg3"
@@ -183,7 +191,7 @@ export default function Gather() {
           defaultValue="실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스를 가입 후
           바로 이용하실 수 있어요."
         ></textarea>
-        <button className="join_btn">
+        <button className="join_btn" onclick="submitForm()">
           <Link to="/join">이메일 회원가입</Link>
         </button>
       </div>
