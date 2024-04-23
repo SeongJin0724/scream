@@ -27,7 +27,7 @@ export default function Gather() {
 
   return (
     <Main>
-      <form onSubmit={handleSubmit}>
+      <form className="form1" onSubmit={handleSubmit}>
         <div className="div">
           <div className="div2">
             <input
@@ -50,7 +50,7 @@ export default function Gather() {
             />
             <label htmlFor="checkbox1">[필수] 이용약관</label>
             <textarea
-              className="userjoin_msg2"
+              className="userjoin_msg"
               defaultValue="네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
           
           네이버 서비스를 이용하시거나 네이버 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
@@ -178,7 +178,7 @@ export default function Gather() {
             />
             <label htmlFor="checkbox2">[필수] 개인정보 수집 및 이용</label>
             <textarea
-              className="userjoin_msg3"
+              className="userjoin_msg"
               defaultValue=" 개인정보보호법에 따라 회원가입 신청하시는 분께 수집하는 개인정보의
           항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의
           거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은
@@ -223,11 +223,13 @@ export default function Gather() {
             />
             <label htmlFor="checkbox3">[선택] 실명 인증된 아이디로 가입</label>
             <textarea
-              className="userjoin_msg4"
+              className="userjoin_msg"
               defaultValue="실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스를 가입 후
           바로 이용하실 수 있어요."
             ></textarea>
-            <button type="submit">다음</button>
+            <button type="submit" className="button">
+              다음
+            </button>
           </div>
         </div>
       </form>
