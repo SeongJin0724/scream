@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Main from "../components/section/Main";
-// import axios from "axios";
+import axios from "axios";
 
 const SearchRes = () => {
   const [results, setResults] = useState([]);
@@ -14,17 +14,23 @@ const SearchRes = () => {
 
     if (term) {
       setSearchTerm(term);
-      fetch(
-        `${process.env.REACT_APP_API_URL}/api/search?term=${encodeURIComponent(
-          term
-        )}`
-      )
-        .then((response) => response.json())
-        .then((data) => setResults(data))
-        .catch((error) => console.error("Error:", error));
+      const fetchData = async () => {
+        try {
+          const result = await axios.get(
+            `${
+              process.env.REACT_APP_API_URL
+            }/api/search?term=${encodeURIComponent(term)}`
+          );
+          setResults(result.data);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      fetchData();
     }
   }, [location.search]);
-  console.log(results);
+
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };
