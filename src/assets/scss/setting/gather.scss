@@ -1,7 +1,4 @@
 .div2 {
-  position: relative;
-  left: 750px;
-  bottom: 100px;
   width: 320px;
   height: 210px;
   resize: none;
@@ -45,9 +42,7 @@
   padding: 15px;
   margin-top: 20px;
 }
-.my-checkbox {
-  background-position: -216px -96px;
-  background-repeat: no-repeat;
+#checkbox1 {
   width: 16px;
   height: 16px;
 
@@ -55,16 +50,36 @@
   left: 0;
   content: "";
 }
-#selectAll {
-  background-position: -216px -96px;
-  background-repeat: no-repeat;
+#checkbox2 {
+  width: 16px;
+  height: 16px;
+
+  top: 0;
+  left: 0;
+  content: "";
+}
+#checkbox3 {
+  width: 16px;
+  height: 16px;
+
+  top: 0;
+  left: 0;
+  content: "";
+}
+#check-all {
   width: 16px;
   height: 16px;
   content: "";
 }
-input[type="checkbox"].my-checkbox {
+input[type="checkbox"]#checkbox1 {
   appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
 }
-input[type="checkbox"]#selectAll {
+input[type="checkbox"]#checkbox2 {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}
+input[type="checkbox"]#checkbox3 {
+  appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
+}
+input[type="checkbox"]#check-all {
   appearance: checkbox; /* 또는 -webkit-appearance: checkbox; */
 }

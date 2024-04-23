@@ -57,7 +57,7 @@ export default function Login() {
           </button>
         </form>
         <button className="join_btn">
-          <Link to="/join">이메일 회원가입</Link>
+          <Link to="/gather">이메일 회원가입</Link>
         </button>
       </div>
     </Main>

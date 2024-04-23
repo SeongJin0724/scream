@@ -1,33 +1,57 @@
-import React, { useEffect } from "react";
-import { checkAll } from "../components/data/gather";
-import { validateAllChecked } from "../components/data/gather";
-import { submitForm } from "../components/data/gather";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Main from "../components/section/Main";
+
+import { useCheckboxLogic } from "../components/data/CheckboxLogic";
 export default function Gather() {
-  useEffect(() => {
-    checkAll();
-  }, []);
-  useEffect(() => {
-    validateAllChecked();
-  }, []);
-  useEffect(() => {
-    submitForm();
-  }, []);
+  const navigate = useNavigate();
+  const {
+    isAllChecked,
+    isTermsChecked,
+    isPrivacyChecked,
+    isAChecked,
+    handleAllCheck,
+    handleTermsCheck,
+    handlePrivacyCheck,
+    handleACheck,
+  } = useCheckboxLogic();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isTermsChecked && isPrivacyChecked) {
+      navigate("/join"); // 여기서 '/nextPage'는 다음 페이지의 경로입니다.
+    } else {
+      alert("모든 필수 항목을 체크해주세요.");
+    }
+  };
 
   return (
-    <div className="div">
-      <div className="div2">
-        <input type="checkbox" id="selectAll" onchange="checkAll(this)"></input>
-        <label> 전체 동의하기</label>
-        <textarea
-          className="userjoin_msg"
-          defaultValue="실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・혜택 정보 수신(선택) 동의를 포함합니다."
-        ></textarea>
-        <input type="checkbox" className="my-checkbox" required />
-        <label> [필수] 이용약관</label>
-        <textarea
-          className="userjoin_msg2"
-          defaultValue="네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+    <Main>
+      <form onSubmit={handleSubmit}>
+        <div className="div">
+          <div className="div2">
+            <input
+              type="checkbox"
+              id="check-all"
+              checked={isAllChecked}
+              onChange={(e) => handleAllCheck(e.target.checked)}
+            />
+            <label htmlFor="check-all">전체 동의</label>
+            <textarea
+              className="userjoin_msg"
+              defaultValue="실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・혜택 정보 수신(선택) 동의를 포함합니다."
+            ></textarea>
+            <input
+              type="checkbox"
+              id="checkbox1"
+              className="checkbox required"
+              checked={isTermsChecked}
+              onChange={(e) => handleTermsCheck(e.target.checked)}
+            />
+            <label htmlFor="checkbox1">[필수] 이용약관</label>
+            <textarea
+              className="userjoin_msg2"
+              defaultValue="네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
           
           네이버 서비스를 이용하시거나 네이버 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
           
@@ -144,12 +168,18 @@ export default function Gather() {
           공지 일자: 2018년 3월 30일
           적용 일자: 2018년 5월 1일
           네이버 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표번호: 1588 – 3820/ 평일 09:00~18:00)로 문의 주시기 바랍니다."
-        ></textarea>
-        <input type="checkbox" className="my-checkbox" required />
-        <label> [필수] 개인정보 수집 및 이용</label>
-        <textarea
-          className="userjoin_msg3"
-          defaultValue=" 개인정보보호법에 따라 회원가입 신청하시는 분께 수집하는 개인정보의
+            ></textarea>
+            <input
+              type="checkbox"
+              id="checkbox2"
+              className="checkbox required"
+              checked={isPrivacyChecked}
+              onChange={(e) => handlePrivacyCheck(e.target.checked)}
+            />
+            <label htmlFor="checkbox2">[필수] 개인정보 수집 및 이용</label>
+            <textarea
+              className="userjoin_msg3"
+              defaultValue=" 개인정보보호법에 따라 회원가입 신청하시는 분께 수집하는 개인정보의
           항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의
           거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은
           후 동의하여 주시기 바랍니다. 1. 수집하는 개인정보 이용자는 회원가입을
@@ -183,18 +213,24 @@ export default function Gather() {
           권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수
           항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수
           있습니다."
-        ></textarea>
-        <input type="checkbox" className="my-checkbox"></input>
-        <label> [선택] 실명 인증된 아이디로 가입</label>
-        <textarea
-          className="userjoin_msg4"
-          defaultValue="실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스를 가입 후
+            ></textarea>
+            <input
+              type="checkbox"
+              id="checkbox3"
+              className="checkbox"
+              checked={isAChecked}
+              onChange={(e) => handleACheck(e.target.checked)}
+            />
+            <label htmlFor="checkbox3">[선택] 실명 인증된 아이디로 가입</label>
+            <textarea
+              className="userjoin_msg4"
+              defaultValue="실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스를 가입 후
           바로 이용하실 수 있어요."
-        ></textarea>
-        <button className="join_btn" onclick="submitForm()">
-          <Link to="/join">이메일 회원가입</Link>
-        </button>
-      </div>
-    </div>
+            ></textarea>
+            <button type="submit">다음</button>
+          </div>
+        </div>
+      </form>
+    </Main>
   );
 }
