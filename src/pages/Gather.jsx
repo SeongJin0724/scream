@@ -36,7 +36,10 @@ export default function Gather() {
               checked={isAllChecked}
               onChange={(e) => handleAllCheck(e.target.checked)}
             />
-            <label htmlFor="check-all">전체 동의</label>
+            <label htmlFor="check-all">
+              {" "}
+              <span className="text">전체 동의하기</span>
+            </label>
             <textarea
               className="userjoin_msg"
               defaultValue="실명 인증된 아이디로 가입, 위치기반서비스 이용약관(선택), 이벤트・혜택 정보 수신(선택) 동의를 포함합니다."
@@ -48,7 +51,11 @@ export default function Gather() {
               checked={isTermsChecked}
               onChange={(e) => handleTermsCheck(e.target.checked)}
             />
-            <label htmlFor="checkbox1">[필수] 이용약관</label>
+            <label htmlFor="checkbox1">
+              {" "}
+              <em className="optionpoint">[필수]</em>
+              <span className="text">이용약관</span>
+            </label>
             <textarea
               className="userjoin_msg"
               defaultValue="네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
@@ -176,7 +183,11 @@ export default function Gather() {
               checked={isPrivacyChecked}
               onChange={(e) => handlePrivacyCheck(e.target.checked)}
             />
-            <label htmlFor="checkbox2">[필수] 개인정보 수집 및 이용</label>
+            <label htmlFor="checkbox2">
+              {" "}
+              <em className="optionpoint">[필수]</em>
+              <span className="text">개인정보 수집 및 이용</span>
+            </label>
             <textarea
               className="userjoin_msg"
               defaultValue=" 개인정보보호법에 따라 회원가입 신청하시는 분께 수집하는 개인정보의
@@ -221,13 +232,17 @@ export default function Gather() {
               checked={isAChecked}
               onChange={(e) => handleACheck(e.target.checked)}
             />
-            <label htmlFor="checkbox3">[선택] 실명 인증된 아이디로 가입</label>
+            <label htmlFor="checkbox3">
+              {" "}
+              <em className="option">[선택]</em>
+              <span className="text">실명 인증된 아이디로 가입</span>
+            </label>
             <textarea
               className="userjoin_msg"
               defaultValue="실명 인증된 아이디로 가입하시면 본인인증이 필요한 서비스를 가입 후
           바로 이용하실 수 있어요."
             ></textarea>
-            <button type="submit" className="button">
+            <button type="submit" className="buttongather">
               다음
             </button>
           </div>
