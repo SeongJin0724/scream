@@ -17,6 +17,9 @@ import slide7 from "../../assets/image/mainSlideImg7.webp";
 import slide8 from "../../assets/image/mainSlideImg8.webp";
 
 export default function Carousel() {
+  const pagination = {
+    clickable: true,
+  };
   function getBrightness(color) {
     let r, g, b;
 
@@ -45,7 +48,7 @@ export default function Carousel() {
       }}
       navigation={true}
       loop={true}
-      pagination={true}
+      pagination={pagination}
       modules={[Autoplay, Navigation, Pagination]}
       onSlideChange={(swiper) => {
         const activeSlide = swiper.slides[swiper.activeIndex];
