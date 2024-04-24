@@ -46,7 +46,7 @@ const SearchRes = () => {
   };
 
   return (
-    <>
+    <Main>
       <form onSubmit={handleSearch} className="searchres_search">
         <input
           type="text"
@@ -62,41 +62,36 @@ const SearchRes = () => {
           />
         )}
       </form>
-
-      <Main>
-        <ul className="search_result_lists">
-          {results.length > 0 ? (
-            results.map((product) => (
-              <li key={product.itemKey} className="search_result_wrap">
-                <Link>
-                  <img
-                    src={product.img}
-                    alt={product.title}
-                    className="search_item_img"
-                  />
-                  <div className="search_item_desc">
-                    <p className="brandName">
-                      {capitalizeFirstLetter(product.brand)}
-                    </p>
-                    <p className="productName">{product.title}</p>
-                    <p className="price">
-                      {new Intl.NumberFormat("ko-KR").format(
-                        product.launchPrice
-                      )}
-                      원
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            ))
-          ) : (
-            <div>
-              <p>검색하신 결과가 없습니다.</p>
-            </div>
-          )}
-        </ul>
-      </Main>
-    </>
+      <ul className="search_result_lists">
+        {results.length > 0 ? (
+          results.map((product) => (
+            <li key={product.itemKey} className="search_result_wrap">
+              <Link>
+                <img
+                  src={product.img}
+                  alt={product.title}
+                  className="search_item_img"
+                />
+                <div className="search_item_desc">
+                  <p className="brandName">
+                    {capitalizeFirstLetter(product.brand)}
+                  </p>
+                  <p className="productName">{product.title}</p>
+                  <p className="price">
+                    {new Intl.NumberFormat("ko-KR").format(product.launchPrice)}
+                    원
+                  </p>
+                </div>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <div>
+            <p>검색하신 결과가 없습니다.</p>
+          </div>
+        )}
+      </ul>
+    </Main>
   );
 };
 
