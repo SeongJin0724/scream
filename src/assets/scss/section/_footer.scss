@@ -26,22 +26,41 @@
   }
   .modal-content {
     position: relative;
-    background-color: lightcoral;
-    padding: 20px;
+    background-color: rgb(255, 255, 255);
     border-radius: 16px;
     width: 560px;
-    height: 560px;
-    overflow: auto;
+    height: 600px;
+
+    .modal-content-inner {
+      width: 100%;
+      height: 540px;
+      overflow: auto;
+      padding: 20px 40px;
+      .modal-content-inner-wrap {
+        padding-right: 20px;
+      }
+    }
+    .modal-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 0 0 0;
+    }
     .modal-button {
       width: 40px;
       height: 40px;
       position: absolute;
-      top: 1%;
-      right: 5%;
+      top: 1.6%;
+      right: 7%;
       background-color: transparent;
       border: none;
       font-size: 50px;
       cursor: pointer;
+      svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
     }
   }
   .footer_container {
@@ -134,7 +153,6 @@
         flex-direction: column;
         position: relative;
         margin-top: 30px;
-        z-index: -1;
         .footer_info4_wrap {
           display: flex;
           align-items: center;
@@ -199,26 +217,63 @@
           text-decoration: underline;
         }
       }
-      // .footer_info5 {
-      //   position: relative;
-
-      //   max-width: 640px;
-
-      //   .FcCloseUpMode {
-      //     display: flex;
-      //     font-size: 30px;
-      //     position: absolute;
-      //     right: 101px;
-      //     bottom: 200px;
-      //   }
-      //   .FaCamera {
-      //     display: flex;
-      //     font-size: 30px;
-      //     position: absolute;
-      //     right: 41px;
-      //     bottom: 200px;
-      //   }
-      // }
     }
   }
+}
+
+.modal-content2 {
+  padding: 40px;
+}
+.accordion {
+  margin-top: 20px;
+}
+.accordion-button {
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border: none;
+  outline: none;
+  width: 70%;
+  text-align: left;
+  padding: 15px;
+  font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  margin: 0 auto;
+}
+
+.accordion-content {
+  display: none;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-button.active + .accordion-content {
+  display: block;
+}
+.content-block {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.contentq {
+  word-break: break-word;
+}
+.contentq p {
+  line-height: 22.5px;
+}
+.tableq {
+  margin-top: 10px;
+}
+.tableq table {
+  word-wrap: break-word;
+  border-top: 1px solid #ebebeb;
+  text-align: center;
+  width: 100%;
+  word-break: break-word;
+}
+.tableq h4 {
+  color: red;
 }
