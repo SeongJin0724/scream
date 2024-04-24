@@ -25,6 +25,7 @@ const Personal = lazy(() => import("./pages/Personal"));
 const Question = lazy(() => import("./pages/Question"));
 const Detail1 = lazy(() => import("./pages/Detail1"));
 const Gather = lazy(() => import("./pages/Gather"));
+const BrandProducts = lazy(() => import("./pages/BrandProducts"));
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/question" element={<Question />} />
           <Route path="/detail1" element={<Detail1 />} />
           <Route path="/gather" element={<Gather />} />
+          <Route path="/brands/:brand" element={<BrandProducts />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
