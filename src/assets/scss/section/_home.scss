@@ -3,4 +3,42 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
+
+  .home_topBrand {
+    .topBrand_header {
+      margin-bottom: 16px;
+
+      h3 {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+
+      p {
+        font-size: 16px;
+        color: rgba(34, 34, 34, 0.5);
+      }
+    }
+
+    .topBrand_lists {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .topBrand_name {
+        width: 230px;
+        height: 120px;
+
+        img {
+          width: 100%;
+          height: 100px;
+        }
+        p {
+          font-size: 14px;
+          color: #222222;
+          text-align: center;
+        }
+      }
+    }
+  }
 }
