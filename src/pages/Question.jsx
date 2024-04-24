@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { SlArrowDown } from "react-icons/sl";
+import { SlArrowUp } from "react-icons/sl";
 
 // React에서 이벤트 핸들러는 이벤트 객체를 인자로 받을 수 있습니다.
 // 따라서, DOM 요소에 직접 접근하기 위해 useRef와 같은 React의 기능을 사용하는 것이 좋습니다.
-function toggleAccordion(event) {
-  const element = event.currentTarget; // 버튼에 직접 붙은 이벤트 핸들러에서는 currentTarget을 사용
-  const content = element.nextElementSibling;
-
-  // "active" 클래스 토글
-  element.classList.toggle("active");
-
-  // 내용 표시 토글
-  if (content.style.display === "block") {
-    content.style.display = "none";
-  } else {
-    content.style.display = "block";
-  }
-}
 
 export default function Question() {
+  const [upDown, setUpDown] = useState(false);
+  function toggleAccordion(event) {
+    const element = event.currentTarget; // 버튼에 직접 붙은 이벤트 핸들러에서는 currentTarget을 사용
+    const content = element.nextElementSibling;
+
+    // "active" 클래스 토글
+    element.classList.toggle("active");
+
+    // 내용 표시 토글
+    if (content.style.display === "block") {
+      content.style.display = "none";
+      setUpDown(false);
+    } else {
+      content.style.display = "block";
+      setUpDown(true);
+    }
+  }
   return (
     <>
       <div className="accordion">
@@ -25,6 +30,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
@@ -249,6 +255,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
@@ -473,6 +480,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
@@ -697,6 +705,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
@@ -921,6 +930,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
@@ -1145,6 +1155,7 @@ export default function Question() {
           {/* 이벤트 핸들러를 onClick으로 변경하고 함수를 직접 전달합니다. */}
           <button className="accordion-button" onClick={toggleAccordion}>
             이용정책 - 판매자 정책
+            {upDown ? <SlArrowUp /> : <SlArrowDown />}
           </button>
           <div className="accordion-content">
             <div className="content-block">
