@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   uldata1,
   uldata2,
@@ -57,7 +56,6 @@ export default function Footer() {
                 {item.content}
               </div>
             ))}
-
             <Link className="p9" to={"/question"}>
               <input
                 type="button"
@@ -76,8 +74,9 @@ export default function Footer() {
                     <Link to={item.src}>{item.title}</Link>
                   </li>
                 ))}
-
-                <strong className="menu_title3">개인정보처리방침</strong>
+                <Link to={"/Notice"} className="menu_title3">
+                  개인정보처리방침
+                </Link>
               </ul>
               <div className="footer_info4_icon">
                 <Link to={"/company"}>
@@ -86,7 +85,7 @@ export default function Footer() {
                 <Link to={"/company"}>
                   <FaCamera className="FaCamera" />
                 </Link>
-                <Link to={"/company"}>
+                <Link to={"/penalty"}>
                   <FcCloseUpMode className="FcCloseUpMode" />
                 </Link>
               </div>

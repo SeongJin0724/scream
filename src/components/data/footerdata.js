@@ -1,7 +1,8 @@
-import Guideline from "../../pages/Guideline";
 import Standards from "../../pages/Standards";
 import Policy from "../../pages/Policy";
 import Penalty from "../../pages/Penalty";
+import Guideline from "../../pages/Guideline";
+
 import Notice from "../../pages/Notice";
 import Service from "../../pages/Service";
 import Storeinfo from "../../pages/Storeinfo";
@@ -90,7 +91,7 @@ export const uldata5 = [
       <p className="p1">
         크림 주식회사 · 대표 김창욱<span className="blank"></span>사업자등록번호
         : 570-88-01618
-        <Link className="p10" id="p10" to={"/question"}>
+        <Link className="p10" id="p10" to={"/personal"}>
           사업자정보확인
         </Link>
         <span className="blank"></span>
@@ -112,7 +113,7 @@ export const uldata6 = [
       <p className="p3">
         당사는 고객님의 현금 결제 금액에 대해 신한은행과 채무지급보증 계약을
         체결하여 안전거래를 보장하고 있습니다.
-        <Link className="p11" id="p11" to={"/question"}>
+        <Link className="p11" id="p11" to={"/Notice"}>
           서비스가입 사실 확인
         </Link>
       </p>
