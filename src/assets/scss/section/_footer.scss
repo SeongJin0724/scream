@@ -7,11 +7,6 @@
   max-width: 1280px;
   margin: 40px auto;
   font-size: 12px;
-  .footer_container {
-    width: 100%;
-    max-width: 1280;
-    padding: 0 40px;
-  }
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -35,10 +30,7 @@
       width: 100%;
       height: 540px;
       overflow: auto;
-      padding: 20px 40px;
-      .modal-content-inner-wrap {
-        padding-right: 20px;
-      }
+      padding: 30px 60px;
     }
     .modal-title {
       text-align: center;
@@ -220,10 +212,15 @@
     }
   }
 }
-
+.contenth1 {
+  border-bottom: 3px solid #222;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
 .modal-content2 {
   padding: 60px;
-  margin: 0px 170px;
+  margin: 0px auto;
+  max-width: 700px;
 }
 .accordionh2 {
   display: flex;
@@ -237,7 +234,7 @@
   background-color: #f9f9f9;
   border: none;
   outline: none;
-  width: 70%;
+  width: 63%;
   text-align: left;
   padding: 15px;
   transition: background-color 0.2s ease-in-out;
@@ -260,7 +257,7 @@
 .content-block {
   font-family: Arial, sans-serif;
   max-width: 808px;
-  margin: 0px 170px;
+  margin: 0px 318px;
   padding: 20px;
 }
 .contentq {

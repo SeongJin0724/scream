@@ -25,7 +25,7 @@ export const uldata1 = [
 export const uldata2 = [
   {
     title: "공지사항",
-    src: "/notice",
+    src: "/partnership",
   },
   {
     title: "서비스 소개",

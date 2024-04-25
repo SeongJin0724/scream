@@ -75,7 +75,7 @@ export default function Footer() {
                     <Link to={item.src}>{item.title}</Link>
                   </li>
                 ))}
-                <Link to={"/Notice"} className="menu_title3">
+                <Link to={"/notice"} className="menu_title3">
                   개인정보처리방침
                 </Link>
               </ul>
