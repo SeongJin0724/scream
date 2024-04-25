@@ -10,6 +10,7 @@ import {
 import ModalContent from "../contents/ModalContent";
 import { FcCloseUpMode } from "react-icons/fc";
 import { FaCamera } from "react-icons/fa";
+import { BiCloset } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -82,11 +83,11 @@ export default function Footer() {
                 <Link to={"/company"}>
                   <FcCloseUpMode className="FcCloseUpMode" />
                 </Link>
-                <Link to={"/company"}>
+                <Link to={"/talented"}>
                   <FaCamera className="FaCamera" />
                 </Link>
-                <Link to={"/penalty"}>
-                  <FcCloseUpMode className="FcCloseUpMode" />
+                <Link to={"/partnership"}>
+                  <BiCloset className="BiCloset" />
                 </Link>
               </div>
             </div>
