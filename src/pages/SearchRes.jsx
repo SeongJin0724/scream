@@ -62,6 +62,7 @@ const SearchRes = () => {
           />
         )}
       </form>
+
       <ul className="search_result_lists">
         {results.length > 0 ? (
           results.map((product) => (
@@ -87,7 +88,7 @@ const SearchRes = () => {
           ))
         ) : (
           <div>
-            <p>검색하신 결과가 없습니다.</p>
+            <p className="search_noResult">검색하신 결과가 없습니다.</p>
           </div>
         )}
       </ul>

@@ -23,17 +23,26 @@ const BrandProductsPage = () => {
 
   return (
     <Main>
-      <div>
-        <h2>{brand} 제품</h2>
-        <ul>
+      <div className="brands_wrap">
+        <div className="brand_header">
+          <img src="" alt="" className="brand_header_img" />
+          <h2 className="brand_header_title">{brand}</h2>
+        </div>
+
+        <ul className="brand_result_lists">
           {products.length > 0 ? (
             products.map((product) => (
               <li key={product.itemKey}>
                 <Link>
-                  <img src={product.img} alt={product.title} />
-                  <div>
-                    <h3>{product.title}</h3>
-                    <p>{product.launchPrice}원</p>
+                  <img
+                    src={product.img}
+                    alt={product.title}
+                    className="brand_item_img"
+                  />
+                  <div className="brand_item_desc">
+                    <p className="brandName">{product.brand}</p>
+                    <h3 className="productName">{product.title}</h3>
+                    <p className="price">{product.launchPrice}원</p>
                   </div>
                 </Link>
               </li>

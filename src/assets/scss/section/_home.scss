@@ -4,8 +4,11 @@
   margin: 0 auto;
   padding: 0 40px;
 
-  .home_topBrand {
-    .topBrand_header {
+  .home_section {
+    margin-top: 28px;
+    margin-bottom: 28px;
+
+    .section_title {
       margin-bottom: 16px;
 
       h3 {
@@ -20,19 +23,17 @@
       }
     }
 
-    .topBrand_lists {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .topBrand_items_wrap {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px 8px;
 
-      .topBrand_name {
-        width: 230px;
-        height: 120px;
-
+      .topBrand_item {
         img {
           width: 100%;
           height: 100px;
         }
+
         p {
           font-size: 14px;
           color: #222222;
