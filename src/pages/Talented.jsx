@@ -4,6 +4,7 @@ export default function Talented() {
   return (
     <Main>
       <div className="modal-content2">
+        <h1 className="contenth1">공공재산권</h1>
         공공필요에 의한 재산권의 수용·사용 또는 제한 및 그에 대한 보상은
         법률로써 하되, 정당한 보상을 지급하여야 한다. 모든 국민은 법 앞에
         평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여

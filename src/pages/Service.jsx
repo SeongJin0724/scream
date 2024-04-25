@@ -4,6 +4,7 @@ export default function Service() {
   return (
     <Main>
       <div className="modal-content2">
+        <h1 className="contenth1">서비스소개</h1>
         콘텐츠의 저작권 회원이 서비스 내에 게시한 콘텐츠의 저작권은 해당
         게시물의 저작자에게 귀속됩니다. 회원이 게시한 콘텐츠는 저작권법에 의하여
         보호를 받으며, KREAM이 작성한 저작물에 대한 저작권 및 기타 지적재산권은

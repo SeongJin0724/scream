@@ -5,6 +5,7 @@ export default function Terms() {
   return (
     <Main>
       <div className="modal-content2">
+        <h1 className="contenth1">헌법개정안</h1>
         헌법개정안이 제2항의 찬성을 얻은 때에는 헌법개정은 확정되며, 대통령은
         즉시 이를 공포하여야 한다. 헌법개정은 국회재적의원 과반수 또는 대통령의
         발의로 제안된다. 국방상 또는 국민경제상 긴절한 필요로 인하여 법률이

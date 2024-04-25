@@ -4,6 +4,7 @@ export default function Personal() {
   return (
     <Main>
       <div className="modal-content2">
+        <h1 className="contenth1">주거생활</h1>
         국가는 주택개발정책등을 통하여 모든 국민이 쾌적한 주거생활을 할 수
         있도록 노력하여야 한다. 교육의 자주성·전문성·정치적 중립성 및 대학의
         자율성은 법률이 정하는 바에 의하여 보장된다. 대통령은 법률이 정하는 바에

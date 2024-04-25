@@ -4,6 +4,7 @@ export default function Company() {
   return (
     <Main>
       <div className="modal-content2">
+        <h1 className="contenth1">대한민국의주권</h1>
         공개하지 아니한 회의내용의 공표에 관하여는 법률이 정하는 바에 의한다.
         대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.
         외국인은 국제법과 조약이 정하는 바에 의하여 그 지위가 보장된다. 국가는
