@@ -224,19 +224,21 @@
 .modal-content2 {
   padding: 40px;
 }
+.accordionh2 {
+  display: flex;
+  justify-content: center;
+}
 .accordion {
   margin-top: 20px;
 }
 .accordion-button {
   display: flex;
-  justify-content: center;
   background-color: #f9f9f9;
   border: none;
   outline: none;
   width: 70%;
   text-align: left;
   padding: 15px;
-  font-size: 16px;
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
   border-bottom: 1px solid #ddd;
@@ -246,8 +248,8 @@
 }
 
 .accordion-content {
-  display: none;
   padding: 15px;
+  font-size: 14px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -256,8 +258,8 @@
 }
 .content-block {
   font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 808px;
+  margin: 0px 170px;
   padding: 20px;
 }
 .contentq {
@@ -268,14 +270,19 @@
 }
 .tableq {
   margin-top: 10px;
+  table {
+    word-wrap: break-word;
+    text-align: center;
+
+    width: 100%;
+    word-break: break-word;
+    td {
+      width: 900px;
+      border-top: 1px solid #ebebeb;
+    }
+  }
 }
-.tableq table {
-  word-wrap: break-word;
-  border-top: 1px solid #ebebeb;
-  text-align: center;
-  width: 100%;
-  word-break: break-word;
-}
+
 .tableq h4 {
   color: red;
 }
