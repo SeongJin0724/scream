@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl"; // Import 수정
 import Main from "../components/section/Main";
-import { FaQuora } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 export default function Question() {
   // 현재 열려있는 아코디언의 상태를 관리합니다. null은 아무것도 열리지 않았음을 의미합니다.

@@ -164,8 +164,6 @@ export default Accordion;*/
 
 import React, { useState } from "react";
 import Main from "../components/section/Main";
-import { FaQuora } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const TabContent = ({ content }) => (
   <div className="tab-content3">{content}</div>

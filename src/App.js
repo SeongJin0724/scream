@@ -9,11 +9,11 @@ const Man = lazy(() => import("./pages/Man"));
 const Woman = lazy(() => import("./pages/Woman"));
 const SearchRes = lazy(() => import("./pages/SearchRes"));
 const MyPage = lazy(() => import("./pages/MyPage"));
-const Standardss = lazy(() => import("./pages/Standardss"));
+const FooterStandards = lazy(() => import("./pages/FooterStandards"));
 const Policy = lazy(() => import("./pages/Policy"));
 const Penalty = lazy(() => import("./pages/Penalty"));
 const Guideline = lazy(() => import("./pages/Guideline"));
-const Noticee = lazy(() => import("./pages/Noticee"));
+const FooterNotice = lazy(() => import("./pages/FooterNotice"));
 const Service = lazy(() => import("./pages/Service"));
 const Storeinfo = lazy(() => import("./pages/Storeinfo"));
 const Acceptance = lazy(() => import("./pages/Acceptance"));
@@ -42,11 +42,11 @@ function App() {
           <Route path="/man" element={<Man />} />
           <Route path="/woman" element={<Woman />} />
           <Route path="/searchres" element={<SearchRes />} />
-          <Route path="/standardss" element={<Standardss />} />
+          <Route path="/footerstandards" element={<FooterStandards />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/penalty" element={<Penalty />} />
           <Route path="/guideline" element={<Guideline />} />
-          <Route path="/noticee" element={<Noticee />} />
+          <Route path="/footernotice" element={<FooterNotice />} />
           <Route path="/service" element={<Service />} />
           <Route path="/storeinfo" element={<Storeinfo />} />
           <Route path="/acceptance" element={<Acceptance />} />

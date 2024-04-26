@@ -1,7 +1,6 @@
 import React from "react";
 import Main from "../components/section/Main";
 
-import { FaQuora } from "react-icons/fa";
 import { Link } from "react-router-dom";
 export default function Company() {
   return (
