@@ -1,4 +1,4 @@
-import Standards from "../../pages/Standards";
+import Standardss from "../../pages/Standardss";
 import Policy from "../../pages/Policy";
 import Penalty from "../../pages/Penalty";
 import Guideline from "../../pages/Guideline";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const uldata1 = [
   {
     title: "검수기준",
-    src: <Standards />,
+    src: <Standardss />,
   },
   {
     title: "이용정책",
@@ -25,7 +25,7 @@ export const uldata1 = [
 export const uldata2 = [
   {
     title: "공지사항",
-    src: "/partnership",
+    src: "/notice",
   },
   {
     title: "서비스 소개",
@@ -103,7 +103,7 @@ export const uldata6 = [
       <p className="p3">
         당사는 고객님의 현금 결제 금액에 대해 신한은행과 채무지급보증 계약을
         체결하여 안전거래를 보장하고 있습니다.
-        <Link className="p11" id="p11" to={"/Notice"}>
+        <Link className="p11" id="p11" to={"/Noticee"}>
           서비스가입 사실 확인
         </Link>
       </p>

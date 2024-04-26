@@ -9,11 +9,11 @@ const Man = lazy(() => import("./pages/Man"));
 const Woman = lazy(() => import("./pages/Woman"));
 const SearchRes = lazy(() => import("./pages/SearchRes"));
 const MyPage = lazy(() => import("./pages/MyPage"));
-const Standards = lazy(() => import("./pages/Standards"));
+const Standardss = lazy(() => import("./pages/Standardss"));
 const Policy = lazy(() => import("./pages/Policy"));
 const Penalty = lazy(() => import("./pages/Penalty"));
 const Guideline = lazy(() => import("./pages/Guideline"));
-const Notice = lazy(() => import("./pages/Notice"));
+const Noticee = lazy(() => import("./pages/Noticee"));
 const Service = lazy(() => import("./pages/Service"));
 const Storeinfo = lazy(() => import("./pages/Storeinfo"));
 const Acceptance = lazy(() => import("./pages/Acceptance"));
@@ -26,7 +26,10 @@ const Question = lazy(() => import("./pages/Question"));
 const Detail1 = lazy(() => import("./pages/Detail1"));
 const Gather = lazy(() => import("./pages/Gather"));
 const BrandProducts = lazy(() => import("./pages/BrandProducts"));
-
+const Standards = lazy(() => import("./pages/Standards"));
+const Notice = lazy(() => import("./pages/Notice"));
+const Notice5 = lazy(() => import("./pages/Notice5"));
+const Notice4 = lazy(() => import("./pages/Notice4"));
 function App() {
   return (
     <BrowserRouter>
@@ -39,11 +42,11 @@ function App() {
           <Route path="/man" element={<Man />} />
           <Route path="/woman" element={<Woman />} />
           <Route path="/searchres" element={<SearchRes />} />
-          <Route path="/standards" element={<Standards />} />
+          <Route path="/standardss" element={<Standardss />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/penalty" element={<Penalty />} />
           <Route path="/guideline" element={<Guideline />} />
-          <Route path="/notice" element={<Notice />} />
+          <Route path="/noticee" element={<Noticee />} />
           <Route path="/service" element={<Service />} />
           <Route path="/storeinfo" element={<Storeinfo />} />
           <Route path="/acceptance" element={<Acceptance />} />
@@ -56,6 +59,10 @@ function App() {
           <Route path="/detail1" element={<Detail1 />} />
           <Route path="/gather" element={<Gather />} />
           <Route path="/brands/:brand" element={<BrandProducts />} />
+          <Route path="/standards" element={<Standards />} />
+          <Route path="/notice" element={<Notice />} />
+          <Route path="/notice/5" element={<Notice5 />} />
+          <Route path="/notice/4" element={<Notice4 />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-/*import React from "react";
+import React from "react";
 import Main from "../components/section/Main";
 export default function Company() {
   return (
@@ -43,80 +43,4 @@ export default function Company() {
       </div>
     </Main>
   );
-}*/
-import React, { useState } from "react";
-import Main from "../components/section/Main";
-
-const accordionItems = [
-  {
-    id: 1,
-    title: "신발",
-    content: (
-      <p>
-        "KREAM의 검수기준은 거래 당사자간 원활한 거래와 보다 균형있는 검수기준
-        확립을 위해 지속적으로 업데이트 되고 있습니다. 거래에 앞서 최신
-        검수기준을 참고하시기 바랍니다. 회원님께서 판매 또는 구매하신 모든
-        상품은 KREAM의 전문 검수팀이 제품의 컨디션을 꼼꼼하게 확인한 후, 검수
-        합격 시에만 출고하고 있습니다. ※ 신발 거래 관련 주의사항 KREAM은 정가품
-        판정 및 검수기준에 의한 기본 품질 확인을 수행하고 있으나, 통신판매
-        중개자로서 제조업체의 제품별 보증에 대해서는 책임을 지지 않습니다. 제품
-        기능에 관한 사항이나 기타 제품 관련 질문은 제조업체에 문의하시기
-        바랍니다. 단, 제조업체의 A/S 여부는 보장하지 않습니다. (이용약관 제22조
-        3항 참고) KREAM의 검수기준으로 고지된 사항 이외 아래와 같이 제조사에서
-        불량으로 인정하지 않는 기준, 또는 당사 검수기준에 따라 그 여부를 명확히
-        분별할 수 없는 상품의 경우 하자로 판단하지 않으며,이로 인한 구매 취소는
-        불가하므로 신중한 거래 부탁드립니다. 제조공정, 유통과정 또는 소재 특성
-        상 발생할 수 있는 사항 도장, 마킹 등의 제조사 또는 판매처에서 진행되는
-        사항 검수 중 발생할 수 있는 사항 (속지, 슈트리 손상 등) 택배 개봉 또는
-        적재 및 상품 이동 중 발생할 수 있는 사항 (칼자국, 박스 눌림, 이염 등)
-        상품택, 구성품 등의 고리 누락/이탈 생산 시기에 따른 소재, 패턴, 색상 등
-        일부 디테일 차이 고지드린 검수 기준으로 판정하기 모호한 상품 상태,
-        비특정적 상품 상태, 특정 모델의 제조공정에 따른 개체차이와 관련하여서는
-        검수센터 책임자의 최종 판단 하에 결정하게 됩니다. KREAM의 검수기준에
-        동의하지 않으실 경우 거래가 불가하오니 거래 당사자는 거래에 앞서 KREAM의
-        검수기준을 반드시 검토하시기 바랍니다."
-      </p>
-    ),
-  },
-  { id: 2, title: "아우터", content: "아우터 관련 내용" },
-  { id: 3, title: "상의", content: "상의 관련 내용" },
-  { id: 4, title: "하의", content: "하의 관련 내용" },
-  // Add more sections as needed
-];
-
-const Accordion = () => {
-  const [openItemId, setOpenItemId] = useState(null);
-  const [color, setColor] = useState(true);
-
-  const toggleItem = (id) => {
-    if (openItemId === id) {
-      setOpenItemId(null); // Close this item
-      setColor(true);
-    } else {
-      setOpenItemId(id); // Open this item and close others
-      setColor(false);
-    }
-  };
-
-  return (
-    <Main>
-      <div className="footer_tab_wrap">
-        {accordionItems.map((item) => (
-          <div key={item.id} className="tab_item">
-            <button className="tab_btn" onClick={() => toggleItem(item.id)}>
-              <p className={openItemId === item.id && !color ? "active" : ""}>
-                {item.title}
-              </p>
-            </button>
-
-            <div className={openItemId === item.id ? "show" : "tab_content"}>
-              {item.content}
-            </div>
-          </div>
-        ))}
-      </div>
-    </Main>
-  );
-};
-
-export default Accordion;
+}
