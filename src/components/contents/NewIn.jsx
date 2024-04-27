@@ -6,29 +6,36 @@ export default function NewIn() {
   const [products, setProducts] = useState([]);
   const [offset, setOffset] = useState(0);
   const [showMore, setShowMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchProducts = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
       );
-      console.log(response.data);
-      setProducts((prevProducts) => [...prevProducts, ...response.data[0]]);
-      console.log(products);
-      setOffset((prevOffset) => prevOffset + 5);
+      const newProducts = response.data[0];
+      setProducts((prevProducts) => {
+        const newUniqueProducts = newProducts.filter(
+          (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
+        );
+        return [...prevProducts, ...newUniqueProducts];
+      });
       if (offset + 5 >= 15) {
         setShowMore(false);
-        setOffset(0);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    setShowMore(true);
     fetchProducts();
-  }, []);
+  }, [offset]);
 
   return (
     <div className="home_section">
@@ -65,7 +72,10 @@ export default function NewIn() {
 
       {showMore && (
         <div className="moreBtn_wrap">
-          <button onClick={fetchProducts} className="moreBtn">
+          <button
+            className="moreBtn"
+            onClick={() => setOffset((prevOffset) => prevOffset + 5)}
+          >
             더보기
           </button>
         </div>
