@@ -422,3 +422,34 @@
     cursor: pointer;
   }
 }
+.purchase_list_tab[data-v-2cbb289b] {
+  background-color: #fafafa;
+  border-radius: 12px;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.tab_item[data-v-2cbb289b] {
+  display: table-cell;
+  text-align: center;
+}
+.tab_link[data-v-2cbb289b] {
+  display: block;
+  height: 96px;
+  padding-top: 18px;
+  position: relative;
+}
+.tab_link .title[data-v-2cbb289b] {
+  color: rgba(34, 34, 34, 0.8);
+  font-size: 13px;
+  letter-spacing: -0.07px;
+}
+.tab_item:first-of-type .tab_link[data-v-2cbb289b]:before {
+  background-color: #ebebeb;
+  bottom: 18px;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 18px;
+  width: 1px;
+}
