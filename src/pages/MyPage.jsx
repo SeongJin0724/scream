@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
+import axios from "axios";
 import { SlArrowRight } from "react-icons/sl";
 export default function Mypage() {
+  const [data, setData] = useState([]);
+  const selectAll = async () => {
+    const result = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/mypage`
+    );
+    setData(result.data);
+    console.log(result.data);
+  };
+  useEffect(() => {
+    selectAll();
+  }, []);
   return (
     <Main>
       <div className="mypage_container">
@@ -11,9 +23,15 @@ export default function Mypage() {
             <li className="mypage_shopinfo_li">
               <h3 className="mypage_shopinfo_title">쇼핑 정보</h3>
               <ul className="mypage_shopinfo_sub_ul">
-                <li className="mypage_shopinfo_sub_li">구매내역</li>
-                <li className="mypage_shopinfo_sub_li">판매내역</li>
-                <li className="mypage_shopinfo_sub_li">관심</li>
+                <li className="mypage_shopinfo_sub_li">
+                  <a href="/company">구매내역</a>
+                </li>
+                <li className="mypage_shopinfo_sub_li">
+                  <a href="/company">판매내역</a>
+                </li>
+                <li className="mypage_shopinfo_sub_li">
+                  <a href="/company">관심</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -21,11 +39,21 @@ export default function Mypage() {
             <li className="mypage_myinfo_li">
               <h3 className="mypage_myinfo_title">내 정보</h3>
               <ul className="mypage_myinfo_sub_ul">
-                <li className="mypage_myinfo_sub_li">로그인 정보</li>
-                <li className="mypage_myinfo_sub_li">프로필 관리</li>
-                <li className="mypage_myinfo_sub_li">주소록</li>
-                <li className="mypage_myinfo_sub_li">결제 정보</li>
-                <li className="mypage_myinfo_sub_li">판매 정산 계좌</li>
+                <li className="mypage_myinfo_sub_li">
+                  <a href="/company">로그인 정보</a>
+                </li>
+                <li className="mypage_myinfo_sub_li">
+                  <a href="/company">프로필 관리</a>
+                </li>
+                <li className="mypage_myinfo_sub_li">
+                  <a href="/company">주소록</a>
+                </li>
+                <li className="mypage_myinfo_sub_li">
+                  <a href="/company">결제 정보</a>
+                </li>
+                <li className="mypage_myinfo_sub_li">
+                  <a href="/company">판매 정산 계좌</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -42,7 +70,11 @@ export default function Mypage() {
                 />
               </div>
               <div className="mypage_userinfo_info">
-                <div className="mypage_userinfo_info_name">name</div>
+                <div className="mypage_userinfo_info_name">
+                  {data.map((user, index) => (
+                    <div key={index}>{user.name}</div>
+                  ))}
+                </div>
                 <div className="mypage_userinfo_info_email">email</div>
               </div>
             </div>
