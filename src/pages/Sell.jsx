@@ -1,33 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Main from "../components/section/Main";
 
 export default function Sell() {
-  const [formData, setFormData] = useState({
-    size: "",
-    desc: "",
-    price: "",
-    deadline: "30",
-    totalPrice: "",
-  });
+  const [size, setSize] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  const [fee, setFee] = useState("");
+  const [deadline, setDeadline] = useState("30");
+  //   const [changeDeadline, setChangeDeadline] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
+  const [apply, setApply] = useState(false);
+
+  //   useEffect(() => {
+  //     const today = new Date();
+  //     today.setDate(today.getDate() + parseInt(deadline));
+  //     setChangeDeadline(today.toISOString().split("T")[0]);
+  //   }, [deadline]);
+
+  const changeDeadline = useMemo(() => {
+    const today = new Date();
+    today.setDate(today.getDate() + parseInt(deadline));
+    return today.toISOString().split("T")[0];
+  }, [deadline]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    switch (id) {
+      case "size":
+        setSize(value);
+        break;
+      case "desc":
+        setDesc(value);
+        break;
+      case "price":
+        setPrice(value);
+        setFee("");
+        setTotalPrice("");
+        break;
+      default:
+        break;
+    }
   };
 
   const selectDeadline = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      deadline: e.target.value,
-    }));
+    setDeadline(e.target.value);
+    if (price) {
+      setFee(Math.trunc(parseInt(price) * 0.07));
+    }
   };
 
-  const today = new Date();
-  today.setDate(today.getDate() + parseInt(formData.deadline));
-  const deadlineDate = today.toISOString().split("T")[0];
+  function formatPrice(price) {
+    return new Intl.NumberFormat("ko-KR").format(price);
+  }
+
+  useEffect(() => {
+    if (size && desc && price && deadline && fee) {
+      setTotalPrice(parseInt(price) - parseInt(fee));
+      setApply(true);
+    } else {
+      setApply(false);
+    }
+  }, [size, desc, price, deadline, fee]);
 
   return (
     <Main>
@@ -48,7 +81,7 @@ export default function Sell() {
                   id="size"
                   placeholder="사이즈 입력"
                   className="sell_form_input"
-                  value={formData.size}
+                  value={size}
                   onChange={handleChange}
                 />
               </div>
@@ -56,7 +89,7 @@ export default function Sell() {
                 <label htmlFor="desc">상품상태 및 설명</label>
                 <textarea
                   id="desc"
-                  value={formData.desc}
+                  value={desc}
                   onChange={handleChange}
                 ></textarea>
               </div>
@@ -68,7 +101,7 @@ export default function Sell() {
                     placeholder="희망가 입력"
                     id="price"
                     className="sell_form_input"
-                    value={formData.price}
+                    value={price}
                     onChange={handleChange}
                   />
                   <span className="input_unit">원</span>
@@ -84,11 +117,7 @@ export default function Sell() {
                 </tr>
                 <tr>
                   <td className="fee_title">수수료</td>
-                  <td>
-                    {formData.price && formData.deadline
-                      ? Math.trunc(parseInt(formData.price) * 0.07)
-                      : "-"}
-                  </td>
+                  <td>{fee ? ` - ${formatPrice(fee)}원` : "-"}</td>
                 </tr>
                 <tr>
                   <td className="fee_title">배송비</td>
@@ -100,7 +129,7 @@ export default function Sell() {
             <div className="deadline_wrap">
               <h3 className="deadline_header">입찰마감기한</h3>
               <p className="deadline_text">
-                {formData.deadline}일 ({deadlineDate} 마감)
+                {deadline}일 ({changeDeadline} 마감)
               </p>
               <ul className="deadline_dates">
                 <li>
@@ -108,7 +137,7 @@ export default function Sell() {
                     type="button"
                     value="1"
                     onClick={selectDeadline}
-                    className={formData.deadline === "1" ? "selected" : ""}
+                    className={deadline === "1" ? "selected" : ""}
                   >
                     1일
                   </button>
@@ -118,7 +147,7 @@ export default function Sell() {
                     type="button"
                     value="3"
                     onClick={selectDeadline}
-                    className={formData.deadline === "3" ? "selected" : ""}
+                    className={deadline === "3" ? "selected" : ""}
                   >
                     3일
                   </button>
@@ -128,7 +157,7 @@ export default function Sell() {
                     type="button"
                     value="7"
                     onClick={selectDeadline}
-                    className={formData.deadline === "7" ? "selected" : ""}
+                    className={deadline === "7" ? "selected" : ""}
                   >
                     7일
                   </button>
@@ -138,7 +167,7 @@ export default function Sell() {
                     type="button"
                     value="30"
                     onClick={selectDeadline}
-                    className={formData.deadline === "30" ? "selected" : ""}
+                    className={deadline === "30" ? "selected" : ""}
                   >
                     30일
                   </button>
@@ -148,7 +177,7 @@ export default function Sell() {
                     type="button"
                     value="60"
                     onClick={selectDeadline}
-                    className={formData.deadline === "60" ? "selected" : ""}
+                    className={deadline === "60" ? "selected" : ""}
                   >
                     60일
                   </button>
@@ -158,12 +187,19 @@ export default function Sell() {
 
             <div className="totalPrice_wrap">
               <p className="totalPrice_title">정산금액</p>
-              <p className="totalPrice_amount">
-                <span>-</span>
+              <p
+                className={
+                  totalPrice ? "totalPrice_amount ready" : "totalPrice_amount"
+                }
+              >
+                {totalPrice ? formatPrice(totalPrice) + "원" : "-"}
               </p>
             </div>
 
-            <button className="applyBtn" type="submit">
+            <button
+              type="submit"
+              className={apply ? "applyBtn showApplyBtn" : "applyBtn"}
+            >
               판매입찰 신청
             </button>
           </form>
