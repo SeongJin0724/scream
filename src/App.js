@@ -30,6 +30,7 @@ const Standards = lazy(() => import("./pages/Standards"));
 const Notice = lazy(() => import("./pages/Notice"));
 const Notice5 = lazy(() => import("./pages/Notice5"));
 const Notice4 = lazy(() => import("./pages/Notice4"));
+const Sell = lazy(() => import("./pages/Sell"));
 const Notice3 = lazy(() => import("./pages/Notice3"));
 const Test = lazy(() => import("./pages/Test"));
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/notice" element={<Notice />} />
           <Route path="/notice/5" element={<Notice5 />} />
           <Route path="/notice/4" element={<Notice4 />} />
+          <Route path="/sell" element={<Sell />} />
           <Route path="/notice/3" element={<Notice3 />} />
           <Route path="/test" element={<Test />} />
         </Routes>
