@@ -2,30 +2,43 @@ import React, { useState } from "react";
 import Main from "../components/section/Main";
 import Logo from "../assets/image/screamlogo.png";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
-  const [email, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/login`,
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // 쿠키를 포함시키기 위해 설정
+        }
+      );
 
-    const data = await response.json();
-    if (response.ok) {
-      navigate("/");
-      console.log("★로그인성공★");
-    } else {
-      alert(data.message);
+      if (response.status === 200) {
+        navigate("/");
+        console.log("★로그인성공★");
+      } else {
+        alert(response.data.message);
+        console.log("로그인실패");
+      }
+    } catch (error) {
+      // axios는 네트워크 에러 또는 2xx 범위를 벗어난 상태 코드를 받을 때 예외를 발생시킵니다.
+      alert(
+        error.response
+          ? error.response.data.message
+          : "로그인 처리 중 에러 발생"
+      );
       console.log("로그인실패");
     }
   };
@@ -41,7 +54,7 @@ export default function Login() {
             <input
               type="text"
               value={email}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="예) abc@abc.com"
             />
           </div>

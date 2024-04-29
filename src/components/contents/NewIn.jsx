@@ -16,7 +16,9 @@ export default function NewIn() {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
       );
+      console.log(response);
       const newProducts = response.data[0];
+      console.log(newProducts);
       setProducts((prevProducts) => {
         const newUniqueProducts = newProducts.filter(
           (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
@@ -43,11 +45,10 @@ export default function NewIn() {
         <h3>New In</h3>
         <p>신규 판매 상품</p>
       </div>
-
       <ul className="newIn_lists_wrap">
         {products.length > 0 ? (
           products.map((product) => (
-            <li key={product.itemkey} className="newIn_item">
+            <li key={product.itemKey} className="newIn_item">
               <Link>
                 <img
                   src={product.img}
