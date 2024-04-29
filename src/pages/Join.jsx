@@ -1,188 +1,98 @@
 import React, { useState } from "react";
-import Main from "../components/section/Main";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Register() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [tel, setTel] = useState("");
+  const [address, setAddress] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
-  const [userDetails, setUserDetails] = useState({
-    password: "",
-    name: "",
-    tel: "", // phoneNumber을 tel로 변경
-    address: "",
-    bankName: "", // 은행 이름
-    accountNum: "", // 계좌 번호
-    accountOwner: "", // 계좌 소유주 이름
-    // verification_code, code_expires_at, verified는 서버 측에서 처리할 정보이므로 여기에 포함시킬 필요는 없음
-  });
 
-  // 이메일 코드 보내기
-  const handleSendEmailCode = async () => {
+  const sendVerificationCode = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/send-verification-code`,
-        {
-          email,
-          withCredentials: true,
-        }
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/send-verification-code`,
+        { email }
       );
-      alert(response.data.message);
+      alert("인증 코드가 이메일로 발송되었습니다.");
     } catch (error) {
-      console.error("Error sending email code:", error);
-      alert("Failed to send email code");
+      alert("인증 코드 발송에 실패하였습니다.");
     }
   };
 
-  // 이메일 코드 확인하기
-  const handleVerifyEmailCode = async () => {
+  const verifyCode = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/verify`,
-        {
-          email,
-          code: verificationCode,
-          withCredentials: true,
-        }
-      );
-      alert(response.data.message);
+      await axios.post(`${process.env.REACT_APP_API_URL}/verify-code`, {
+        email,
+        verificationCode,
+      });
+      alert("이메일이 성공적으로 인증되었습니다.");
     } catch (error) {
-      console.error("Error verifying email code:", error);
-      alert("Failed to verify email code");
+      alert("유효하지 않거나 만료된 인증 코드입니다.");
     }
   };
 
-  // 사용자 정보 입력 핸들링
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
-
-  // 회원가입 최종 확인
-  const handleFinalizeRegistration = async () => {
+  const register = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/signup`,
-        {
-          ...userDetails,
-          email,
-          verificationCode,
-          withCredentials: true,
-        }
-      );
-      alert(response.data.message);
+      await axios.post(`${process.env.REACT_APP_API_URL}/register`, {
+        email,
+        password,
+        name,
+        tel,
+        address,
+      });
+      alert("회원가입이 완료되었습니다.");
     } catch (error) {
-      console.error("Error finalizing registration:", error);
-      alert("Failed to finalize registration");
+      alert("회원가입에 실패하였습니다.");
     }
   };
 
   return (
-    <Main>
-      <div className="join_wrap">
-        <h2 className="join_title">회원가입</h2>
-        <div className="join_form">
-          <div className="form_inner">
-            <label className="form_title">이메일</label>
-            <label id="form_position">
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button onClick={handleSendEmailCode}>인증</button>
-            </label>
-            <label id="form_position">
-              <input
-                type="text"
-                placeholder="인증 코드"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-              />
-              <button onClick={handleVerifyEmailCode}>인증 완료</button>
-            </label>
-          </div>
-
-          <div className="form_inner">
-            <label className="form_title">비밀번호</label>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={userDetails.password}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">이름</label>
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              value={userDetails.name}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">전화번호</label>
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              name="tel"
-              value={userDetails.tel}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">주소</label>
-            <input
-              type="text"
-              placeholder="Address"
-              name="address"
-              value={userDetails.address}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">은행</label>
-            <input
-              type="text"
-              placeholder="은행 이름"
-              name="bankName"
-              value={userDetails.bankName}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">계좌번호</label>
-            <input
-              type="text"
-              placeholder="계좌 번호"
-              name="accountNum"
-              value={userDetails.accountNum}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form_inner">
-            <label className="form_title">예금주</label>
-            <input
-              type="text"
-              placeholder="예금주명"
-              name="accountOwner"
-              value={userDetails.accountOwner}
-              onChange={handleChange}
-            />
-          </div>
-          <button className="join_btn" onClick={handleFinalizeRegistration}>
-            회원가입 최종 확인
-          </button>
-        </div>
-      </div>
-    </Main>
+    <div>
+      <h2>회원가입</h2>
+      <input
+        type="email"
+        placeholder="이메일"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button onClick={sendVerificationCode}>인증 코드 발송</button>
+      <br />
+      <input
+        type="text"
+        placeholder="인증 코드"
+        value={verificationCode}
+        onChange={(e) => setVerificationCode(e.target.value)}
+      />
+      <button onClick={verifyCode}>인증 코드 검증</button>
+      <br />
+      <input
+        type="password"
+        placeholder="비밀번호"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="이름"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="전화번호"
+        value={tel}
+        onChange={(e) => setTel(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="주소"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+      />
+      <button onClick={register}>회원가입</button>
+    </div>
   );
 }
 

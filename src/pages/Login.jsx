@@ -23,8 +23,10 @@ export default function Login() {
     const data = await response.json();
     if (response.ok) {
       navigate("/");
+      console.log("★로그인성공★");
     } else {
       alert(data.message);
+      console.log("로그인실패");
     }
   };
   return (
