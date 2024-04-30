@@ -50,6 +50,10 @@ export const headerBottomMenus = [
     title: "여성",
     src: "/woman",
   },
+  {
+    title: "STYLE",
+    src: "/style",
+  },
 ];
 
 // export const productImg = [
