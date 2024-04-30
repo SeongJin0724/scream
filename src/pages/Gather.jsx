@@ -38,7 +38,7 @@ export default function Gather() {
   };
   return (
     <Main>
-      <terms className="terms_container" onSubmit={handleSubmit}>
+      <form className="terms_container" onSubmit={handleSubmit}>
         <div className="terms_inner">
           <div className="terms_item">
             <div className="terms_item_inner">
@@ -127,7 +127,7 @@ export default function Gather() {
         <button className="terms_btn" onClick={handleSubmit}>
           약관 동의 후 회원가입하기
         </button>
-      </terms>
+      </form>
     </Main>
   );
 }
