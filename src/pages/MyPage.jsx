@@ -43,7 +43,7 @@ export default function Mypage() {
                   <a href="/mypage/infochange">로그인 정보</a>
                 </li>
                 <li className="mypage_myinfo_sub_li">
-                  <a href="/company">프로필 관리</a>
+                  <a href="/mypage/profilechange">프로필 관리</a>
                 </li>
                 <li className="mypage_myinfo_sub_li">
                   <a href="/company">주소록</a>

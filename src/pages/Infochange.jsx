@@ -67,6 +67,9 @@ const EditUser = ({ user_id }) => {
           </ul>
         </nav>
         <div className="infochange_wrap">
+          <div className="infochange_wrap_border">
+            <h1 className="infochange_wrap_h1">로그인 정보</h1>
+          </div>
           <h3 className="infochange_wrap_myaccount_h3">내 계정</h3>
           <div className="infochange_wrap_myaccount">
             <label className="infochange_title">이메일</label>

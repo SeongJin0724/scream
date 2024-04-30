@@ -40,11 +40,21 @@
     }
   }
   .infochange_wrap {
+    width: 100%;
+    .infochange_wrap_border {
+      border-bottom: 3px solid #222;
+      padding-bottom: 16px;
+      .infochange_wrap_h1 {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
     .infochange_wrap_myaccount_h3 {
       font-weight: 700;
+      padding-top: 38px;
     }
     .infochange_wrap_myaccount {
-      width: 100%;
+      width: 30%;
       display: flex;
       flex-direction: column;
       margin-top: 20px;
@@ -70,7 +80,7 @@
       margin-top: 50px;
     }
     .infochange_wrap_myprivate {
-      width: 100%;
+      width: 30%;
       display: flex;
       flex-direction: column;
       margin-top: 20px;
@@ -93,7 +103,11 @@
     }
     .infochange_btn {
       background-color: #ffffff;
-      border: 2px solid black;
+      border: 1px solid #b6b4b4;
+      border-radius: 12px;
+      font-size: 13px;
+      height: 10%;
+      width: 10%;
     }
   }
 }

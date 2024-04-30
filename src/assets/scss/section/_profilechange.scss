@@ -1,0 +1,61 @@
+.profilechange_container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding: 40px 40px 160px;
+
+  .profilechange_nav {
+    margin-right: 20px;
+    width: 180px;
+
+    .profilechange_nav_title {
+      padding-bottom: 30px;
+      font-weight: 700;
+    }
+    .profilechange_shopinfo_title {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .profilechange_shopinfo_sub_li {
+      margin-top: 12px;
+      color: #b6b4b4;
+      font-size: 15px;
+    }
+
+    .profilechange_myinfo {
+      margin-top: 40px;
+
+      .profilechange_myinfo_title {
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .profilechange_myinfo_sub_li {
+        margin-top: 12px;
+        color: #b6b4b4;
+        font-size: 15px;
+      }
+    }
+  }
+  .profilechange_wrap {
+    width: 100%;
+    .profilechange_wrap_border {
+      border-bottom: 3px solid #222;
+      padding-bottom: 16px;
+      .profilechange_wrap_h1 {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+    .profilechange_wrap_changebtn {
+      background-color: white;
+      border: 1px solid #b6b4b4;
+      border-radius: 12px;
+      font-size: 13px;
+      height: 10%;
+      width: 10%;
+    }
+  }
+}
