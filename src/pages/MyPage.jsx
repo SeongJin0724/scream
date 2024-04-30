@@ -66,7 +66,7 @@ export default function Mypage() {
                   data-v-ed683452=""
                   src="https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg"
                   alt="사용자 이미지"
-                  class="thumb_img"
+                  className="thumb_img"
                 />
               </div>
               <div className="mypage_userinfo_info">

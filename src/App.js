@@ -32,6 +32,8 @@ const Notice5 = lazy(() => import("./pages/Notice5"));
 const Notice4 = lazy(() => import("./pages/Notice4"));
 const Sell = lazy(() => import("./pages/Sell"));
 const Notice3 = lazy(() => import("./pages/Notice3"));
+const Infochange = lazy(() => import("./pages/Infochange"));
+
 function App() {
   return (
     <BrowserRouter>
@@ -67,6 +69,7 @@ function App() {
           <Route path="/notice/4" element={<Notice4 />} />
           <Route path="/sell" element={<Sell />} />
           <Route path="/notice/3" element={<Notice3 />} />
+          <Route path="/infochange" element={<Infochange />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
