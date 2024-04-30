@@ -1,8 +1,8 @@
-.sell_wrap {
+.apply_wrap {
   padding-top: 30px;
   color: #222222;
 
-  .sell_apply {
+  .apply_content {
     width: 100%;
     height: auto;
     max-width: 700px;
@@ -11,7 +11,7 @@
     border: 2px solid #222;
     border-radius: 8px;
 
-    .sell_header {
+    .content_header {
       color: #000;
       font-size: 20px;
       font-weight: 700;
@@ -21,7 +21,7 @@
       margin-bottom: 4px;
     }
 
-    .sell_item {
+    .apply_item {
       display: flex;
       align-items: center;
       gap: 16px;
@@ -38,11 +38,11 @@
       }
     }
 
-    .sell_form {
+    .apply_form {
       font-size: 14px;
       font-weight: 700;
 
-      .sell_form_input {
+      .apply_form_input {
         width: 200px;
         outline: none;
         text-align: end;
@@ -68,15 +68,15 @@
         margin: 0;
       }
 
-      .sell_size,
-      .sell_desc,
-      .sell_price {
+      .item_size,
+      .item_desc,
+      .item_price {
         padding-bottom: 10px;
         border-bottom: 1px solid #eeeeee;
         margin-bottom: 18px;
       }
 
-      .sell_desc {
+      .item_desc {
         display: flex;
         flex-direction: column;
 
@@ -89,14 +89,14 @@
         }
       }
 
-      .sell_size,
-      .sell_price {
+      .item_size,
+      .item_price {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
-      .sell_fee {
+      .item_fee {
         width: 100%;
         margin-bottom: 24px;
         tr {
@@ -112,6 +112,20 @@
           font-size: 13px;
           letter-spacing: -0.07px;
           color: #22222280;
+
+          .fee_icon {
+            padding: 0 3px;
+          }
+
+          .fee_desc {
+            display: none;
+            font-size: 12px;
+            color: #bcbcbc;
+          }
+
+          .fee_icon:hover + .fee_desc {
+            display: inline-block;
+          }
         }
       }
 
