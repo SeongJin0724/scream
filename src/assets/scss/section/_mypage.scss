@@ -41,6 +41,9 @@
   }
   .mypage_wrap {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
     .mypage_profile {
       display: flex;
       border: 1px solid #b6b4b4;
@@ -96,7 +99,6 @@
     .mypage_buy {
       .mypage_buy_title {
         display: flex;
-        margin-top: 42px;
         .mypage_buy_title_h3 {
           font-size: 18px;
           font-weight: 700;
@@ -129,11 +131,19 @@
           text-align: center;
         }
       }
+      .mypage_buy_purchase_all {
+        text-align: center;
+        padding: 10%;
+        p {
+          color: rgba(34, 34, 34, 0.5);
+          font-size: 13px;
+          letter-spacing: -0.07px;
+        }
+      }
     }
     .mypage_sell {
       .mypage_sell_title {
         display: flex;
-        margin-top: 42px;
         .mypage_sell_title_h3 {
           font-size: 18px;
           font-weight: 700;
@@ -166,6 +176,15 @@
           text-align: center;
         }
       }
+      .mypage_sell_sale_all {
+        padding: 10%;
+        text-align: center;
+        p {
+          color: rgba(34, 34, 34, 0.5);
+          font-size: 13px;
+          letter-spacing: -0.07px;
+        }
+      }
     }
     .mypage_wish {
       .mypage_wish_title {
@@ -180,6 +199,16 @@
           margin-left: auto;
           font-size: 13px;
           align-items: center;
+        }
+      }
+      .mypage_wish_all {
+        text-align: center;
+        padding: 10%;
+        background-color: #fafafa;
+        p {
+          color: rgba(34, 34, 34, 0.5);
+          font-size: 13px;
+          letter-spacing: -0.07px;
         }
       }
     }

@@ -6,7 +6,7 @@ export default function Mypage() {
   const [data, setData] = useState([]);
   const selectAll = async () => {
     const result = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/mypage`
+      `${process.env.REACT_APP_API_URL}/api/users`
     );
     setData(result.data);
     console.log(result.data);
@@ -40,7 +40,7 @@ export default function Mypage() {
               <h3 className="mypage_myinfo_title">내 정보</h3>
               <ul className="mypage_myinfo_sub_ul">
                 <li className="mypage_myinfo_sub_li">
-                  <a href="/company">로그인 정보</a>
+                  <a href="/mypage/infochange">로그인 정보</a>
                 </li>
                 <li className="mypage_myinfo_sub_li">
                   <a href="/company">프로필 관리</a>
@@ -113,7 +113,7 @@ export default function Mypage() {
                 </div>
               </div>
               <div className="mypage_buy_purchase_all">
-                거래 내역이 없습니다.
+                <p>거래 내역이 없습니다.</p>
               </div>
             </div>
           </div>
@@ -138,7 +138,9 @@ export default function Mypage() {
                   종료<div className="mypage_sell_sale_list3_count"></div>
                 </div>
               </div>
-              <div className="mypage_sell_sale_all">거래 내역이 없습니다.</div>
+              <div className="mypage_sell_sale_all">
+                <p>거래 내역이 없습니다.</p>
+              </div>
             </div>
           </div>
           <div className="mypage_wish">
@@ -149,7 +151,9 @@ export default function Mypage() {
                 <SlArrowRight />
               </a>
             </div>
-            <div className="mypage_wish_all">거래 내역이 없습니다.</div>
+            <div className="mypage_wish_all">
+              <p>추가하신 관심 상품이 없습니다.</p>
+            </div>
           </div>
         </div>
       </div>

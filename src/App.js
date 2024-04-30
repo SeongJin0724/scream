@@ -71,7 +71,7 @@ function App() {
           <Route path="/sell" element={<Sell />} />
           <Route path="/buy" element={<Buy />} />
           <Route path="/notice/3" element={<Notice3 />} />
-          <Route path="/infochange" element={<Infochange />} />
+          <Route path="/mypage/infochange" element={<Infochange />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

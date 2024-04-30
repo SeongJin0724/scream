@@ -1,0 +1,99 @@
+.infochange_container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding: 40px 40px 160px;
+
+  .infochange_nav {
+    margin-right: 20px;
+    width: 180px;
+
+    .infochange_nav_title {
+      padding-bottom: 30px;
+      font-weight: 700;
+    }
+    .infochange_shopinfo_title {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .infochange_shopinfo_sub_li {
+      margin-top: 12px;
+      color: #b6b4b4;
+      font-size: 15px;
+    }
+
+    .infochange_myinfo {
+      margin-top: 40px;
+
+      .infochange_myinfo_title {
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .infochange_myinfo_sub_li {
+        margin-top: 12px;
+        color: #b6b4b4;
+        font-size: 15px;
+      }
+    }
+  }
+  .infochange_wrap {
+    .infochange_wrap_myaccount_h3 {
+      font-weight: 700;
+    }
+    .infochange_wrap_myaccount {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      align-items: baseline;
+      .infochange_title {
+        font-size: 14px;
+        letter-spacing: -0.07px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+      input {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .infochange_wrap_myprivate_h3 {
+      font-weight: 700;
+      margin-top: 50px;
+    }
+    .infochange_wrap_myprivate {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      align-items: baseline;
+      .infochange_title {
+        font-size: 14px;
+        letter-spacing: -0.07px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+      input {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .infochange_btn {
+      background-color: #ffffff;
+      border: 2px solid black;
+    }
+  }
+}
