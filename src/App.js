@@ -34,6 +34,8 @@ const Sell = lazy(() => import("./pages/Sell"));
 const Buy = lazy(() => import("./pages/Buy"));
 const Notice3 = lazy(() => import("./pages/Notice3"));
 const Infochange = lazy(() => import("./pages/Infochange"));
+const Style = lazy(() => import("./pages/Style"));
+const Post = lazy(() => import("./pages/Post"));
 
 function App() {
   return (
@@ -72,6 +74,8 @@ function App() {
           <Route path="/buy" element={<Buy />} />
           <Route path="/notice/3" element={<Notice3 />} />
           <Route path="/infochange" element={<Infochange />} />
+          <Route path="/style" element={<Style />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
