@@ -1,0 +1,9 @@
+.check_label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .check_input {
+    cursor: pointer;
+  }
+}

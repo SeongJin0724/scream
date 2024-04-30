@@ -87,7 +87,8 @@
     width: 160px;
   }
   form {
-    width: 50%;
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,7 +115,7 @@
       }
     }
     .login_btn {
-      width: 70%;
+      width: 100%;
       background-color: #000;
       color: #fff;
       border-radius: 10px;
@@ -123,10 +124,17 @@
       cursor: pointer;
       font-size: 20px;
       font-weight: 700;
+      border: 1px solid #000;
+      &:hover {
+        background-color: #fff;
+        color: #222;
+        border-color: #222;
+      }
     }
   }
   .join_btn {
-    width: 35%;
+    width: 100%;
+    max-width: 500px;
     background-color: #eee;
     color: #000;
     border-radius: 10px;
@@ -136,6 +144,12 @@
     font-size: 18px;
     font-weight: 700;
     text-align: center;
+    border: 1px solid #eee;
+    &:hover {
+      background-color: #fff;
+      color: #222;
+      border-color: #222;
+    }
   }
 }
 
@@ -147,67 +161,67 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .join_title {
-    font-size: 30px;
-    font-weight: 700;
-    margin-top: 20px;
-  }
-  .join_form {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .form_inner {
-      width: 100%;
+  .join_wrap_inner {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    .join_email_wrap {
       display: flex;
-      flex-direction: column;
+      gap: 8px;
+    }
+    .join_title {
+      font-size: 30px;
+      font-weight: 700;
       margin-top: 20px;
-      align-items: baseline;
-      #form_position {
-        position: relative;
-        width: 100%;
-        button {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          transform: translate(0, -50%);
-          border: none;
-          border-radius: 10px;
-          color: #fff;
-          padding: 4px;
-          background-color: #000;
-          font-size: 12px;
-          font-weight: bold;
-          cursor: pointer;
-        }
+    }
+    .join_input {
+      width: 100%;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+      &:focus {
+        outline: none;
       }
-      input {
-        width: 100%;
-        padding: 10px 0;
-        border-bottom: 1px solid #ddd;
-        &:focus {
-          outline: none;
-        }
+      &::placeholder {
+        color: lightgray;
       }
-      .form_title {
-        font-size: 14px;
-        letter-spacing: -0.07px;
-        line-height: 18px;
-        margin-bottom: 10px;
-        font-weight: 500;
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
-  }
-  .join_btn {
-    width: 70%;
-    background-color: #000;
-    color: #fff;
-    border-radius: 10px;
-    padding: 14px 0;
-    margin: 20px auto;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 700;
+    .join_email_btn {
+      width: 100%;
+      background-color: #fff;
+      color: #999;
+      border-radius: 10px;
+      padding: 6px 0;
+      margin: 10px auto;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid #ebebeb;
+      &:hover {
+        color: #222;
+        border-color: #222;
+      }
+    }
+    .join_btn {
+      width: 100%;
+      background-color: #222;
+      color: #fff;
+      border-radius: 10px;
+      padding: 14px 0;
+      margin: 20px auto;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 700;
+      border: 1px solid #000;
+      &:hover {
+        background-color: #fff;
+        color: #222;
+        border: 1px solid #222;
+      }
+    }
   }
 }
 
