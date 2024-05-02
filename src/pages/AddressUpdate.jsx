@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import Main from "../components/section/Main";
+import Modal from "react-modal";
 
 export default function AddressUpdate(props) {
   const [address, setAddress] = useState("");
   const [zonecode, setZonecode] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [detailedAddress, setDetailedAddress] = useState();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   const themeObj = {
     bgColor: "#FFFFFF",
@@ -40,29 +50,44 @@ export default function AddressUpdate(props) {
   return (
     <Main>
       <div>
-        <div>
-          <strong>address</strong>
-        </div>
-        <div>
+        <button onClick={openModal}>새 배송지 추가</button>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={{
+            content: {
+              position: "relative",
+              backgroundColor: "rgb(255, 255, 255)",
+              borderRadius: "16px",
+              width: "560px",
+              height: "600px",
+            },
+          }}
+        >
           <div>
-            <div>{zonecode}</div>
-            <button type="button" onClick={toggleHandler}>
-              주소 찾기
-            </button>
+            <strong>새 주소 추가</strong>
           </div>
-          {isOpen && (
+          <div>
             <div>
-              <DaumPostcode
-                theme={themeObj}
-                style={postCodeStyle}
-                onComplete={completeHandler}
-                onClose={closeHandler}
-              />
+              <div>{zonecode}</div>
+              <button type="button" onClick={toggleHandler}>
+                주소 찾기
+              </button>
             </div>
-          )}
-          <div>{address}</div>
-          <input value={detailedAddress} onChange={inputChangeHandler} />
-        </div>
+            {isOpen && (
+              <div>
+                <DaumPostcode
+                  theme={themeObj}
+                  style={postCodeStyle}
+                  onComplete={completeHandler}
+                  onClose={closeHandler}
+                />
+              </div>
+            )}
+            <div>{address}</div>
+            <input value={detailedAddress} onChange={inputChangeHandler} />
+          </div>
+        </Modal>
       </div>
     </Main>
   );
