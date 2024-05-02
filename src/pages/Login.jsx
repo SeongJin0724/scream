@@ -2,45 +2,28 @@ import React, { useState } from "react";
 import Main from "../components/section/Main";
 import Logo from "../assets/image/screamlogo.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { logIn } from "../service/authService";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/login`,
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, // 쿠키를 포함시키기 위해 설정
-        }
-      );
-      const data = response.data;
-
+      const data = await logIn(email, password); // authService의 logIn 함수를 사용
       if (data.token) {
         localStorage.setItem("accessToken", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        // localStorage.setItem("email", data.email);
-      }
-      console.log("sadsad", data);
-      if (response.status === 200) {
-        navigate("/");
         console.log("★로그인성공★");
+        navigate("/"); // 사용자를 홈으로 리다이렉트
       } else {
-        alert(response.data.message);
+        alert(data.message);
         console.log("로그인실패");
       }
     } catch (error) {
-      // axios는 네트워크 에러 또는 2xx 범위를 벗어난 상태 코드를 받을 때 예외를 발생시킵니다.
       alert(
         error.response
           ? error.response.data.message
@@ -49,6 +32,7 @@ export default function Login() {
       console.log("로그인실패");
     }
   };
+
   return (
     <Main>
       <div className="login_wrap">
