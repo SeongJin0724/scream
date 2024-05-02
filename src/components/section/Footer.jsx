@@ -80,7 +80,7 @@ export default function Footer() {
                 </Link>
               </ul>
               <div className="footer_info4_icon">
-                <Link to={"/company"}>
+                <Link to={"/talented"}>
                   <FcCloseUpMode className="FcCloseUpMode" />
                 </Link>
                 <Link to={"/talented"}>

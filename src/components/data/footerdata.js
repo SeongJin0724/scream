@@ -60,7 +60,7 @@ export const uldata3 = [
 export const uldata4 = [
   {
     title: "회사소개",
-    src: "/company",
+    src: "/talented",
   },
   {
     title: "인재채용",
