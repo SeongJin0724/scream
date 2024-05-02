@@ -24,14 +24,14 @@ export default function Login() {
           withCredentials: true, // 쿠키를 포함시키기 위해 설정
         }
       );
-      const data = await response.json();
+      const data = response.data;
 
       if (data.token) {
-        localStorage.setItem("accessToken", data.token["authorization"]);
-        localStorage.setItem("refreshToken", data.token["refresh-token"]);
-        // https://khys.tistory.com/56 참고 사이트
-        // https://wrtn.ai/chat/u/65d591e80c06023ae70af73a/c/662efb2acb5734a1815d654b?type=u 뤼튼
+        localStorage.setItem("accessToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        // localStorage.setItem("email", data.email);
       }
+      console.log("sadsad", data);
       if (response.status === 200) {
         navigate("/");
         console.log("★로그인성공★");
