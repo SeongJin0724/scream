@@ -19,6 +19,7 @@ export default function Login() {
         localStorage.setItem("user", JSON.stringify(data.user));
         console.log("★로그인성공★");
         navigate("/"); // 사용자를 홈으로 리다이렉트
+        window.location.reload();
       } else {
         alert(data.message);
         console.log("로그인실패");

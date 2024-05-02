@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
-import axios from "axios";
 import { SlArrowRight } from "react-icons/sl";
+import { useAuth } from "../components/contents/AuthContext";
+import { useNavigate } from "react-router-dom";
 export default function Mypage() {
-  const [data, setData] = useState([]);
-  const selectAll = async () => {
-    const result = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/users`
-    );
-    setData(result.data);
-    console.log(result.data);
-  };
+  const { user } = useAuth();
+  console.log(user);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken");
   useEffect(() => {
-    selectAll();
-  }, []);
+    if (!token) {
+      return navigate("/login");
+    }
+  }, [token]);
   return (
     <Main>
       <div className="mypage_container">
@@ -70,12 +69,8 @@ export default function Mypage() {
                 />
               </div>
               <div className="mypage_userinfo_info">
-                <div className="mypage_userinfo_info_name">
-                  {data.map((user, index) => (
-                    <div key={index}>{user.name}</div>
-                  ))}
-                </div>
-                <div className="mypage_userinfo_info_email">email</div>
+                <div className="mypage_userinfo_info_name">{user.name}</div>
+                <div className="mypage_userinfo_info_email">{user.email}</div>
               </div>
             </div>
             <div className="mypage_profile_settings">
