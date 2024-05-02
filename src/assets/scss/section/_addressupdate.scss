@@ -1,0 +1,127 @@
+/*.address_wrap {
+  width: 100%;
+  .address_wrap_border {
+    border-bottom: 3px solid #222;
+    padding-bottom: 16px;
+    .address_wrap_h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+  .address_wrap_myaccount_h3 {
+    font-weight: 700;
+    padding-top: 38px;
+  }
+  .address_wrap_myaccount {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: baseline;
+    .address_title {
+      font-size: 14px;
+      letter-spacing: -0.07px;
+      line-height: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    input {
+      width: 100%;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .address_wrap_myprivate_h3 {
+    font-weight: 700;
+    margin-top: 50px;
+  }
+  .address_wrap_myprivate {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: baseline;
+    .address_title {
+      font-size: 14px;
+      letter-spacing: -0.07px;
+      line-height: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    input {
+      width: 100%;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .address_btn {
+    background-color: #ffffff;
+    border: 1px solid #b6b4b4;
+    border-radius: 12px;
+    font-size: 13px;
+    height: 10%;
+    width: 10%;
+  }
+}*/
+
+// .address_modal_wrap {
+//   position: relative;
+//   width: 100px;
+// }
+.address_modal_wrap {
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99999;
+  }
+  .modal-content {
+    width: 560px;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+    padding: 40px;
+
+    .modal-content-inner {
+      width: 100%;
+      height: 340px;
+      overflow: auto;
+      padding: 0 10px;
+    }
+    .modal-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 0 0 0;
+      margin-bottom: 14px;
+    }
+    .modal-button {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 1.6%;
+      right: 7%;
+      background-color: transparent;
+      border: none;
+      font-size: 50px;
+      cursor: pointer;
+      svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+}
