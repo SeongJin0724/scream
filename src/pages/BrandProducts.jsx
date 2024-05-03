@@ -33,7 +33,7 @@ const BrandProductsPage = () => {
           {products.length > 0 ? (
             products.map((product) => (
               <li key={product.itemKey}>
-                <Link to={`/items/t${product.itemKey}`}>
+                <Link to={`/items/${product.itemKey}`}>
                   <img
                     src={product.img}
                     alt={product.title}
