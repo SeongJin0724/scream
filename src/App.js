@@ -2,6 +2,9 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./components/section/Main";
 import { AuthProvider } from "./components/contents/AuthContext";
+import { ItemKeyProvider } from "./components/contents/ItemDetailContext";
+import ItemDetail from "./pages/ItemDetail";
+
 const Home = lazy(() => import("./pages/Home"));
 const Join = lazy(() => import("./pages/Join"));
 const Login = lazy(() => import("./pages/Login"));
@@ -83,6 +86,14 @@ function App() {
             <Route path="/style" element={<Style />} />
             <Route path="/post" element={<Post />} />
             <Route path="/uploadReview" element={<UploadReview />} />
+            <Route
+              path="/items/:itemKey"
+              element={
+                <ItemKeyProvider>
+                  <ItemDetail />
+                </ItemKeyProvider>
+              }
+            />
           </Routes>
         </Suspense>
       </BrowserRouter>

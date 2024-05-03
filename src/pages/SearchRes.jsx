@@ -67,7 +67,7 @@ const SearchRes = () => {
         {results.length > 0 ? (
           results.map((product) => (
             <li key={product.itemKey} className="search_result_wrap">
-              <Link>
+              <Link to={`/items/${product.itemKey}`}>
                 <img
                   src={product.img}
                   alt={product.title}

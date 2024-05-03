@@ -49,7 +49,7 @@ export default function NewIn() {
         {products.length > 0 ? (
           products.map((product) => (
             <li key={product.itemKey} className="newIn_item">
-              <Link>
+              <Link to={`/items/${product.itemKey}`}>
                 <img
                   src={product.img}
                   alt={product.title}
