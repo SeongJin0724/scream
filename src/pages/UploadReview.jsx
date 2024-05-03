@@ -58,50 +58,58 @@ export default function UploadReview() {
 
   return (
     <Main>
-      <div className="uploadReview_wrap">
-        <h3 className="review_header">STYLE 작성</h3>
-        <div className="review_item">
-          <img src="" alt="" className="item_img" />
-          <p>상품정보</p>
-        </div>
-
-        <form className="review_form" onSubmit={handleSubmit}>
-          {previewSrc ? (
-            <img src={previewSrc} alt="Image preview" className="previewImg" />
-          ) : (
-            <div className="previewImg noImg">
-              <FontAwesomeIcon icon={faImage} />
-              이미지 미리보기
-            </div>
-          )}
-          <div className="upload_box">
-            <input
-              id="upload_file"
-              type="file"
-              onChange={handleFileChange}
-              ref={fileInputRef}
-            />
-            {img && (
-              <FontAwesomeIcon
-                icon={faX}
-                onClick={deleteImg}
-                className="deleteBtn"
-              />
-            )}
+      <div className="uploadReview_container">
+        <div className="uploadReview_wrap">
+          <h3 className="review_header">STYLE 작성</h3>
+          <div className="review_item">
+            <img src="" alt="" className="item_img" />
+            <p>상품정보</p>
           </div>
 
-          <textarea
-            className="review_content"
-            placeholder="게시글 작성"
-            onChange={(e) => setReview(e.target.value)}
-          ></textarea>
-          <input
-            type="submit"
-            value="STYLE 등록"
-            className={previewSrc && review ? "uploadBtn active" : "uploadBtn"}
-            disabled={previewSrc && review ? false : true}
-          />
-        </form>
+          <form className="review_form" onSubmit={handleSubmit}>
+            {previewSrc ? (
+              <img
+                src={previewSrc}
+                alt="Image preview"
+                className="previewImg"
+              />
+            ) : (
+              <div className="previewImg noImg">
+                <FontAwesomeIcon icon={faImage} />
+                이미지 미리보기
+              </div>
+            )}
+            <div className="upload_box">
+              <input
+                id="upload_file"
+                type="file"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+              />
+              {img && (
+                <FontAwesomeIcon
+                  icon={faX}
+                  onClick={deleteImg}
+                  className="deleteBtn"
+                />
+              )}
+            </div>
+
+            <textarea
+              className="review_content"
+              placeholder="게시글 작성"
+              onChange={(e) => setReview(e.target.value)}
+            ></textarea>
+            <input
+              type="submit"
+              value="STYLE 등록"
+              className={
+                previewSrc && review ? "uploadBtn active" : "uploadBtn"
+              }
+              disabled={previewSrc && review ? false : true}
+            />
+          </form>
+        </div>
       </div>
     </Main>
   );

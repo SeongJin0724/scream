@@ -39,6 +39,7 @@ const ViewUserProfile = lazy(() => import("./pages/ViewUserProfile"));
 const Style = lazy(() => import("./pages/Style"));
 const Post = lazy(() => import("./pages/Post"));
 const UploadReview = lazy(() => import("./pages/UploadReview"));
+const Order = lazy(() => import("./pages/Order"));
 
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
             <Route path="/style" element={<Style />} />
             <Route path="/post" element={<Post />} />
             <Route path="/uploadReview" element={<UploadReview />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
