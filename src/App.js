@@ -4,8 +4,6 @@ import Main from "./components/section/Main";
 import { AuthProvider } from "./components/contents/AuthContext";
 import { ItemKeyProvider } from "./components/contents/ItemDetailContext";
 import ItemDetail from "./pages/ItemDetail";
-import { ItemKeyProvider } from "./components/contents/ItemDetailContext";
-import ItemDetail from "./pages/ItemDetail";
 
 const Home = lazy(() => import("./pages/Home"));
 const Join = lazy(() => import("./pages/Join"));
@@ -28,7 +26,6 @@ const Partnership = lazy(() => import("./pages/Partnership"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Personal = lazy(() => import("./pages/Personal"));
 const Question = lazy(() => import("./pages/Question"));
-const Detail1 = lazy(() => import("./pages/Detail1"));
 const Gather = lazy(() => import("./pages/Gather"));
 const BrandProducts = lazy(() => import("./pages/BrandProducts"));
 const Standards = lazy(() => import("./pages/Standards"));
@@ -73,7 +70,6 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/personal" element={<Personal />} />
             <Route path="/question" element={<Question />} />
-            <Route path="/detail1" element={<Detail1 />} />
             <Route path="/gather" element={<Gather />} />
             <Route path="/brands/:brand" element={<BrandProducts />} />
             <Route path="/standards" element={<Standards />} />
