@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTruck,
@@ -12,9 +13,32 @@ import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 
 export default function Order() {
   const [selectPayment, setSelectPayment] = useState(false);
+  const [payment, setPayment] = useState("결제방법");
+  const [deliveryfee, setDeliveryfee] = useState(3000);
 
   const selectOption = (e) => {
-    console.log(e.target.value);
+    setSelectPayment(false);
+    setPayment(e.target.value);
+  };
+
+  const sendOrder = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/payment/kakao`,
+        {
+          partner_order_id: "your_partner_order_id", // 예시 값
+          partner_user_id: "your_partner_user_id", // 예시 값
+          item_name: "초코파이", // 예시 값
+          quantity: "1", // 예시 값
+          total_amount: "2200", // 예시 값
+          tax_free_amount: "0", // 예시 값
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -27,7 +51,7 @@ export default function Order() {
             <p>상품정보</p>
           </div>
 
-          <form>
+          <form onSubmit={sendOrder}>
             <div className="order_delivery">
               <div>
                 <h3 className="section_header">배송 주소</h3>
@@ -50,10 +74,19 @@ export default function Order() {
               </div>
               <div>
                 <h3 className="section_header">배송 방법</h3>
-                <div className="section_delivery">
+
+                <div
+                  className={
+                    deliveryfee === 3000
+                      ? "section_delivery selected"
+                      : "section_delivery"
+                  }
+                  onClick={() => setDeliveryfee(3000)}
+                >
                   <div className="icon_box">
                     <FontAwesomeIcon icon={faTruck} />
                   </div>
+
                   <div className="delivery_type_wrap">
                     <p className="delivery_type">일반배송 3,000원</p>
                     <p className="type_desc">
@@ -62,7 +95,14 @@ export default function Order() {
                   </div>
                 </div>
 
-                <div className="section_delivery">
+                <div
+                  className={
+                    deliveryfee === 0
+                      ? "section_delivery selected"
+                      : "section_delivery"
+                  }
+                  onClick={() => setDeliveryfee(0)}
+                >
                   <div className="icon_box">
                     <FontAwesomeIcon icon={faWarehouse} />
                   </div>
@@ -85,7 +125,7 @@ export default function Order() {
                   className="payment_drop"
                   onClick={() => setSelectPayment(!selectPayment)}
                 >
-                  <span>결제방법</span>
+                  <span>{payment}</span>
                   {selectPayment ? (
                     <FontAwesomeIcon icon={faCaretUp} />
                   ) : (
@@ -108,7 +148,7 @@ export default function Order() {
                         icon={faComment}
                         className="option_icon"
                       />
-                      <span>카카오페이 KakaoPay</span>
+                      카카오페이 KakaoPay
                     </button>
                   </li>
                 </ul>
@@ -121,7 +161,7 @@ export default function Order() {
                 <tbody>
                   <tr>
                     <th>구매 희망가</th>
-                    <td>원</td>
+                    <td>-</td>
                   </tr>
                   <tr>
                     <th>검수비</th>
@@ -133,18 +173,25 @@ export default function Order() {
                   </tr>
                   <tr>
                     <th>배송비</th>
-                    <td>-</td>
+                    <td>{deliveryfee === 0 ? "무료" : "3,000원"}</td>
                   </tr>
                 </tbody>
               </table>
               <div className="total_price">
                 <p>총 결제금액</p>
-                <p>-원</p>
+                <p>-</p>
               </div>
             </div>
 
             <div className="apply_order">
-              <input type="submit" value="주문하기" className="orderBtn" />
+              <input
+                type="submit"
+                value="주문하기"
+                className={
+                  payment === "카카오페이" ? "orderBtn show" : "orderBtn"
+                }
+                disabled={payment !== "카카오페이"}
+              />
             </div>
           </form>
         </div>

@@ -66,6 +66,14 @@
         background-color: #f4f4f4;
       }
 
+      &.selected {
+        border: 1px solid #222222;
+
+        &:hover {
+          background-color: inherit;
+        }
+      }
+
       .icon_box {
         width: 40px;
         height: 40px;
@@ -216,8 +224,14 @@
         font-size: 16px;
         font-weight: 700;
         color: #ffffffcc;
+        background-color: #d3d3d3;
         border-radius: 10px;
         cursor: pointer;
+
+        &.show {
+          color: #fff;
+          background-color: #222222;
+        }
       }
     }
   }
