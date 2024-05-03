@@ -1,0 +1,224 @@
+@mixin section-padding {
+  padding: 32px;
+  border-bottom: 8px solid #f4f4f4;
+}
+
+.order_container {
+  padding: 30px 0;
+  color: #222222;
+  background-color: #f4f4f4;
+
+  .order_wrap {
+    width: 100%;
+    height: auto;
+    max-width: 700px;
+    margin: auto;
+    padding: 40px 0 0;
+    // border: 2px solid #222;
+    border-radius: 8px;
+    background-color: #fff;
+
+    .order_header {
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      padding: 0 0 8px;
+      border-bottom: 2px solid #222222;
+      margin-bottom: 4px;
+    }
+
+    .order_item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      height: 144px;
+      @include section-padding();
+      margin-bottom: 12px;
+
+      .item_img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+      }
+    }
+
+    .section_header {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.15px;
+      line-height: 22px;
+      margin-bottom: 12px;
+    }
+
+    .section_delivery {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 12px 15px;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      margin-bottom: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f4f4f4;
+      }
+
+      .icon_box {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        background-color: #eee;
+        border-radius: 50%;
+      }
+
+      .delivery_type_wrap {
+        .delivery_type {
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: -0.07px;
+        }
+
+        .type_desc {
+          color: #22222280;
+          font-size: 12px;
+          height: 14px;
+          letter-spacing: -0.06px;
+          line-height: 14px;
+        }
+      }
+    }
+
+    .order_delivery {
+      @include section-padding();
+
+      .address_detail {
+        width: 100%;
+        text-align: left;
+        padding-bottom: 15px;
+        margin-bottom: 22px;
+        border-bottom: 1px solid #f4f4f4;
+
+        th {
+          width: 15%;
+          font-size: 13px;
+          letter-spacing: -0.07px;
+          min-width: 80px;
+          color: #22222280;
+        }
+
+        td {
+          width: 85%;
+          font-size: 14px;
+          letter-spacing: -0.21px;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .order_pay {
+      @include section-padding();
+
+      .select_payment {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 10px;
+
+        .payment_drop {
+          width: 600px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px;
+          border-radius: 4px;
+          background-color: transparent;
+          border: 1px solid #eee;
+        }
+
+        .payment_dropdown {
+          display: none;
+          position: absolute;
+          width: 90%;
+          top: 40px;
+          left: 45px;
+
+          &.show {
+            display: block;
+          }
+        }
+
+        .dropdown_option {
+          width: 100%;
+          padding: 8px;
+          border-radius: 4px;
+          background-color: #fff;
+          cursor: pointer;
+          box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+          outline: none;
+
+          &:hover {
+            background-color: #f4f4f4;
+          }
+
+          .option_icon {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+
+    .order_info {
+      @include section-padding();
+
+      .order_detail {
+        width: 100%;
+        margin-bottom: 22px;
+
+        th {
+          width: 15%;
+          font-size: 13px;
+          text-align: left;
+          letter-spacing: -0.07px;
+          min-width: 80px;
+          color: #22222280;
+        }
+
+        td {
+          width: 85%;
+          font-size: 14px;
+          text-align: end;
+          letter-spacing: -0.21px;
+          overflow: hidden;
+        }
+      }
+
+      .total_price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .apply_order {
+      padding: 10px 8px;
+      text-align: center;
+
+      .orderBtn {
+        width: 80%;
+        height: 52px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffffcc;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}

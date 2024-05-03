@@ -42,6 +42,7 @@ const Style = lazy(() => import("./pages/Style"));
 const Post = lazy(() => import("./pages/Post"));
 const UploadReview = lazy(() => import("./pages/UploadReview"));
 const AddressSearchPage = lazy(() => import("./pages/AddressSearchPage"));
+const Order = lazy(() => import("./pages/Order"));
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
               path="/address-search-page"
               element={<AddressSearchPage />}
             />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
