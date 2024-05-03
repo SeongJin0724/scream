@@ -1,113 +1,43 @@
-/*.address_wrap {
-  width: 100%;
-  .address_wrap_border {
-    border-bottom: 3px solid #222;
-    padding-bottom: 16px;
-    .address_wrap_h1 {
-      font-size: 22px;
-      font-weight: 700;
-    }
-  }
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.ReactModal__Content {
   .address_wrap_myaccount_h3 {
-    font-weight: 700;
-    padding-top: 38px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1px 0 0 0;
   }
   .address_wrap_myaccount {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: baseline;
-    .address_title {
-      font-size: 14px;
-      letter-spacing: -0.07px;
-      line-height: 18px;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    input {
-      width: 100%;
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-  .address_wrap_myprivate_h3 {
-    font-weight: 700;
-    margin-top: 50px;
-  }
-  .address_wrap_myprivate {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: baseline;
-    .address_title {
-      font-size: 14px;
-      letter-spacing: -0.07px;
-      line-height: 18px;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    input {
-      width: 100%;
-      padding: 10px 0;
-      border-bottom: 1px solid #ddd;
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-  .address_btn {
-    background-color: #ffffff;
-    border: 1px solid #b6b4b4;
-    border-radius: 12px;
-    font-size: 13px;
-    height: 10%;
-    width: 10%;
-  }
-}*/
-
-// .address_modal_wrap {
-//   position: relative;
-//   width: 100px;
-// }
-.address_modal_wrap {
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 99999;
-  }
-  .modal-content {
-    width: 560px;
-    position: relative;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgb(255, 255, 255);
-    border-radius: 16px;
-    padding: 40px;
-
-    .modal-content-inner {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: baseline;
+    .address_title {
+      font-size: 14px;
+      letter-spacing: -0.07px;
+      line-height: 18px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    input {
       width: 100%;
-      height: 340px;
-      overflow: auto;
-      padding: 0 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      &:focus {
+        outline: none;
+      }
     }
-    .modal-title {
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 12px 0 0 0;
-      margin-bottom: 14px;
+    .address_plusbtn2 {
+      background-color: #ffffff;
+      border: 1px solid #b6b4b4;
+      border-radius: 12px;
+      font-size: 13px;
+      height: 40px;
+      width: 15%;
     }
-    .modal-button {
+    .address_closebtn {
       width: 40px;
       height: 40px;
       position: absolute;
@@ -117,11 +47,56 @@
       border: none;
       font-size: 50px;
       cursor: pointer;
-      svg {
-        width: 100%;
-        height: 100%;
-        display: block;
+    }
+  }
+}
+.address_container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding: 40px 40px 160px;
+
+  .address_nav {
+    margin-right: 20px;
+    width: 180px;
+
+    .address_nav_title {
+      padding-bottom: 30px;
+      font-weight: 700;
+    }
+    .address_shopinfo_title {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .address_shopinfo_sub_li {
+      margin-top: 12px;
+      color: #b6b4b4;
+      font-size: 15px;
+    }
+
+    .address_myinfo {
+      margin-top: 40px;
+
+      .address_myinfo_title {
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .address_myinfo_sub_li {
+        margin-top: 12px;
+        color: #b6b4b4;
+        font-size: 15px;
       }
     }
+  }
+  .address_plusbtn {
+    background-color: #ffffff;
+    border: 1px solid #b6b4b4;
+    border-radius: 12px;
+    font-size: 13px;
+    height: 40px;
+    width: 15%;
   }
 }

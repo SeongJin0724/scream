@@ -1,12 +1,10 @@
-/*import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { increaseWishlistCount } from "../components/data/wishlistLogic";
-import path_to_main_product_image from "./path_to_default_main_image.jpg";
-import path_to_thumbnail1 from "./path_to_thumbnail1.jpg";
-import path_to_thumbnail2 from "./path_to_thumbnail2.jpg";
-import path_to_thumbnail3 from "./path_to_thumbnail3.jpg";
-import path_to_thumbnail4 from "./path_to_thumbnail4.jpg";
-
+import path_to_thumbnail1 from "../../src/assets/image/path_to_thumbnail1.jpg";
+import path_to_thumbnail2 from "../../src/assets/image/path_to_thumbnail2.jpg";
+import path_to_thumbnail3 from "../../src/assets/image/path_to_thumbnail3.jpg";
+import path_to_thumbnail4 from "../../src/assets/image/path_to_thumbnail4.jpg";
 const ProductActions = () => {
   const navigate = useNavigate();
   const [wishlistCount, setWishlistCount] = useState(1582);
@@ -117,7 +115,7 @@ const ProductActions = () => {
   );
 };
 
-export default ProductActions;*/
+export default ProductActions;
 
 // import React, { useRef, useState } from "react";
 // // Import Swiper React components
