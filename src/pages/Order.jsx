@@ -35,7 +35,8 @@ export default function Order() {
           tax_free_amount: "0", // 예시 값
         }
       );
-      console.log(response.data);
+
+      window.location.href = response.data.next_redirect_pc_url;
     } catch (error) {
       console.error("Error:", error);
     }
