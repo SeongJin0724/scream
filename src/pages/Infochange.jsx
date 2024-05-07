@@ -4,12 +4,12 @@ import Main from "../components/section/Main";
 import { useAuth } from "../components/contents/AuthContext";
 
 const EditUser = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
-
-  const updateUser = () => {
+  console.log(user);
+  const updateUserHandler = () => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`, {
         email,
@@ -17,7 +17,7 @@ const EditUser = () => {
         tel,
       })
       .then(() => {
-        alert("회원 정보가 수정되었습니다.");
+        updateUser({ email, password, tel });
       })
       .catch((error) => {
         console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
@@ -101,7 +101,7 @@ const EditUser = () => {
               placeholder={user.tel}
             />
           </div>
-          <button onClick={updateUser} className="infochange_btn">
+          <button onClick={updateUserHandler} className="infochange_btn">
             수정하기
           </button>
         </div>

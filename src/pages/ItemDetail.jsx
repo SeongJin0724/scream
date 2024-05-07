@@ -7,10 +7,15 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 
 import { Scrollbar } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 export default function ItemDetail() {
   const { item, itemKey } = useContext(ItemDetailContext);
+  const navigate = useNavigate();
 
+  const sellHandler = () => {
+    navigate(`/items/${itemKey}/sell`);
+  };
   console.log(item);
   return (
     <Main>
@@ -24,7 +29,9 @@ export default function ItemDetail() {
               modules={[Scrollbar]}
               className="mySwiper"
             >
-              <SwiperSlide>Slide 1</SwiperSlide>
+              <SwiperSlide>
+                <button onClick={sellHandler}>판매신청</button>
+              </SwiperSlide>
               <SwiperSlide>Slide 2</SwiperSlide>
               <SwiperSlide>Slide 3</SwiperSlide>
               <SwiperSlide>Slide 4</SwiperSlide>

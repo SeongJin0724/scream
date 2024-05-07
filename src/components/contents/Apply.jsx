@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
+import { ItemDetailContext } from "./ItemDetailContext";
 
 export default function Apply({ content, onGetData }) {
   const [size, setSize] = useState("");
@@ -10,7 +11,8 @@ export default function Apply({ content, onGetData }) {
   const [deadline, setDeadline] = useState(30);
   const [totalPrice, setTotalPrice] = useState("");
   const [apply, setApply] = useState(false);
-
+  const { item, itemKey } = useContext(ItemDetailContext);
+  console.log(item[0].title, itemKey);
   const changeDeadline = useMemo(() => {
     const today = new Date();
     today.setDate(today.getDate() + parseInt(deadline));
@@ -76,7 +78,7 @@ export default function Apply({ content, onGetData }) {
         <h3 className="content_header">{content.type}신청</h3>
         <div className="apply_item">
           <img src="" alt="" className="item_img" />
-          <p>상품정보</p>
+          <p>{item[0].title}</p>
         </div>
 
         <form className="apply_form" onSubmit={handleSubmit}>

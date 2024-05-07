@@ -28,13 +28,14 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = async (updatedUserInfo) => {
     try {
+      const token = localStorage.getItem("accessToken"); // 로컬 스토리지에서 토큰을 가져옵니다.
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/updateUser`,
         {
-          method: "POST", // 또는 'PUT'
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // 토큰이 필요한 경우 여기에 추가
+            Authorization: `Bearer ${token}`, // 토큰을 `Authorization` 헤더에 추가합니다.
           },
           body: JSON.stringify(updatedUserInfo),
         }
@@ -47,6 +48,7 @@ export const AuthProvider = ({ children }) => {
       // 로컬 스토리지와 상태 업데이트
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setUser(updatedUser);
+      // 새로운 토큰도 업데이트가 필요하다면 이곳에서 로컬 스토리지에 저장
     } catch (error) {
       console.error(error);
     }

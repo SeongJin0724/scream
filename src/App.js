@@ -77,7 +77,6 @@ function App() {
             <Route path="/notice" element={<Notice />} />
             <Route path="/notice/5" element={<Notice5 />} />
             <Route path="/notice/4" element={<Notice4 />} />
-            <Route path="/sell" element={<Sell />} />
             <Route path="/buy" element={<Buy />} />
             <Route path="/notice/3" element={<Notice3 />} />
             <Route path="/mypage/infochange" element={<Infochange />} />
@@ -91,6 +90,14 @@ function App() {
               element={
                 <ItemKeyProvider>
                   <ItemDetail />
+                </ItemKeyProvider>
+              }
+            />
+            <Route
+              path="/items/:itemKey/sell"
+              element={
+                <ItemKeyProvider>
+                  <Sell />
                 </ItemKeyProvider>
               }
             />
