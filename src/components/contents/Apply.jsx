@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-regular-svg-icons";
+import { useAuth } from "./AuthContext";
 
 export default function Apply({ content, onGetData }) {
   const [size, setSize] = useState("");
@@ -10,7 +11,8 @@ export default function Apply({ content, onGetData }) {
   const [deadline, setDeadline] = useState(30);
   const [totalPrice, setTotalPrice] = useState("");
   const [apply, setApply] = useState(false);
-
+  const { user } = useAuth();
+  console.log(user);
   const changeDeadline = useMemo(() => {
     const today = new Date();
     today.setDate(today.getDate() + parseInt(deadline));
