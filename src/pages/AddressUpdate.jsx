@@ -3,6 +3,7 @@ import Main from "../components/section/Main";
 import Modal from "react-modal";
 import { IoIosClose } from "react-icons/io";
 import { useAuth } from "../components/contents/AuthContext";
+import axios from "axios";
 
 export default function AddressUpdate(props) {
   const [address, setAddress] = useState("");
@@ -10,13 +11,12 @@ export default function AddressUpdate(props) {
   const [detailedAddress, setDetailedAddress] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
-  const [addresses, setAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
 
   const { user, updateUser } = useAuth();
 
-  console.log(savedAddresses);
-  console.log(user);
+  // console.log(savedAddresses);
+  // console.log(user);
   const saveAddress = () => {
     if (editIndex >= 0) {
       // 주소 수정
@@ -80,14 +80,41 @@ export default function AddressUpdate(props) {
     setDetailedAddress(event.target.value);
   };
 
-  const defaultAddressHanlder = (e) => {
+  // const defaultAddressHanlder = (e) => {
+  //   e.preventDefault();
+  //   const addressString = savedAddresses
+  //     .map(
+  //       (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
+  //     )
+  //     .join("; ");
+  //   updateUser({ address: addressString });
+  // };
+  const AddressUpdate2 = async (data) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/AddressUpdate2`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Failed to update user:", error);
+      throw error; // 오류를 다시 throw하여 호출 코드에서 catch할 수 있도록 합니다.
+    }
+  };
+  const defaultAddressHanlder = async (e) => {
     e.preventDefault();
-    const addressString = savedAddresses
-      .map(
-        (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
-      )
-      .join("; ");
-    updateUser({ address: addressString });
+    try {
+      const addressString = savedAddresses
+        .map(
+          (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
+        )
+        .join("; ");
+      const updateResult = await updateUser({ address: addressString });
+      console.log("Update success:", updateResult);
+    } catch (error) {
+      console.error("Error updating address:", error);
+      // 여기에서 사용자에게 오류를 알릴 수 있습니다.
+    }
   };
   // const openPostcode = () => {
   //   new window.daum.Postcode({
@@ -180,7 +207,7 @@ export default function AddressUpdate(props) {
                 <div className="address_btn_wrap">
                   <button
                     className="address_defalutbtn"
-                    onClick={defaultAddressHanlder}
+                    onClick={AddressUpdate2}
                   >
                     기본배송지
                   </button>
