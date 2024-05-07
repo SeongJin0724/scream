@@ -22,13 +22,11 @@ export const AuthProvider = ({ children }) => {
         phoneNumber: "010-0000-0000",
       });
     }
-
-    console.log(token);
   }, []);
 
   const updateUser = async (updatedUserInfo) => {
     try {
-      const token = localStorage.getItem("accessToken"); // 로컬 스토리지에서 토큰을 가져옵니다.
+      const token = localStorage.getItem("accessToken"); // 기존 토큰 가져오기
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/updateUser`,
         {
@@ -40,15 +38,17 @@ export const AuthProvider = ({ children }) => {
           body: JSON.stringify(updatedUserInfo),
         }
       );
+
       if (!response.ok) {
         throw new Error("유저 정보 업데이트 실패");
       }
-      const updatedUser = await response.json();
 
-      // 로컬 스토리지와 상태 업데이트
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-      setUser(updatedUser);
-      // 새로운 토큰도 업데이트가 필요하다면 이곳에서 로컬 스토리지에 저장
+      const data = await response.json();
+      const newToken = data.newToken; // 응답으로 받은 새로운 토큰
+      localStorage.setItem("accessToken", newToken); // 새 토큰 저장
+      localStorage.setItem("user", JSON.stringify(data.user)); // 업데이트된 사용자 정보 저장
+
+      setUser(data.user); // 상태 업데이트
     } catch (error) {
       console.error(error);
     }
