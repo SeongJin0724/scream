@@ -8,12 +8,46 @@
     font-weight: bold;
     padding: 1px 0 0 0;
   }
+  .address_plusbtn3 {
+    background-color: #ffffff;
+    border: 1px solid #b6b4b4;
+    border-radius: 12px;
+    font-size: 13px;
+    height: 50px;
+    width: 70px;
+  }
   .address_wrap_myaccount {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     align-items: baseline;
+    .address_wrap_myaccount_inner {
+      .address_title {
+        font-size: 14px;
+        letter-spacing: -0.07px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+      input {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        &:focus {
+          outline: none;
+        }
+      }
+      .address_plusbtn2 {
+        background-color: #ffffff;
+        border: 1px solid #b6b4b4;
+        border-radius: 12px;
+        font-size: 13px;
+        height: 40px;
+        width: 15%;
+        position: absolute;
+      }
+    }
     .address_title {
       font-size: 14px;
       letter-spacing: -0.07px;
@@ -72,6 +106,7 @@
       width: 12%;
     }
   }
+
   .address_container {
     display: flex;
     margin-left: auto;
@@ -141,6 +176,14 @@
           font-size: 13px;
           height: 30px;
           width: 50px;
+        }
+        .address_defalutbtn {
+          background-color: #ffffff;
+          border: 1px solid #b6b4b4;
+          border-radius: 12px;
+          font-size: 13px;
+          height: 50px;
+          width: 70px;
         }
       }
     }

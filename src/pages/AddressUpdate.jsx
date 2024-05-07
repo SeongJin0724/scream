@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Main from "../components/section/Main";
 import Modal from "react-modal";
 import { IoIosClose } from "react-icons/io";
+import { useAuth } from "../components/contents/AuthContext";
 
 export default function AddressUpdate(props) {
   const [address, setAddress] = useState("");
@@ -9,15 +10,30 @@ export default function AddressUpdate(props) {
   const [detailedAddress, setDetailedAddress] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
+  const [addresses, setAddresses] = useState([]);
+  const [editIndex, setEditIndex] = useState(-1);
+
+  const { user, updateUser } = useAuth();
+
   console.log(savedAddresses);
+  console.log(user);
   const saveAddress = () => {
-    // 새 주소 정보를 savedAddresses 배열에 추가
-    setSavedAddresses((prev) => [
-      ...prev,
-      { zonecode, address, detailedAddress },
-    ]);
+    if (editIndex >= 0) {
+      // 주소 수정
+      const updatedAddresses = [...savedAddresses];
+      updatedAddresses[editIndex] = { zonecode, address, detailedAddress };
+      setSavedAddresses(updatedAddresses);
+      setEditIndex(-1); // 수정 모드 해제
+    } else {
+      // 새 주소 추가
+      setSavedAddresses((prev) => [
+        ...prev,
+        { zonecode, address, detailedAddress },
+      ]);
+    }
     closeModal(); // 모달 닫기
   };
+
   const openAddressSearch = () => {
     const addressWindow = window.open(
       "/address-search-page",
@@ -30,15 +46,29 @@ export default function AddressUpdate(props) {
       }
 
       const { zonecode, address } = event.data;
-      setZonecode(zonecode); // 우편번호 설정
-      setAddress(address); // 주소 설정
+      setZonecode(zonecode);
+      setAddress(address);
       window.removeEventListener("message", handleMessage); // 이벤트 리스너 제거
     };
 
     window.addEventListener("message", handleMessage);
   };
 
-  const openModal = () => {
+  const openModal = (index) => {
+    if (index >= 0) {
+      // 주소 수정 모드
+      const { zonecode, address, detailedAddress } = savedAddresses[index];
+      setZonecode(zonecode);
+      setAddress(address);
+      setDetailedAddress(detailedAddress);
+      setEditIndex(index);
+    } else {
+      // 새 주소 추가 모드
+      setZonecode("");
+      setAddress("");
+      setDetailedAddress("");
+      setEditIndex(-1);
+    }
     setModalIsOpen(true);
   };
 
@@ -49,6 +79,46 @@ export default function AddressUpdate(props) {
   const inputChangeHandler = (event) => {
     setDetailedAddress(event.target.value);
   };
+
+  const defaultAddressHanlder = (e) => {
+    e.preventDefault();
+    const addressString = savedAddresses
+      .map(
+        (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
+      )
+      .join("; ");
+    updateUser({ address: addressString });
+  };
+  // const openPostcode = () => {
+  //   new window.daum.Postcode({
+  //     oncomplete: function (data) {
+  //       let fullAddress = data.address;
+  //       let extraAddress = "";
+
+  //       if (data.addressType === "R") {
+  //         if (data.bname !== "") {
+  //           extraAddress += data.bname;
+  //         }
+  //         if (data.buildingName !== "") {
+  //           extraAddress +=
+  //             extraAddress !== ""
+  //               ? `, ${data.buildingName}`
+  //               : data.buildingName;
+  //         }
+  //         fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+  //       }
+
+  //       if (editIndex >= 0) {
+  //         const updatedAddresses = [...addresses];
+  //         updatedAddresses[editIndex] = fullAddress;
+  //         setAddresses(updatedAddresses);
+  //         setEditIndex(-1); // 수정 후 수정모드 해제
+  //       } else {
+  //         setAddresses([...addresses, fullAddress]);
+  //       }
+  //     },
+  //   }).open();
+  // };
   return (
     <Main>
       <div className="address_container_wrap">
@@ -100,7 +170,6 @@ export default function AddressUpdate(props) {
               </li>
             </ul>
           </nav>
-
           <div className="address_list">
             {savedAddresses.map((addr, index) => (
               <div key={index} className="address_list_item">
@@ -109,13 +178,23 @@ export default function AddressUpdate(props) {
                   {addr.detailedAddress}
                 </p>
                 <div className="address_btn_wrap">
-                  <button onClick={openModal} className="address_updatebtn">
+                  <button
+                    className="address_defalutbtn"
+                    onClick={defaultAddressHanlder}
+                  >
+                    기본배송지
+                  </button>
+                  <button
+                    onClick={() => openModal(index)}
+                    className="address_updatebtn"
+                  >
                     수정
                   </button>
                   <button className="address_deletebtn">삭제</button>
                 </div>
               </div>
             ))}
+            {user.address}
           </div>
 
           <Modal
@@ -132,11 +211,12 @@ export default function AddressUpdate(props) {
                 width: "530px", // Set width as required
                 height: "600px",
                 border: "1px solid #ccc", // Optional border styling
-                padding: "30px 60px", // Optional padding
+                padding: "30px 60px", //  Optional padding
                 borderRadius: "16px",
                 backgroundColor: "rgb(255, 255, 255)",
               },
             }}
+            ariaHideApp={false}
           >
             <div className="address_wrap">
               <h3 className="address_wrap_myaccount_h3">새 주소 추가</h3>
@@ -144,27 +224,30 @@ export default function AddressUpdate(props) {
                 <button onClick={closeModal} className="address_closebtn">
                   <IoIosClose />
                 </button>
-                <label className="address_title">우편번호</label>
-                <button
-                  type="button"
-                  className="address_plusbtn2"
-                  onClick={openAddressSearch}
-                >
-                  주소 찾기
-                </button>
-                <input
-                  type="number"
-                  value={zonecode}
-                  readonly="readonly"
-                  placeholder="우편 번호를 검색하세요"
-                />
+                <div className="address_wrap_myaccount_inner">
+                  <label className="address_title">우편번호</label>
+
+                  <input
+                    type="number"
+                    value={zonecode}
+                    readOnly
+                    placeholder="우편 번호를 검색하세요"
+                  />
+                  <button
+                    type="button"
+                    className="address_plusbtn2"
+                    onClick={openAddressSearch}
+                  >
+                    주소 찾기
+                  </button>
+                </div>
               </div>
               <div className="address_wrap_myaccount">
                 <label className="address_title">주소</label>
                 <input
                   type="text"
                   value={address}
-                  readonly="readonly"
+                  readOnly
                   placeholder="우편 번호 검색 후, 자동입력 됩니다"
                 />
               </div>
@@ -186,60 +269,3 @@ export default function AddressUpdate(props) {
     </Main>
   );
 }
-
-// import React, { useState } from "react";
-// import Main from "../components/section/Main";
-
-// function AddressBook() {
-//   const [addresses, setAddresses] = useState([]);
-//   const [editIndex, setEditIndex] = useState(-1);
-
-//   const openPostcode = () => {
-//     new window.daum.Postcode({
-//       oncomplete: function (data) {
-//         let fullAddress = data.address;
-//         let extraAddress = "";
-
-//         if (data.addressType === "R") {
-//           if (data.bname !== "") {
-//             extraAddress += data.bname;
-//           }
-//           if (data.buildingName !== "") {
-//             extraAddress +=
-//               extraAddress !== ""
-//                 ? `, ${data.buildingName}`
-//                 : data.buildingName;
-//           }
-//           fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-//         }
-
-//         if (editIndex >= 0) {
-//           const updatedAddresses = [...addresses];
-//           updatedAddresses[editIndex] = fullAddress;
-//           setAddresses(updatedAddresses);
-//           setEditIndex(-1); // 수정 후 수정모드 해제
-//         } else {
-//           setAddresses([...addresses, fullAddress]);
-//         }
-//       },
-//     }).open();
-//   };
-
-//   return (
-//     <Main>
-//       <button onClick={openPostcode}>
-//         {editIndex >= 0 ? "주소 수정" : "새 배송지 추가"}
-//       </button>
-//       <ul>
-//         {addresses.map((address, index) => (
-//           <li key={index}>
-//             {address}
-//             <button onClick={() => setEditIndex(index)}>수정</button>
-//           </li>
-//         ))}
-//       </ul>
-//     </Main>
-//   );
-// }
-
-// export default AddressBook;

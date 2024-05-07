@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Main from "../components/section/Main";
+import { useAuth } from "../components/contents/AuthContext";
 
-const EditUser = ({ user_id }) => {
+const EditUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
+  const { user } = useAuth();
 
-  const updateUser = () => {
-    axios
-      .put(`${process.env.REACT_APP_API_URL}/api/infochange/${user_id}`, {
-        email,
-        password,
-        tel,
-      })
-      .then(() => {
-        alert("회원 정보가 수정되었습니다.");
-      })
-      .catch((error) => {
-        console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
-      });
+  const updateUser = async () => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`,
+        {
+          email,
+          password,
+          tel,
+        }
+      );
+      alert("회원정보가 수정되었습니다.");
+    } catch (error) {
+      console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
+    }
   };
 
   return (
