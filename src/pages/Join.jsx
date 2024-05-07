@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Main from "../components/section/Main";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function Register() {
   const [tel, setTel] = useState("");
   const [address, setAddress] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
+  const navigate = useNavigate();
 
   const sendVerificationCode = async () => {
     try {
@@ -43,6 +45,7 @@ function Register() {
         tel,
         address,
       });
+      navigate("/login");
       alert("회원가입이 완료되었습니다.");
     } catch (error) {
       alert("회원가입에 실패하였습니다.");

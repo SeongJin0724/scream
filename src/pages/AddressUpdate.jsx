@@ -219,7 +219,7 @@ export default function AddressUpdate(props) {
             ariaHideApp={false}
           >
             <div className="address_wrap">
-              <h3 className="address_wrap_myaccount_h3">새 주소 추가</h3>
+              <h3 className="address_wrap_myaccount_h3">주소 추가/수정</h3>
               <div className="address_wrap_myaccount">
                 <button onClick={closeModal} className="address_closebtn">
                   <IoIosClose />
@@ -260,7 +260,7 @@ export default function AddressUpdate(props) {
                 />
               </div>
               <button onClick={saveAddress} className="address_plusbtn3">
-                주소 저장
+                저장
               </button>
             </div>
           </Modal>

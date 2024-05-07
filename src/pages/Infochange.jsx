@@ -4,25 +4,24 @@ import Main from "../components/section/Main";
 import { useAuth } from "../components/contents/AuthContext";
 
 const EditUser = () => {
+  const { user } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
-  const { user } = useAuth();
 
-  const updateUser = async () => {
-    try {
-      await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`,
-        {
-          email,
-          password,
-          tel,
-        }
-      );
-      alert("회원정보가 수정되었습니다.");
-    } catch (error) {
-      console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
-    }
+  const updateUser = () => {
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`, {
+        email,
+        password,
+        tel,
+      })
+      .then(() => {
+        alert("회원 정보가 수정되었습니다.");
+      })
+      .catch((error) => {
+        console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
+      });
   };
 
   return (
@@ -80,7 +79,7 @@ const EditUser = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일"
+              placeholder={user.email}
             />
           </div>
           <div className="infochange_wrap_myaccount">
@@ -99,7 +98,7 @@ const EditUser = () => {
               type="tel"
               value={tel}
               onChange={(e) => setTel(e.target.value)}
-              placeholder="전화번호"
+              placeholder={user.tel}
             />
           </div>
           <button onClick={updateUser} className="infochange_btn">

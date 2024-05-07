@@ -15,12 +15,13 @@
     font-size: 13px;
     height: 50px;
     width: 70px;
+    margin-top: 20px;
   }
   .address_wrap_myaccount {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 30px;
     align-items: baseline;
     .address_wrap_myaccount_inner {
       .address_title {
@@ -182,8 +183,9 @@
           border: 1px solid #b6b4b4;
           border-radius: 12px;
           font-size: 13px;
-          height: 50px;
+          height: 30px;
           width: 70px;
+          margin-right: 8px;
         }
       }
     }
