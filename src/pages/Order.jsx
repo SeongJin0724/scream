@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import axios from "axios";
+import { useAuth } from "../components/contents/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTruck,
@@ -12,6 +14,16 @@ import {
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 
 export default function Order() {
+  const { user } = useAuth();
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      return navigate("/login");
+    }
+  }, [token]);
+
   const [selectPayment, setSelectPayment] = useState(false);
   const [payment, setPayment] = useState("결제방법");
   const [deliveryfee, setDeliveryfee] = useState(3000);
@@ -23,16 +35,23 @@ export default function Order() {
 
   const sendOrder = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/payment/kakao`,
         {
-          partner_order_id: "your_partner_order_id", // 예시 값
-          partner_user_id: "your_partner_user_id", // 예시 값
+          partner_order_id: "1", // 예시 값 //dealKey넣기
+          partner_user_id: "2", // 예시 값 //userid넣기
           item_name: "초코파이", // 예시 값
+          item_code: "3", // itemKey넣기
           quantity: "1", // 예시 값
           total_amount: "2200", // 예시 값
           tax_free_amount: "0", // 예시 값
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -60,15 +79,15 @@ export default function Order() {
                   <tbody>
                     <tr>
                       <th>받는 분</th>
-                      <td>username</td>
+                      <td>{user.name}</td>
                     </tr>
                     <tr>
                       <th>연락처</th>
-                      <td>usernumber</td>
+                      <td>{user.tel}</td>
                     </tr>
                     <tr>
                       <th>배송주소</th>
-                      <td>useraddress</td>
+                      <td>{user.address}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -187,7 +206,7 @@ export default function Order() {
             <div className="apply_order">
               <input
                 type="submit"
-                value="주문하기"
+                value="결제하기"
                 className={
                   payment === "카카오페이" ? "orderBtn show" : "orderBtn"
                 }
