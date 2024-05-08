@@ -1,17 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ItemDetailContext } from "../components/contents/ItemDetailContext"; // 경로는 실제 프로젝트 구조에 맞게 조정해야 합니다.
 import Main from "../components/section/Main";
 import { Swiper, SwiperSlide } from "swiper/react";
+import axios from "axios";
 
 import "swiper/css";
 import "swiper/css/scrollbar";
 
 import { Scrollbar } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ItemDetail() {
   const { item, itemKey } = useContext(ItemDetailContext);
   const navigate = useNavigate();
+  const [sales, setSales] = useState([]);
+  const [purchases, setPurchases] = useState([]);
 
   const actionHandler = (action) => () => {
     if (action === "sell") {
@@ -21,6 +24,22 @@ export default function ItemDetail() {
     }
   };
   console.log(item);
+
+  useEffect(() => {
+    const fetchOffers = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/items/${itemKey}/offers`
+        );
+        setSales(response.data.sales);
+        setPurchases(response.data.purchases);
+      } catch (error) {
+        console.error("Error fetching offers:", error);
+      }
+    };
+    fetchOffers();
+  }, [itemKey]);
+
   return (
     <Main>
       <div className="itemDetail_container">
@@ -178,6 +197,41 @@ export default function ItemDetail() {
           임명하는 3인, 국회에서 선출하는 3인과 대법원장이 지명하는 3인의
           위원으로 구성한다. 위원장은 위원중에서 호선한다.
         </div>
+      </div>
+
+      <div>
+        <h2>판매리스트</h2>
+        {sales.length > 0 ? (
+          <ul>
+            {sales.map((offer) => (
+              <li key={offer.dealKey}>
+                <p>{offer.size}</p>
+                <p>{offer.price}</p>
+                <p>{offer.deadline}</p>
+                <p>{offer.description}</p>
+                <Link to={`/order/${offer.itemKey}`}>구매하기</Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>거래 상품이 없습니다.</p>
+        )}
+        <h2>구매리스트</h2>
+        {purchases.length > 0 ? (
+          <ul>
+            {purchases.map((offer) => (
+              <li key={offer.dealKey}>
+                <p>{offer.size}</p>
+                <p>{offer.price}</p>
+                <p>{offer.deadline}</p>
+                <p>{offer.description}</p>
+                <Link to={`/order/${offer.itemKey}`}>판매하기</Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>구매 제안 상품이 없습니다.</p>
+        )}
       </div>
     </Main>
   );

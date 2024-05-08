@@ -114,7 +114,7 @@ function App() {
               path="/address-search-page"
               element={<AddressSearchPage />}
             />
-            <Route path="/order" element={<Order />} />
+            <Route path="/order/:itemKey" element={<Order />} />
             <Route path="mypage/account" element={<Account />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
           </Routes>
