@@ -1,0 +1,84 @@
+.account_container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1280px;
+  padding: 40px 40px 160px;
+
+  .account_nav {
+    margin-right: 20px;
+    width: 180px;
+
+    .account_nav_title {
+      padding-bottom: 30px;
+      font-weight: 700;
+    }
+    .account_shopinfo_title {
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .account_shopinfo_sub_li {
+      margin-top: 12px;
+      color: #b6b4b4;
+      font-size: 15px;
+    }
+
+    .account_myinfo {
+      margin-top: 40px;
+
+      .account_myinfo_title {
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .account_myinfo_sub_li {
+        margin-top: 12px;
+        color: #b6b4b4;
+        font-size: 15px;
+      }
+    }
+  }
+  .account_wrap {
+    width: 100%;
+    .account_wrap_h2 {
+      font-weight: 700;
+      padding-top: 38px;
+    }
+    .account_wrap_inner {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      .account_title {
+        font-size: 13px;
+        letter-spacing: -0.07px;
+        line-height: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .account_btn_box {
+      // display: flex;
+      // justify-content: center;
+      .account_btn {
+        border-radius: 10px;
+        font-size: 14px;
+        height: 40px;
+        width: 102px;
+        background-color: #222;
+        color: #fff;
+        font-weight: 700;
+        margin-top: 10px;
+      }
+    }
+  }
+}

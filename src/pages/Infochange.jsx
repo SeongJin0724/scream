@@ -50,10 +50,10 @@ const EditUser = () => {
               <h3 className="infochange_myinfo_title">내 정보</h3>
               <ul className="infochange_myinfo_sub_ul">
                 <li className="infochange_myinfo_sub_li">
-                  <a href="/company">로그인 정보</a>
+                  <a href="/mypage/infochange">로그인 정보</a>
                 </li>
                 <li className="infochange_myinfo_sub_li">
-                  <a href="/company">프로필 관리</a>
+                  <a href="/mypage/profilechange">프로필 관리</a>
                 </li>
                 <li className="infochange_myinfo_sub_li">
                   <a href="/mypage/address">주소록</a>
@@ -62,7 +62,7 @@ const EditUser = () => {
                   <a href="/company">결제 정보</a>
                 </li>
                 <li className="infochange_myinfo_sub_li">
-                  <a href="/company">판매 정산 계좌</a>
+                  <a href="/mypage/account">판매 정산 계좌</a>
                 </li>
               </ul>
             </li>
