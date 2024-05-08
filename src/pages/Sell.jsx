@@ -6,6 +6,7 @@ import axios from "axios";
 export default function Sell() {
   const [formData, setFormData] = useState({
     deal: "판매",
+    itemKey: "",
     userId: "",
     dealItem: "",
     size: "",
@@ -14,6 +15,7 @@ export default function Sell() {
     totalPrice: "",
     fee: "",
     deadline: "",
+    sign: false,
   });
   const [apply, setApply] = useState(false);
 
