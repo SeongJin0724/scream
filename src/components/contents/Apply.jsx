@@ -72,6 +72,7 @@ export default function Apply({ content, onGetData }) {
     const deadLine = changeDeadline;
 
     onGetData({
+      itemKey: itemKey,
       userId: user.user_id,
       dealItem: parseInt(itemKey),
       size: size,

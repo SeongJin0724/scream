@@ -43,6 +43,7 @@ const Post = lazy(() => import("./pages/Post"));
 const UploadReview = lazy(() => import("./pages/UploadReview"));
 const AddressSearchPage = lazy(() => import("./pages/AddressSearchPage"));
 const Order = lazy(() => import("./pages/Order"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 
 function App() {
   return (
@@ -106,6 +107,7 @@ function App() {
               element={<AddressSearchPage />}
             />
             <Route path="/order" element={<Order />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
