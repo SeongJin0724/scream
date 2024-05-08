@@ -3,9 +3,21 @@ import axios from "axios";
 import Main from "../components/section/Main";
 
 const AccountForm = () => {
-  const [bankName, setBankName] = useState("");
   const [accountNum, setAccountNumber] = useState("");
   const [accountOwner, setAccountOwner] = useState("");
+
+  const [bankName, setSelectedBank] = useState("");
+  const banks = [
+    { id: 1, name: "국민은행" },
+    { id: 2, name: "신한은행" },
+    { id: 3, name: "하나은행" },
+    { id: 4, name: "우리은행" },
+    { id: 5, name: "SC은행" },
+  ];
+
+  const handleSelectBank = (event) => {
+    setSelectedBank(event.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,12 +82,31 @@ const AccountForm = () => {
             <div className="account_wrap_inner">
               <label className="account_title">
                 은행명
-                <input
+                {/* <input
                   type="text"
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value)}
                   placeholder="선택하세요"
-                />
+                    readOnly
+                /> */}
+                <select
+                  onChange={handleSelectBank}
+                  defaultValue=""
+                  className="account_select"
+                >
+                  <option value="" disabled>
+                    선택하세요
+                  </option>
+                  {banks.map((bank) => (
+                    <option
+                      key={bank.id}
+                      value={bank.name}
+                      onChange={(e) => setSelectedBank(e.target.value)}
+                    >
+                      {bank.name}
+                    </option>
+                  ))}
+                </select>
               </label>
             </div>
             <div className="account_wrap_inner">

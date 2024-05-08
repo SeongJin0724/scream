@@ -16,17 +16,19 @@ export default function AddressUpdate(props) {
 
   const saveAddress = () => {
     if (editIndex >= 0) {
+      // 주소 수정
       const updatedAddresses = [...savedAddresses];
       updatedAddresses[editIndex] = { zonecode, address, detailedAddress };
       setSavedAddresses(updatedAddresses);
-      setEditIndex(-1);
+      setEditIndex(-1); // 수정 모드 해제
     } else {
+      // 새 주소 추가
       setSavedAddresses((prev) => [
         ...prev,
         { zonecode, address, detailedAddress },
       ]);
     }
-    closeModal();
+    closeModal(); // 모달 닫기
   };
 
   const openAddressSearch = () => {
@@ -37,13 +39,13 @@ export default function AddressUpdate(props) {
     );
     const handleMessage = (event) => {
       if (event.origin !== window.location.origin) {
-        return;
+        return; // 동일 출처 정책을 준수
       }
 
       const { zonecode, address } = event.data;
       setZonecode(zonecode);
       setAddress(address);
-      window.removeEventListener("message", handleMessage);
+      window.removeEventListener("message", handleMessage); // 이벤트 리스너 제거
     };
 
     window.addEventListener("message", handleMessage);
@@ -51,12 +53,14 @@ export default function AddressUpdate(props) {
 
   const openModal = (index) => {
     if (index >= 0) {
+      // 주소 수정 모드
       const { zonecode, address, detailedAddress } = savedAddresses[index];
       setZonecode(zonecode);
       setAddress(address);
       setDetailedAddress(detailedAddress);
       setEditIndex(index);
     } else {
+      // 새 주소 추가 모드
       setZonecode("");
       setAddress("");
       setDetailedAddress("");
@@ -80,10 +84,12 @@ export default function AddressUpdate(props) {
           (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
         )
         .join("; ");
-
+      // 필요한 정보만 추출하여 새로운 data 객체 생성
       const data = {
-        user_id: user.user_id,
+        // 예를 들어, originalData 객체에서 필요한 정보만 추출
+        user_id: address.user_id,
         address: addressString,
+        // 추가적으로 필요한 정보들을 여기에 포함
       };
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/mypage/address`,
@@ -93,7 +99,7 @@ export default function AddressUpdate(props) {
       return response.data;
     } catch (error) {
       console.error("Failed to update user:", error);
-      throw error;
+      throw error; // 오류를 다시 throw하여 호출 코드에서 catch할 수 있도록 합니다.
     }
   };
 
@@ -149,7 +155,7 @@ export default function AddressUpdate(props) {
             </ul>
           </nav>
           <div className="address_list">
-            기본배송지:{user.address}
+            기본배송지:{address.address}
             {savedAddresses.map((addr, index) => (
               <div key={index} className="address_list_item">
                 <p>
