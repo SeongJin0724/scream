@@ -51,7 +51,7 @@ export default function Mypage() {
                   <a href="/company">결제 정보</a>
                 </li>
                 <li className="mypage_myinfo_sub_li">
-                  <a href="/company">판매 정산 계좌</a>
+                  <a href="/mypage/account">판매 정산 계좌</a>
                 </li>
               </ul>
             </li>

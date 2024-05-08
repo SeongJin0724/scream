@@ -12,11 +12,8 @@ export default function AddressUpdate(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
-
   const { user, updateUser } = useAuth();
 
-  // console.log(savedAddresses);
-  // console.log(user);
   const saveAddress = () => {
     if (editIndex >= 0) {
       // 주소 수정
@@ -89,18 +86,32 @@ export default function AddressUpdate(props) {
   //     .join("; ");
   //   updateUser({ address: addressString });
   // };
-  const AddressUpdate2 = async (data) => {
+  const AddressUpdateapi = async () => {
     try {
+      const addressString = savedAddresses
+        .map(
+          (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
+        )
+        .join("; ");
+      // 필요한 정보만 추출하여 새로운 data 객체 생성
+      const data = {
+        // 예를 들어, originalData 객체에서 필요한 정보만 추출
+        user_id: user.user_id,
+        address: addressString,
+        // 추가적으로 필요한 정보들을 여기에 포함
+      };
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/AddressUpdate2`,
+        `${process.env.REACT_APP_API_URL}/api/mypage/address`,
         data
       );
+      alert("기본배송지로 설정되었습니다.");
       return response.data;
     } catch (error) {
       console.error("Failed to update user:", error);
       throw error; // 오류를 다시 throw하여 호출 코드에서 catch할 수 있도록 합니다.
     }
   };
+
   const defaultAddressHanlder = async (e) => {
     e.preventDefault();
     try {
@@ -191,23 +202,24 @@ export default function AddressUpdate(props) {
                     <a href="/company">결제 정보</a>
                   </li>
                   <li className="address_myinfo_sub_li">
-                    <a href="/company">판매 정산 계좌</a>
+                    <a href="/mypage/account">판매 정산 계좌</a>
                   </li>
                 </ul>
               </li>
             </ul>
           </nav>
           <div className="address_list">
+            기본배송지:{user.address}
             {savedAddresses.map((addr, index) => (
               <div key={index} className="address_list_item">
                 <p>
-                  ({addr.zonecode}){addr.address}
+                  ({addr.zonecode}){addr.address}&nbsp;상세주소:
                   {addr.detailedAddress}
                 </p>
                 <div className="address_btn_wrap">
                   <button
                     className="address_defalutbtn"
-                    onClick={AddressUpdate2}
+                    onClick={AddressUpdateapi}
                   >
                     기본배송지
                   </button>
@@ -221,7 +233,6 @@ export default function AddressUpdate(props) {
                 </div>
               </div>
             ))}
-            {user.address}
           </div>
 
           <Modal
