@@ -13,7 +13,13 @@ export default function AddressUpdate(props) {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
   const { user, updateUser } = useAuth();
-
+  const [userInfo, setUserInfo] = useState({
+    name: "유저",
+    profileImage: "https://via.placeholder.com/150x150",
+    email: "None@naver.com",
+    nickname: "닉네임",
+    phoneNumber: "010-0000-0000",
+  });
   const saveAddress = () => {
     if (editIndex >= 0) {
       // 주소 수정
@@ -76,33 +82,37 @@ export default function AddressUpdate(props) {
   const inputChangeHandler = (event) => {
     setDetailedAddress(event.target.value);
   };
-
-  const AddressUpdateapi = async () => {
+  const AddressUpdateApi = async () => {
     try {
+      // 저장된 주소 정보를 하나의 문자열로 결합
       const addressString = savedAddresses
         .map(
           (addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`
         )
         .join("; ");
-      // 필요한 정보만 추출하여 새로운 data 객체 생성
+
+      // 서버로 전송할 데이터 객체 생성
       const data = {
-        // 예를 들어, originalData 객체에서 필요한 정보만 추출
-        user_id: user.user_id,
-        address: addressString,
-        // 추가적으로 필요한 정보들을 여기에 포함
+        user_id: user.user_id, // 사용자 ID
+        address: addressString, // 결합된 주소 정보 문자열
+        // 필요한 추가 정보가 있다면 여기에 포함
       };
+
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/mypage/address`,
         data
       );
+
+      // updateUser 함수를 사용하여 사용자 정보를 업데이트
+      // 이 예에서는 사용자의 주소 정보만 업데이트되지만, 필요에 따라 다른 정보도 업데이트할 수 있습니다.
+      updateUser({ ...user, address: addressString });
+
       alert("기본배송지로 설정되었습니다.");
-      return response.data;
     } catch (error) {
       console.error("Failed to update user:", error);
-      throw error; // 오류를 다시 throw하여 호출 코드에서 catch할 수 있도록 합니다.
+      throw error; // 오류 발생 시 다시 throw하여 호출 코드에서 처리할 수 있도록 함
     }
   };
-
   return (
     <Main>
       <div className="address_container_wrap">
@@ -165,7 +175,7 @@ export default function AddressUpdate(props) {
                 <div className="address_btn_wrap">
                   <button
                     className="address_defalutbtn"
-                    onClick={AddressUpdateapi}
+                    onClick={AddressUpdateApi}
                   >
                     기본배송지
                   </button>

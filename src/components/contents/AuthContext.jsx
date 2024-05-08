@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -26,31 +27,38 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = async (updatedUserInfo) => {
     try {
-      const token = localStorage.getItem("accessToken"); // 기존 토큰 가져오기
-      const response = await fetch(
+      const token = localStorage.getItem("accessToken");
+
+      const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/updateUser`,
         {
-          method: "POST",
+          user_id: user.user_id,
+          newUserInfo: updatedUserInfo,
+        },
+        {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // 토큰을 `Authorization` 헤더에 추가합니다.
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(updatedUserInfo),
         }
       );
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error("유저 정보 업데이트 실패");
       }
 
-      const data = await response.json();
-      const newToken = data.newToken; // 응답으로 받은 새로운 토큰
-      localStorage.setItem("accessToken", newToken); // 새 토큰 저장
-      localStorage.setItem("user", JSON.stringify(data.user)); // 업데이트된 사용자 정보 저장
+      const { newUser, newAccessToken } = response.data;
 
-      setUser(data.user); // 상태 업데이트
+      // 새로운 accessToken과 사용자 정보를 localStorage에 저장합니다.
+      localStorage.setItem("accessToken", newAccessToken); // 새로운 accessToken 업데이트
+      localStorage.setItem("user", JSON.stringify(newUser)); // 새로운 사용자 정보 업데이트
+
+      setUser({ ...newUser, token: newAccessToken }); // 상태 업데이트
     } catch (error) {
       console.error(error);
+      if (error.response) {
+        console.error("Error data:", error.response.data);
+        console.error("Error status:", error.response.status);
+      }
     }
   };
 
