@@ -13,9 +13,7 @@ export default function Apply({ content, onGetData }) {
   const [totalPrice, setTotalPrice] = useState("");
   const [apply, setApply] = useState(false);
   const { item, itemKey } = useContext(ItemDetailContext);
-  // console.log(item[0].title, itemKey);
   const { user } = useAuth();
-  // console.log(user);
 
   const changeDeadline = useMemo(() => {
     const today = new Date();
@@ -83,10 +81,6 @@ export default function Apply({ content, onGetData }) {
       deadline: deadLine,
       totalPrice: totalPrice,
     });
-  };
-
-  const showAlert = () => {
-    alert("거래 중개 등 제반 서비스 이용료가 포함됩니다.");
   };
 
   return (

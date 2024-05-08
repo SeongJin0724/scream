@@ -13,8 +13,12 @@ export default function ItemDetail() {
   const { item, itemKey } = useContext(ItemDetailContext);
   const navigate = useNavigate();
 
-  const sellHandler = () => {
-    navigate(`/items/${itemKey}/sell`);
+  const actionHandler = (action) => () => {
+    if (action === "sell") {
+      navigate(`/items/${itemKey}/sell`);
+    } else if (action === "buy") {
+      navigate(`/items/${itemKey}/buy`);
+    }
   };
   console.log(item);
   return (
@@ -30,7 +34,8 @@ export default function ItemDetail() {
               className="mySwiper"
             >
               <SwiperSlide>
-                <button onClick={sellHandler}>판매신청</button>
+                <button onClick={actionHandler("sell")}>판매신청</button>
+                <button onClick={actionHandler("buy")}>구매신청</button>
               </SwiperSlide>
               <SwiperSlide>Slide 2</SwiperSlide>
               <SwiperSlide>Slide 3</SwiperSlide>
