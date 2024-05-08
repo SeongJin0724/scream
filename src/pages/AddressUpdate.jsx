@@ -87,7 +87,7 @@ export default function AddressUpdate(props) {
       // 필요한 정보만 추출하여 새로운 data 객체 생성
       const data = {
         // 예를 들어, originalData 객체에서 필요한 정보만 추출
-        user_id: address.user_id,
+        user_id: user.user_id,
         address: addressString,
         // 추가적으로 필요한 정보들을 여기에 포함
       };
@@ -155,7 +155,7 @@ export default function AddressUpdate(props) {
             </ul>
           </nav>
           <div className="address_list">
-            기본배송지:{address.address}
+            기본배송지:{user.address}
             {savedAddresses.map((addr, index) => (
               <div key={index} className="address_list_item">
                 <p>
