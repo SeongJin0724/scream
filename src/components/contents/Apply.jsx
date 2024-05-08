@@ -13,9 +13,9 @@ export default function Apply({ content, onGetData }) {
   const [totalPrice, setTotalPrice] = useState("");
   const [apply, setApply] = useState(false);
   const { item, itemKey } = useContext(ItemDetailContext);
-  console.log(item[0].title, itemKey);
+  // console.log(item[0].title, itemKey);
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   const changeDeadline = useMemo(() => {
     const today = new Date();
@@ -69,7 +69,19 @@ export default function Apply({ content, onGetData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onGetData({ size, desc, price, fee, deadline, totalPrice });
+    const deadLine = changeDeadline;
+
+    onGetData({
+      userId: user.user_id,
+      dealItem: parseInt(itemKey),
+      size: size,
+      desc: desc,
+      price: price,
+      totalPrice: totalPrice,
+      fee: fee,
+      deadline: deadLine,
+      totalPrice: totalPrice,
+    });
   };
 
   const showAlert = () => {
