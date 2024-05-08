@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import axios from "axios";
 import { useAuth } from "../components/contents/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTruck,
@@ -17,6 +17,8 @@ export default function Order() {
   const { user } = useAuth();
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
+  const { dealKey } = useParams();
+  console.log(dealKey);
 
   useEffect(() => {
     if (!token) {
