@@ -55,6 +55,7 @@ export default function Apply({ content, onGetData }) {
     if (size && desc && price && deadline && fee) {
       if (content.type === "구매") {
         setTotalPrice(parseInt(price) + parseInt(fee));
+        setApply(true);
       }
       if (content.type === "판매") {
         setTotalPrice(parseInt(price) - parseInt(fee));

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import Apply from "../components/contents/Apply";
+import ApplyResultModal from "../components/contents/ApplyResultModal";
 import axios from "axios";
 
 export default function Sell() {
@@ -18,6 +19,7 @@ export default function Sell() {
     sign: false,
   });
   const [apply, setApply] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const getData = (form) => {
     setFormData((prevFormData) => ({ ...prevFormData, ...form }));
@@ -32,9 +34,9 @@ export default function Sell() {
             `${process.env.REACT_APP_API_URL}/api/offerDeal`,
             formData
           );
-          if (response.success) {
+          if (response.data.success) {
             setApply(false);
-            console.log("데이터베이스에 성공적으로 추가되었습니다.");
+            setSuccess(true);
           }
         } catch (error) {
           console.error("Error:", error);
@@ -43,6 +45,16 @@ export default function Sell() {
       handleSubmit();
     }
   }, [apply]);
+
+  useEffect(() => {
+    if (success) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [success]);
 
   return (
     <Main>
@@ -56,6 +68,7 @@ export default function Sell() {
           desc: "상품 상태 및 설명",
         }}
       />
+      {success && <ApplyResultModal type="판매" />}
     </Main>
   );
 }
