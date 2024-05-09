@@ -16,10 +16,10 @@ export default function Login() {
       const data = await logIn(email, password); // authService의 logIn 함수를 사용
       if (data.token) {
         localStorage.setItem("accessToken", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
         console.log("★로그인성공★");
         navigate("/"); // 사용자를 홈으로 리다이렉트
-        window.location.reload();
+        // window.location.reload();
+        console.log(data.token);
       } else {
         alert(data.message);
         console.log("로그인실패");

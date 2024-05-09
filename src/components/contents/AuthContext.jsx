@@ -9,55 +9,80 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("accessToken");
+      console.log(token);
+      if (token) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_URL}/api/user`,
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
-    if (token && userData) {
-      setUser({ ...userData, token: token });
-    } else {
-      setUser({
-        name: "유저",
-        profileImage: "https://via.placeholder.com/150x150",
-        email: "None@naver.com",
-        nickname: "닉네임",
-        phoneNumber: "010-0000-0000",
-      });
-    }
+          if (response.data && response.data.user) {
+            // 현재 user 상태와 서버에서 받아온 데이터를 JSON 문자열로 변환하여 비교
+            const currentUserString = JSON.stringify(user);
+            const fetchedUserString = JSON.stringify(response.data.user);
+
+            // 두 JSON 문자열이 다를 경우에만 상태 업데이트
+            if (currentUserString !== fetchedUserString) {
+              setUser(response.data.user);
+            }
+          }
+        } catch (error) {
+          console.error(
+            "사용자 정보를 가져오는 중 오류가 발생했습니다:",
+            error
+          );
+          // 오류 발생 시 기본 사용자 정보로 설정
+          setUser({
+            name: "유저",
+            profileImage: "https://via.placeholder.com/150x150",
+            email: "None@naver.com",
+            nickname: "닉네임",
+            phoneNumber: "010-0000-0000",
+          });
+        }
+      }
+    };
+
+    fetchUserData();
   }, []);
+  console.log(user);
 
   const updateUser = async (updatedUserInfo) => {
-    try {
-      const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("accessToken");
+    if (token && updatedUserInfo) {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/updateUser`,
+          updatedUserInfo,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/updateUser`,
-        {
-          user_id: user.user_id,
-          newUserInfo: updatedUserInfo,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        if (response.data && response.data.newToken) {
+          // 새로운 토큰을 로컬 스토리지에 저장
+          localStorage.setItem("accessToken", response.data.newToken);
+
+          // 새로운 사용자 정보와 토큰을 상태에 저장
+          setUser({
+            ...user,
+            ...response.data.user,
+          });
         }
-      );
-
-      if (response.status !== 200) {
-        throw new Error("유저 정보 업데이트 실패");
-      }
-
-      const { newUser, newAccessToken } = response.data;
-
-      // 새로운 accessToken과 사용자 정보를 localStorage에 저장합니다.
-      localStorage.setItem("accessToken", newAccessToken); // 새로운 accessToken 업데이트
-      localStorage.setItem("user", JSON.stringify(newUser)); // 새로운 사용자 정보 업데이트
-
-      setUser({ ...newUser, token: newAccessToken }); // 상태 업데이트
-    } catch (error) {
-      console.error(error);
-      if (error.response) {
-        console.error("Error data:", error.response.data);
-        console.error("Error status:", error.response.status);
+      } catch (error) {
+        console.error(
+          "사용자 정보를 업데이트하는 중 오류가 발생했습니다.",
+          error
+        );
       }
     }
   };

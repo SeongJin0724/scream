@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Main from "../components/section/Main";
 import { SlArrowRight } from "react-icons/sl";
 import { useAuth } from "../components/contents/AuthContext";
