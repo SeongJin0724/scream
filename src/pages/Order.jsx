@@ -18,13 +18,30 @@ export default function Order() {
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
   const { dealKey } = useParams();
-  console.log(dealKey);
 
   useEffect(() => {
     if (!token) {
       return navigate("/login");
     }
   }, [token]);
+
+  const [dealData, setDealData] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/offerDeal/${dealKey}`
+        );
+        setDealData(response.data[0]);
+        setTotalPrice(true);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [dealKey]);
 
   const [selectPayment, setSelectPayment] = useState(false);
   const [payment, setPayment] = useState("결제방법");
@@ -35,20 +52,20 @@ export default function Order() {
     setPayment(e.target.value);
   };
 
+  //결제요청
   const sendOrder = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/payment/kakao`,
         {
-          partner_order_id: "1", // 예시 값 //dealKey넣기
-          partner_user_id: "2", // 예시 값 //userid넣기
-          item_name: "초코파이", // 예시 값
-          item_code: "3", // itemKey넣기
-          quantity: "1", // 예시 값
-          total_amount: "2200", // 예시 값
-          tax_free_amount: "0", // 예시 값
+          partner_order_id: `${dealData.dealKey}`,
+          partner_user_id: `${dealData.user_id}`,
+          item_name: `${dealData.title}`,
+          item_code: `${dealData.itemKey}`,
+          quantity: "1",
+          total_amount: `${dealData.totalPrice}`,
+          tax_free_amount: "0",
         },
         {
           headers: {
@@ -56,21 +73,34 @@ export default function Order() {
           },
         }
       );
-
       window.location.href = response.data.next_redirect_pc_url;
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  function formatPrice(price) {
+    return new Intl.NumberFormat("ko-KR").format(price);
+  }
+
+  const payAmount = () => {
+    const total = dealData.price - dealData.fee - deliveryfee;
+    const result = formatPrice(total);
+    return result;
+  };
+
   return (
     <Main>
       <div className="order_container">
         <div className="order_wrap">
-          <h3 className="order_header">주문</h3>
+          <h3 className="order_header">구매</h3>
           <div className="order_item">
-            <img src="" alt="" className="item_img" />
-            <p>상품정보</p>
+            <img src={dealData.img} alt={dealData.title} className="item_img" />
+            <div className="item_detail">
+              <p className="brand">{dealData.brand}</p>
+              <p className="title">{dealData.title}</p>
+              <p className="size">{dealData.size}</p>
+            </div>
           </div>
 
           <form onSubmit={sendOrder}>
@@ -182,8 +212,8 @@ export default function Order() {
               <table className="order_detail">
                 <tbody>
                   <tr>
-                    <th>구매 희망가</th>
-                    <td>-</td>
+                    <th>구매가</th>
+                    <td>{formatPrice(dealData.price)}원</td>
                   </tr>
                   <tr>
                     <th>검수비</th>
@@ -191,7 +221,7 @@ export default function Order() {
                   </tr>
                   <tr>
                     <th>수수료</th>
-                    <td>-</td>
+                    <td>{formatPrice(dealData.fee)}원</td>
                   </tr>
                   <tr>
                     <th>배송비</th>
@@ -201,7 +231,7 @@ export default function Order() {
               </table>
               <div className="total_price">
                 <p>총 결제금액</p>
-                <p>-</p>
+                <p>{totalPrice ? payAmount() + "원" : "-"}</p>
               </div>
             </div>
 

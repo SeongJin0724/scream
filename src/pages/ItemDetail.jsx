@@ -225,7 +225,7 @@ export default function ItemDetail() {
                 <p>{offer.price}</p>
                 <p>{offer.deadline}</p>
                 <p>{offer.description}</p>
-                <Link to={`/order/${offer.dealKey}`}>판매하기</Link>
+                <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
               </li>
             ))}
           </ul>

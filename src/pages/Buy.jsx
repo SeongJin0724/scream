@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Main from "../components/section/Main";
 import Apply from "../components/contents/Apply";
 import ApplyResultModal from "../components/contents/ApplyResultModal";
 import axios from "axios";
 
 export default function Buy() {
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      return navigate("/login");
+    }
+  }, [token]);
+
   const [formData, setFormData] = useState({
     deal: "구매",
     itemKey: "",
