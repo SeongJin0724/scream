@@ -52,8 +52,27 @@ const OrderSell = () => {
 
   const sendOrder = async (e) => {
     e.preventDefault();
-    console.log("판매");
-    //주문테이블에 데이터 넣기 + 판매완료 모달창 띄우기
+    const ordersellData = {
+      user_id: dealData.user_id,
+      itemKey: dealData.itemKey,
+      dealKey: dealData.dealKey,
+      price: dealData.totalPrice,
+    };
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/sendOrdersell`,
+        ordersellData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
