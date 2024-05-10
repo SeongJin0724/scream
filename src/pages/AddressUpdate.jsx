@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Main from "../components/section/Main";
 import Modal from "react-modal";
 import { IoIosClose } from "react-icons/io";
@@ -13,20 +13,28 @@ export default function AddressUpdate() {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(-1);
   const { user, updateUser } = useAuth();
-  console.log(user);
+  useEffect(() => {
+    const loadedAddresses = localStorage.getItem("savedAddresses");
+    if (loadedAddresses) {
+      setSavedAddresses(JSON.parse(loadedAddresses));
+    }
+  }, []);
   const saveAddress = () => {
     if (editIndex >= 0) {
       // 주소 수정
       const updatedAddresses = [...savedAddresses];
       updatedAddresses[editIndex] = { zonecode, address, detailedAddress };
       setSavedAddresses(updatedAddresses);
+      localStorage.setItem("savedAddresses", JSON.stringify(updatedAddresses)); // 로컬 스토리지에 저장
       setEditIndex(-1); // 수정 모드 해제
     } else {
       // 새 주소 추가
-      setSavedAddresses((prev) => [
-        ...prev,
+      const newAddresses = [
+        ...savedAddresses,
         { zonecode, address, detailedAddress },
-      ]);
+      ];
+      setSavedAddresses(newAddresses);
+      localStorage.setItem("savedAddresses", JSON.stringify(newAddresses)); // 로컬 스토리지에 저장
     }
     closeModal(); // 모달 닫기
   };
@@ -137,6 +145,14 @@ export default function AddressUpdate() {
       alert("정보 업데이트에 실패했습니다.");
     }
   };
+  const deleteAddress = (index) => {
+    // 주어진 인덱스에 해당하는 주소 정보를 제외하고 새 배열을 생성
+    const updatedAddresses = savedAddresses.filter((_, i) => i !== index);
+    // 업데이트된 주소 목록으로 상태 업데이트
+    setSavedAddresses(updatedAddresses);
+    localStorage.setItem("savedAddresses", JSON.stringify(updatedAddresses)); // 로컬 스토리지에 저장
+    alert("주소가 삭제되었습니다.");
+  };
   return (
     <Main>
       <div className="address_container_wrap">
@@ -209,7 +225,12 @@ export default function AddressUpdate() {
                   >
                     수정
                   </button>
-                  <button className="address_deletebtn">삭제</button>
+                  <button
+                    className="address_deletebtn"
+                    onClick={() => deleteAddress(index)}
+                  >
+                    삭제
+                  </button>
                 </div>
               </div>
             ))}

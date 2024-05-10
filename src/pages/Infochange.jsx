@@ -8,7 +8,6 @@ const EditUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [tel, setTel] = useState("");
-  console.log(user);
   const updateUserHandler = () => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`, {
@@ -16,8 +15,10 @@ const EditUser = () => {
         password,
         tel,
       })
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         updateUser({ email, password, tel });
+        alert("회원정보가 수정되었습니다.");
       })
       .catch((error) => {
         console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
