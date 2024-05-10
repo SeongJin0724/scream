@@ -20,7 +20,6 @@ const FooterNotice = lazy(() => import("./pages/FooterNotice"));
 const Service = lazy(() => import("./pages/Service"));
 const Storeinfo = lazy(() => import("./pages/Storeinfo"));
 const Acceptance = lazy(() => import("./pages/Acceptance"));
-const AddressUpdate = lazy(() => import("./pages/AddressUpdate"));
 const Talented = lazy(() => import("./pages/Talented"));
 const Partnership = lazy(() => import("./pages/Partnership"));
 const Terms = lazy(() => import("./pages/Terms"));
@@ -68,7 +67,6 @@ function App() {
             <Route path="/service" element={<Service />} />
             <Route path="/storeinfo" element={<Storeinfo />} />
             <Route path="/acceptance" element={<Acceptance />} />
-            <Route path="/mypage/address" element={<AddressUpdate />} />
             <Route path="/talented" element={<Talented />} />
             <Route path="/partnership" element={<Partnership />} />
             <Route path="/terms" element={<Terms />} />
