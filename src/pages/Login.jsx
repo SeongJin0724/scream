@@ -18,7 +18,7 @@ export default function Login() {
         localStorage.setItem("accessToken", data.token);
         console.log("★로그인성공★");
         navigate("/"); // 사용자를 홈으로 리다이렉트
-        // window.location.reload();
+        window.location.reload();
         console.log(data.token);
       } else {
         alert(data.message);

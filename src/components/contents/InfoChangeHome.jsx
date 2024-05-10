@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 import Modal from "react-modal";
 import { IoIosClose } from "react-icons/io";
 import MyPageUi from "./MyPageUi";
+import AccountForm from "./Account";
 
 export default function InfoChangeHome() {
   const [email, setEmail] = useState("");
@@ -15,11 +16,8 @@ export default function InfoChangeHome() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [savedAddresses, setSavedAddresses] = useState([]);
 
-  const addressString = savedAddresses
-    .map((addr) => `${addr.address}, ${addr.detailedAddress}, ${addr.zonecode}`)
-    .join("; ");
   const { user, updateUser } = useAuth();
-  console.log(addressString);
+
   const openAddressSearch = () => {
     const addressWindow = window.open(
       "/address-search-page",
@@ -119,13 +117,14 @@ export default function InfoChangeHome() {
 
   const updateUserHandler = () => {
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/infochange/${user.user_id}`, {
+      .put(`${process.env.REACT_APP_API_URL}/api/infochange`, {
         email,
         password,
         tel,
+        user_id: user.user_id,
       })
       .then(() => {
-        updateUser({ email, password, tel });
+        updateUser({ email, password, tel, user_id: user.user_id });
       })
       .catch((error) => {
         console.error("회원 정보 수정 중 오류가 발생했습니다.", error);
@@ -251,6 +250,7 @@ export default function InfoChangeHome() {
           </div>
         </Modal>
       </div>
+      <AccountForm />
     </MyPageUi>
   );
 }

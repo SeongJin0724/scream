@@ -7,9 +7,11 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
+      setLoading(true);
       const token = localStorage.getItem("accessToken");
 
       if (token) {
@@ -47,6 +49,7 @@ export const AuthProvider = ({ children }) => {
             phoneNumber: "010-0000-0000",
           });
         }
+        setLoading(false);
       }
     };
 
@@ -87,7 +90,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, updateUser }}>
+    <AuthContext.Provider value={{ user, setUser, updateUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

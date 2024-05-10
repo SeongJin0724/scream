@@ -4,7 +4,7 @@ import { useAuth } from "../contents/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function MyPageHome() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
@@ -13,6 +13,9 @@ export default function MyPageHome() {
       return navigate("/login");
     }
   }, [token]);
+  if (loading) {
+    return <div>로딩중입니다.</div>;
+  }
   return (
     <div className="mypage_wrap">
       <div className="mypage_profile">
