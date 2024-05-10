@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem("accessToken");
-      console.log(token);
+
       if (token) {
         try {
           const response = await axios.get(
@@ -52,7 +52,6 @@ export const AuthProvider = ({ children }) => {
 
     fetchUserData();
   }, []);
-  console.log(user);
 
   const updateUser = async (updatedUserInfo) => {
     const token = localStorage.getItem("accessToken");

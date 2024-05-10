@@ -1,5 +1,6 @@
 .mypage_container {
   display: flex;
+  gap: 14px;
   margin-left: auto;
   margin-right: auto;
   max-width: 1280px;
@@ -7,7 +8,8 @@
 
   .mypage_nav {
     margin-right: 20px;
-    width: 180px;
+    width: 100%;
+    max-width: 200px;
 
     .mypage_nav_title {
       padding-bottom: 30px;
