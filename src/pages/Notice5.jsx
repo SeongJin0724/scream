@@ -17,11 +17,11 @@ export default function Company() {
       </div>
       <div data-v-0945aee6="" class="contentn">
         <p>
-          <span>안녕하세요. KREAM 입니다.</span>
+          <span>안녕하세요. SCREAM 입니다.</span>
         </p>
         <p>
           <span true="">
-            4/17(수) - 4/24(수) 진행된 KREAM DRAW - SURPRISE DRAW - 비스타
+            4/17(수) - 4/24(수) 진행된 SCREAM DRAW - SURPRISE DRAW - 비스타
             워커힐 코너 스위트룸 &amp; 해링턴 카 시승권 응모 안내 드립니다.
           </span>
         </p>
@@ -107,7 +107,7 @@ export default function Company() {
         </p>
         <p>
           <span>
-            *제세공과금은 KREAM에서 부담하며, 제세공과금 처리를 위해 가입된
+            *제세공과금은 SCREAM에서 부담하며, 제세공과금 처리를 위해 가입된
             이메일 주소로 신분증 등 서류를 요청 드립니다.
           </span>
         </p>

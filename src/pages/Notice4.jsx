@@ -15,10 +15,10 @@ export default function Company() {
         </div>
       </div>
       <div data-v-0945aee6="" class="contentn">
-        <p>안녕하세요. KREAM 입니다.</p>
+        <p>안녕하세요. SCREAM 입니다.</p>
         <p>
           4/22(월) - 4/24(수) 진행된 DRAW - 아모프레 X 벌스데이수트 DBSG
-          스타디움 자켓 KREAM 단독 드로우 응모 안내 드립니다.
+          스타디움 자켓 SCREAM 단독 드로우 응모 안내 드립니다.
         </p>
         <p>&nbsp;</p>
         <ul>
