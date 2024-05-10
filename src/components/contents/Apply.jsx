@@ -89,8 +89,14 @@ export default function Apply({ content, onGetData }) {
       <div className="apply_content">
         <h3 className="content_header">{content.type}신청</h3>
         <div className="apply_item">
-          <img src="" alt="" className="item_img" />
-          <p>{item[0].title}</p>
+          <img src={item[0].img} alt={item[0].title} className="item_img" />
+          <div>
+            <p className="brand">{item[0].brand}</p>
+            <p className="title">{item[0].title}</p>
+            <p className="price">
+              발매가: {formatPrice(item[0].launchPrice)}원
+            </p>
+          </div>
         </div>
 
         <form className="apply_form" onSubmit={handleSubmit}>

@@ -13,7 +13,7 @@ export default function Style() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/reviews`
         );
-        setReviews(response.data);
+        setReviews(response.data[0]);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -21,17 +21,25 @@ export default function Style() {
     fetchData();
   }, []);
 
-  //하트할거면 리뷰테이블에 좋아요 넣기
-
   return (
     <Main>
       <div className="style_container">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4 }}>
           <Masonry>
-            {/* {reviews.map((review) => (
-              <Review key={review.reviewKey} />
-            ))} */}
-            <Review height="350px" />
+            {reviews.map((review) => (
+              <Review
+                key={review.reviewKey}
+                data={{
+                  user: `${review.user_id}`,
+                  img: `${review.img}`,
+                  content: `${review.content}`,
+                  height: "250px",
+                  itemKey: `${review.itemKey}`,
+                  reviewKey: `${review.reviewKey}`,
+                }}
+              />
+            ))}
+            {/* <Review height="350px" />
             <Review height="250px" />
             <Review height="350px" />
             <Review height="250px" />
@@ -40,7 +48,7 @@ export default function Style() {
             <Review height="250px" />
             <Review height="350px" />
             <Review height="250px" />
-            <Review height="350px" />
+            <Review height="350px" /> */}
           </Masonry>
         </ResponsiveMasonry>
       </div>

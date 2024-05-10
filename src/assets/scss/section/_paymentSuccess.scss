@@ -1,0 +1,53 @@
+.payment_wrap {
+  color: #222222;
+
+  .success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background-color: #eee;
+
+    .icon {
+      font-size: 30px;
+      color: #31b46e;
+      margin-bottom: 8px;
+    }
+
+    .success_content {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .goToBtn {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      .toMypage,
+      .toHome {
+        padding: 12px 30px;
+        border: 1px solid #222222;
+        border-radius: 4px;
+      }
+
+      .toMypage {
+        transition: all ease-in 100ms;
+        &:hover {
+          scale: 1.05;
+        }
+      }
+
+      .toHome {
+        color: #fff;
+        background-color: #222222;
+        transition: all ease-in 100ms;
+
+        &:hover {
+          scale: 1.05;
+        }
+      }
+    }
+  }
+}

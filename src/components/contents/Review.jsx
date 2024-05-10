@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Img from "../../assets/image/slide_img3.webp";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faSolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
 
-export default function Review({ height }) {
+export default function Review({ data }) {
   const [shape, setShape] = useState();
   const [liked, setLiked] = useState(false);
-
-  useEffect(() => {
-    height === "350px" ? setShape(350) : setShape(280);
-  }, [height]);
-
   const navigate = useNavigate();
 
+  useEffect(() => {
+    data.height === "350px" ? setShape(350) : setShape(280);
+  }, [data.height]);
+
   const goToPost = () => {
-    navigate("/post");
+    navigate(`/post/${data.reviewKey}`);
   };
 
   const onLiked = (e) => {
@@ -36,7 +35,7 @@ export default function Review({ height }) {
 
         <div className="review_detail">
           <div className="detail_user">
-            <p className="user">user</p>
+            <p className="user">{data.user}</p>
             <button
               onClick={onLiked}
               className={liked ? "likeBtn liked" : "likeBtn"}
@@ -44,7 +43,7 @@ export default function Review({ height }) {
               <FontAwesomeIcon icon={liked ? faSolidHeart : faRegularHeart} />
             </button>
           </div>
-          <p className="content">content</p>
+          <p className="content">{data.content}</p>
         </div>
       </div>
     </>

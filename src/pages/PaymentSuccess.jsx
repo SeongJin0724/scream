@@ -7,15 +7,19 @@ import { Link } from "react-router-dom";
 export default function PaymentSuccess() {
   return (
     <Main>
-      <div>
-        <div>
-          <FontAwesomeIcon icon={faCircleCheck} />
-          <h1>주문완료</h1>
+      <div className="payment_wrap">
+        <div className="success">
+          <FontAwesomeIcon icon={faCircleCheck} className="icon" />
+          <h1 className="success_content">주문완료</h1>
+          <div className="goToBtn">
+            <Link to="/mypage" className="toMypage">
+              마이페이지
+            </Link>
+            <Link to="/" className="toHome">
+              홈으로 가기
+            </Link>
+          </div>
         </div>
-        <div>
-          <h3>거래 내역</h3>
-        </div>
-        <Link to="/"> 홈으로</Link>
       </div>
     </Main>
   );
