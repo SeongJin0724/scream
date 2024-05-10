@@ -41,7 +41,7 @@ export default function Post() {
             </div>
           </Link>
         </div>
-        <div className="post_content">리뷰내용</div>
+        <p className="post_content">{styleItem?.content}</p>
       </div>
     </Main>
   );

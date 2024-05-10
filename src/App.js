@@ -46,6 +46,7 @@ const Order = lazy(() => import("./pages/Order"));
 const Account = lazy(() => import("./pages/Account"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const OrderSell = lazy(() => import("./pages/OrderSell"));
+const PaymentApproval = lazy(() => import("./pages/PaymentApproval"));
 
 function App() {
   return (
@@ -119,6 +120,7 @@ function App() {
             <Route path="mypage/account" element={<Account />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/ordersell/:dealKey" element={<OrderSell />} />
+            <Route path="/payment/approval" element={<PaymentApproval />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
