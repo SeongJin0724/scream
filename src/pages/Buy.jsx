@@ -41,7 +41,7 @@ export default function Buy() {
       const handleSubmit = async () => {
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/api/offerDeal`,
+            `${process.env.REACT_APP_API_URL}/api/applyOfferDeal`,
             formData
           );
           if (response.data.success) {
@@ -78,7 +78,7 @@ export default function Buy() {
           desc: "상품 희망 상태",
         }}
       />
-      {success && <ApplyResultModal type="구매" />}
+      {success && <ApplyResultModal type="구매신청" />}
     </Main>
   );
 }

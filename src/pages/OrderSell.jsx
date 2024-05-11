@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Main from "../components/section/Main";
-import axios from "axios";
 import { useAuth } from "../components/contents/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import Main from "../components/section/Main";
+import ApplyResultModal from "../components/contents/ApplyResultModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,6 +25,7 @@ const OrderSell = () => {
 
   const [dealData, setDealData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(false);
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,10 +72,21 @@ const OrderSell = () => {
         }
       );
       console.log(response.data.message);
+      setComplete(true);
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  useEffect(() => {
+    if (complete) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [complete]);
 
   return (
     <div>
@@ -154,7 +167,7 @@ const OrderSell = () => {
                 ) : (
                   <div className="no_account">
                     <p>계좌정보가 없습니다.</p>
-                    <Link to="/mypage/account" className="accountAdd">
+                    <Link to="/mypage/infochange" className="accountAdd">
                       + 계좌등록
                     </Link>
                   </div>
@@ -200,6 +213,7 @@ const OrderSell = () => {
             </form>
           </div>
         </div>
+        {complete && <ApplyResultModal type="판매" />}
       </Main>
     </div>
   );

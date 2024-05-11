@@ -41,7 +41,7 @@ export default function Sell() {
       const handleSubmit = async () => {
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/api/offerDeal`,
+            `${process.env.REACT_APP_API_URL}/api/applyOfferDeal`,
             formData
           );
           if (response.data.success) {
@@ -78,7 +78,7 @@ export default function Sell() {
           desc: "상품 상태 및 설명",
         }}
       />
-      {success && <ApplyResultModal type="판매" />}
+      {success && <ApplyResultModal type="판매신청" />}
     </Main>
   );
 }
