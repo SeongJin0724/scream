@@ -7,38 +7,42 @@ export default function NewIn() {
   const [offset, setOffset] = useState(0);
   const [showMore, setShowMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
-  const fetchProducts = async () => {
-    if (isLoading) return;
-    setIsLoading(true);
-
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
-      );
-      console.log(response);
-      const newProducts = response.data[0];
-      console.log(newProducts);
-      setProducts((prevProducts) => {
-        const newUniqueProducts = newProducts.filter(
-          (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
-        );
-        return [...prevProducts, ...newUniqueProducts];
-      });
-      if (offset + 5 >= 15) {
-        setShowMore(false);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [imagePaths, setImagePaths] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
-  }, [offset]);
+    const fetchProducts = async () => {
+      if (isLoading) return;
+      setIsLoading(true);
 
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
+        );
+        console.log(response);
+        const newProducts = response.data[0];
+        console.log(newProducts);
+        setProducts((prevProducts) => {
+          const newUniqueProducts = newProducts.filter(
+            (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
+          );
+          return [...prevProducts, ...newUniqueProducts];
+        });
+        if (offset + 5 >= 15) {
+          setShowMore(false);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProducts();
+    if (products && products.length > 0 && products[0].img) {
+      const paths = products[0].img.split(",").map((path) => path.trim());
+      setImagePaths(paths);
+    }
+  }, [offset]);
+  console.log(imagePaths);
   return (
     <div className="home_section">
       <div className="section_title">
@@ -50,11 +54,14 @@ export default function NewIn() {
           products.map((product) => (
             <li key={product.itemKey} className="newIn_item">
               <Link to={`/items/${product.itemKey}`}>
-                <img
-                  src={product.img}
-                  alt={product.title}
-                  className="newIn_item_img"
-                />
+                {imagePaths.map((path, index) => (
+                  <img
+                    src={path.img}
+                    alt={product.title}
+                    className="newIn_item_img"
+                  />
+                ))}
+
                 <div className="newIn_item_desc">
                   <p className="brandName">{product.brand}</p>
                   <p className="productName">{product.title}</p>

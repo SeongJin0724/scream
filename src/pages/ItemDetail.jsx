@@ -1,21 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ItemDetailContext } from "../components/contents/ItemDetailContext"; // 경로는 실제 프로젝트 구조에 맞게 조정해야 합니다.
+import { ItemDetailContext } from "../components/contents/ItemDetailContext";
 import Main from "../components/section/Main";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 
 import "swiper/css";
 import "swiper/css/scrollbar";
+import "swiper/css/navigation";
 
-import { Scrollbar } from "swiper/modules";
+import { Navigation, Scrollbar } from "swiper/modules";
 import { Link, useNavigate } from "react-router-dom";
+import { CiBookmark } from "react-icons/ci";
 
+// const imagePaths = [
+//   `${process.env.PUBLIC_URL}/img/nikeairmax.webp`,
+//   `${process.env.PUBLIC_URL}/img/nikeairmax2.webp`,
+//   `${process.env.PUBLIC_URL}/img/nikeairmax3.webp`,
+// ];
 export default function ItemDetail() {
   const { item, itemKey } = useContext(ItemDetailContext);
   const navigate = useNavigate();
   const [sales, setSales] = useState([]);
   const [purchases, setPurchases] = useState([]);
-
+  const [imagePaths, setImagePaths] = useState([]);
   const actionHandler = (action) => () => {
     if (action === "sell") {
       navigate(`/items/${itemKey}/sell`);
@@ -23,7 +30,6 @@ export default function ItemDetail() {
       navigate(`/items/${itemKey}/buy`);
     }
   };
-  console.log(item);
 
   useEffect(() => {
     const fetchOffers = async () => {
@@ -38,200 +44,108 @@ export default function ItemDetail() {
       }
     };
     fetchOffers();
-  }, [itemKey]);
+    if (item && item.length > 0 && item[0].img) {
+      const paths = item[0].img.split(",").map((path) => path.trim());
+      setImagePaths(paths);
+    }
+  }, [itemKey, item]);
 
   return (
     <Main>
-      <div className="itemDetail_container">
-        <div className="item_img_wrap">
-          <div className="item_img_fixed">
-            <Swiper
-              scrollbar={{
-                hide: true,
-              }}
-              modules={[Scrollbar]}
-              className="mySwiper"
-            >
-              <SwiperSlide>
-                <button onClick={actionHandler("sell")}>판매신청</button>
-                <button onClick={actionHandler("buy")}>구매신청</button>
-              </SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-              <SwiperSlide>Slide 5</SwiperSlide>
-              <SwiperSlide>Slide 6</SwiperSlide>
-              <SwiperSlide>Slide 7</SwiperSlide>
-              <SwiperSlide>Slide 8</SwiperSlide>
-              <SwiperSlide>Slide 9</SwiperSlide>
-            </Swiper>
+      <div className="itemDetail_main_container">
+        <div className="itemDetail_container">
+          <div className="item_img_wrap">
+            <div className="item_img_fixed">
+              <Swiper
+                scrollbar={{
+                  hide: true,
+                }}
+                navigation={true}
+                loop={true}
+                modules={[Scrollbar, Navigation]}
+                className="mySwiper"
+              >
+                {imagePaths.map((path, index) => (
+                  <SwiperSlide key={index}>
+                    <img src={path} alt={`image ${index + 1}`} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+          <div className="item_info_wrap">
+            {item && item.length > 0 ? (
+              <div key={itemKey}>
+                <h2 className="item_title">{item[0].brand}</h2>
+                <h3 className="item_name">{item[0].title}</h3>
+                <h4 className="item_sub_name">{item[0].korTitle}</h4>
+                <ul className="item_info">
+                  <li>
+                    <span className="item_info_title">발매가</span>
+                    <div className="item_content">{item[0].launchPrice}</div>
+                  </li>
+                  <li>
+                    <span className="item_info_title">대표 색상</span>
+                    <div className="item_content">{item[0].color}</div>
+                  </li>
+                  <li>
+                    <span className="item_info_title">브랜드</span>
+                    <div className="item_content">{item[0].brand}</div>
+                    <div className="item_content">{item[0].korBrandName}</div>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <div>로딩 중...</div>
+            )}
+            <div className="btn_wrap">
+              <button className="sell_btn" onClick={actionHandler("sell")}>
+                판매신청
+              </button>
+              <button className="buy_btn" onClick={actionHandler("buy")}>
+                구매신청
+              </button>
+            </div>
+            <button className="like_btn">
+              <CiBookmark style={{ fontSize: "20px" }} />
+              <span style={{ paddingLeft: "6px" }}>관심 상품</span>
+            </button>
           </div>
         </div>
-        <div className="item_info_wrap">
-          {item && item.length > 0 ? (
-            <div key={itemKey}>
-              <h2>{item[0].title}</h2>
-              <div>{item[0].brand}</div>
-            </div>
+        <div>
+          <h2>판매리스트</h2>
+          {sales.length > 0 ? (
+            <ul>
+              {sales.map((offer) => (
+                <li key={offer.dealKey}>
+                  <p>{offer.size}</p>
+                  <p>{offer.price}</p>
+                  <p>{offer.deadline}</p>
+                  <p>{offer.description}</p>
+                  <Link to={`/order/${offer.dealKey}`}>구매하기</Link>
+                </li>
+              ))}
+            </ul>
           ) : (
-            <div>로딩 중...</div>
+            <p>거래 상품이 없습니다.</p>
+          )}
+          <h2>구매리스트</h2>
+          {purchases.length > 0 ? (
+            <ul>
+              {purchases.map((offer) => (
+                <li key={offer.dealKey}>
+                  <p>{offer.size}</p>
+                  <p>{offer.price}</p>
+                  <p>{offer.deadline}</p>
+                  <p>{offer.description}</p>
+                  <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>구매 제안 상품이 없습니다.</p>
           )}
         </div>
-        <div>
-          국정의 중요한 사항에 관한 대통령의 자문에 응하기 위하여 국가원로로
-          구성되는 국가원로자문회의를 둘 수 있다. 감사원은 세입·세출의 결산을
-          매년 검사하여 대통령과 차년도국회에 그 결과를 보고하여야 한다. 군인
-          또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상
-          기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한
-          경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지
-          아니한다. 탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그
-          권한행사가 정지된다. 선거운동은 각급 선거관리위원회의 관리하에 법률이
-          정하는 범위안에서 하되, 균등한 기회가 보장되어야 한다. 사면·감형 및
-          복권에 관한 사항은 법률로 정한다. 행정각부의 장은 국무위원 중에서
-          국무총리의 제청으로 대통령이 임명한다. 군인은 현역을 면한 후가 아니면
-          국무총리로 임명될 수 없다. 이 헌법시행 당시의 대법원장과 대법원판사가
-          아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된
-          것으로 본다. 모든 국민은 소급입법에 의하여 참정권의 제한을 받거나
-          재산권을 박탈당하지 아니한다. 대통령은 제1항과 제2항의 처분 또는
-          명령을 한 때에는 지체없이 국회에 보고하여 그 승인을 얻어야 한다.
-          국정감사 및 조사에 관한 절차 기타 필요한 사항은 법률로 정한다. 국가는
-          국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는
-          이용·개발과 보전을 위하여 법률이 정하는 바에 의하여 그에 관한 필요한
-          제한과 의무를 과할 수 있다. 대통령은 조약을 체결·비준하고, 외교사절을
-          신임·접수 또는 파견하며, 선전포고와 강화를 한다. 군사재판을 관할하기
-          위하여 특별법원으로서 군사법원을 둘 수 있다. 국회의 정기회는 법률이
-          정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는
-          국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 원장은 국회의
-          동의를 얻어 대통령이 임명하고, 그 임기는 4년으로 하며, 1차에 한하여
-          중임할 수 있다. 명령·규칙 또는 처분이 헌법이나 법률에 위반되는 여부가
-          재판의 전제가 된 경우에는 대법원은 이를 최종적으로 심사할 권한을
-          가진다. 중앙선거관리위원회는 대통령이 임명하는 3인, 국회에서 선출하는
-          3인과 대법원장이 지명하는 3인의 위원으로 구성한다. 위원장은 위원중에서
-          호선한다.국정의 중요한 사항에 관한 대통령의 자문에 응하기 위하여
-          국가원로로 구성되는 국가원로자문회의를 둘 수 있다. 감사원은
-          세입·세출의 결산을 매년 검사하여 대통령과 차년도국회에 그 결과를
-          보고하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의
-          영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에
-          관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는
-          군사법원의 재판을 받지 아니한다. 탄핵소추의 의결을 받은 자는
-          탄핵심판이 있을 때까지 그 권한행사가 정지된다. 선거운동은 각급
-          선거관리위원회의 관리하에 법률이 정하는 범위안에서 하되, 균등한 기회가
-          보장되어야 한다. 사면·감형 및 복권에 관한 사항은 법률로 정한다.
-          행정각부의 장은 국무위원 중에서 국무총리의 제청으로 대통령이 임명한다.
-          군인은 현역을 면한 후가 아니면 국무총리로 임명될 수 없다. 이 헌법시행
-          당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에
-          불구하고 이 헌법에 의하여 임명된 것으로 본다. 모든 국민은 소급입법에
-          의하여 참정권의 제한을 받거나 재산권을 박탈당하지 아니한다. 대통령은
-          제1항과 제2항의 처분 또는 명령을 한 때에는 지체없이 국회에 보고하여 그
-          승인을 얻어야 한다. 국정감사 및 조사에 관한 절차 기타 필요한 사항은
-          법률로 정한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의
-          효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는 바에
-          의하여 그에 관한 필요한 제한과 의무를 과할 수 있다. 대통령은 조약을
-          체결·비준하고, 외교사절을 신임·접수 또는 파견하며, 선전포고와 강화를
-          한다. 군사재판을 관할하기 위하여 특별법원으로서 군사법원을 둘 수 있다.
-          국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의
-          임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여
-          집회된다. 원장은 국회의 동의를 얻어 대통령이 임명하고, 그 임기는
-          4년으로 하며, 1차에 한하여 중임할 수 있다. 명령·규칙 또는 처분이
-          헌법이나 법률에 위반되는 여부가 재판의 전제가 된 경우에는 대법원은
-          이를 최종적으로 심사할 권한을 가진다. 중앙선거관리위원회는 대통령이
-          임명하는 3인, 국회에서 선출하는 3인과 대법원장이 지명하는 3인의
-          위원으로 구성한다. 위원장은 위원중에서 호선한다.국정의 중요한 사항에
-          관한 대통령의 자문에 응하기 위하여 국가원로로 구성되는
-          국가원로자문회의를 둘 수 있다. 감사원은 세입·세출의 결산을 매년
-          검사하여 대통령과 차년도국회에 그 결과를 보고하여야 한다. 군인 또는
-          군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상
-          기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한
-          경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지
-          아니한다. 탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그
-          권한행사가 정지된다. 선거운동은 각급 선거관리위원회의 관리하에 법률이
-          정하는 범위안에서 하되, 균등한 기회가 보장되어야 한다. 사면·감형 및
-          복권에 관한 사항은 법률로 정한다. 행정각부의 장은 국무위원 중에서
-          국무총리의 제청으로 대통령이 임명한다. 군인은 현역을 면한 후가 아니면
-          국무총리로 임명될 수 없다. 이 헌법시행 당시의 대법원장과 대법원판사가
-          아닌 법관은 제1항 단서의 규정에 불구하고 이 헌법에 의하여 임명된
-          것으로 본다. 모든 국민은 소급입법에 의하여 참정권의 제한을 받거나
-          재산권을 박탈당하지 아니한다. 대통령은 제1항과 제2항의 처분 또는
-          명령을 한 때에는 지체없이 국회에 보고하여 그 승인을 얻어야 한다.
-          국정감사 및 조사에 관한 절차 기타 필요한 사항은 법률로 정한다. 국가는
-          국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는
-          이용·개발과 보전을 위하여 법률이 정하는 바에 의하여 그에 관한 필요한
-          제한과 의무를 과할 수 있다. 대통령은 조약을 체결·비준하고, 외교사절을
-          신임·접수 또는 파견하며, 선전포고와 강화를 한다. 군사재판을 관할하기
-          위하여 특별법원으로서 군사법원을 둘 수 있다. 국회의 정기회는 법률이
-          정하는 바에 의하여 매년 1회 집회되며, 국회의 임시회는 대통령 또는
-          국회재적의원 4분의 1 이상의 요구에 의하여 집회된다. 원장은 국회의
-          동의를 얻어 대통령이 임명하고, 그 임기는 4년으로 하며, 1차에 한하여
-          중임할 수 있다. 명령·규칙 또는 처분이 헌법이나 법률에 위반되는 여부가
-          재판의 전제가 된 경우에는 대법원은 이를 최종적으로 심사할 권한을
-          가진다. 중앙선거관리위원회는 대통령이 임명하는 3인, 국회에서 선출하는
-          3인과 대법원장이 지명하는 3인의 위원으로 구성한다. 위원장은 위원중에서
-          호선한다.국정의 중요한 사항에 관한 대통령의 자문에 응하기 위하여
-          국가원로로 구성되는 국가원로자문회의를 둘 수 있다. 감사원은
-          세입·세출의 결산을 매년 검사하여 대통령과 차년도국회에 그 결과를
-          보고하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의
-          영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에
-          관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는
-          군사법원의 재판을 받지 아니한다. 탄핵소추의 의결을 받은 자는
-          탄핵심판이 있을 때까지 그 권한행사가 정지된다. 선거운동은 각급
-          선거관리위원회의 관리하에 법률이 정하는 범위안에서 하되, 균등한 기회가
-          보장되어야 한다. 사면·감형 및 복권에 관한 사항은 법률로 정한다.
-          행정각부의 장은 국무위원 중에서 국무총리의 제청으로 대통령이 임명한다.
-          군인은 현역을 면한 후가 아니면 국무총리로 임명될 수 없다. 이 헌법시행
-          당시의 대법원장과 대법원판사가 아닌 법관은 제1항 단서의 규정에
-          불구하고 이 헌법에 의하여 임명된 것으로 본다. 모든 국민은 소급입법에
-          의하여 참정권의 제한을 받거나 재산권을 박탈당하지 아니한다. 대통령은
-          제1항과 제2항의 처분 또는 명령을 한 때에는 지체없이 국회에 보고하여 그
-          승인을 얻어야 한다. 국정감사 및 조사에 관한 절차 기타 필요한 사항은
-          법률로 정한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의
-          효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는 바에
-          의하여 그에 관한 필요한 제한과 의무를 과할 수 있다. 대통령은 조약을
-          체결·비준하고, 외교사절을 신임·접수 또는 파견하며, 선전포고와 강화를
-          한다. 군사재판을 관할하기 위하여 특별법원으로서 군사법원을 둘 수 있다.
-          국회의 정기회는 법률이 정하는 바에 의하여 매년 1회 집회되며, 국회의
-          임시회는 대통령 또는 국회재적의원 4분의 1 이상의 요구에 의하여
-          집회된다. 원장은 국회의 동의를 얻어 대통령이 임명하고, 그 임기는
-          4년으로 하며, 1차에 한하여 중임할 수 있다. 명령·규칙 또는 처분이
-          헌법이나 법률에 위반되는 여부가 재판의 전제가 된 경우에는 대법원은
-          이를 최종적으로 심사할 권한을 가진다. 중앙선거관리위원회는 대통령이
-          임명하는 3인, 국회에서 선출하는 3인과 대법원장이 지명하는 3인의
-          위원으로 구성한다. 위원장은 위원중에서 호선한다.
-        </div>
-      </div>
-
-      <div>
-        <h2>판매리스트</h2>
-        {sales.length > 0 ? (
-          <ul>
-            {sales.map((offer) => (
-              <li key={offer.dealKey}>
-                <p>{offer.size}</p>
-                <p>{offer.price}</p>
-                <p>{offer.deadline}</p>
-                <p>{offer.description}</p>
-                <Link to={`/order/${offer.dealKey}`}>구매하기</Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>거래 상품이 없습니다.</p>
-        )}
-        <h2>구매리스트</h2>
-        {purchases.length > 0 ? (
-          <ul>
-            {purchases.map((offer) => (
-              <li key={offer.dealKey}>
-                <p>{offer.size}</p>
-                <p>{offer.price}</p>
-                <p>{offer.deadline}</p>
-                <p>{offer.description}</p>
-                <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>구매 제안 상품이 없습니다.</p>
-        )}
       </div>
     </Main>
   );
