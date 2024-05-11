@@ -18,9 +18,7 @@ export default function NewIn() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
         );
-        console.log(response);
         const newProducts = response.data[0];
-        console.log(newProducts);
         setProducts((prevProducts) => {
           const newUniqueProducts = newProducts.filter(
             (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
@@ -37,12 +35,15 @@ export default function NewIn() {
       }
     };
     fetchProducts();
-    if (products && products.length > 0 && products[0].img) {
-      const paths = products[0].img.split(",").map((path) => path.trim());
+  }, [offset]);
+
+  // products 배열이 변경될 때마다 실행됩니다.
+  useEffect(() => {
+    if (products.length > 0) {
+      const paths = products.map((product) => product.img.split(",")[0].trim()); // 첫 번째 이미지만 사용
       setImagePaths(paths);
     }
-  }, [offset]);
-  console.log(imagePaths);
+  }, [products]);
   return (
     <div className="home_section">
       <div className="section_title">
@@ -51,17 +52,14 @@ export default function NewIn() {
       </div>
       <ul className="newIn_lists_wrap">
         {products.length > 0 ? (
-          products.map((product) => (
+          products.map((product, productIndex) => (
             <li key={product.itemKey} className="newIn_item">
               <Link to={`/items/${product.itemKey}`}>
-                {imagePaths.map((path, index) => (
-                  <img
-                    src={path.img}
-                    alt={product.title}
-                    className="newIn_item_img"
-                  />
-                ))}
-
+                <img
+                  src={imagePaths[productIndex]} // 수정된 부분
+                  alt={product.title}
+                  className="newIn_item_img"
+                />
                 <div className="newIn_item_desc">
                   <p className="brandName">{product.brand}</p>
                   <p className="productName">{product.title}</p>
