@@ -13,8 +13,12 @@ export default function PaymentApproval() {
       console.log(dealKey, pg_token);
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/payment/approval?dealKey=${dealKey}&pg_token=${pg_token}`,
+          const response = await axios.post(
+            `${process.env.REACT_APP_API_URL}/api/payment/approval`,
+            {
+              dealKey,
+              pg_token,
+            },
             {
               headers: {
                 "Content-Type": "application/json",

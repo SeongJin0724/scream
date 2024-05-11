@@ -2,7 +2,23 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 20px 40px;
+
+  .upload_section {
+    text-align: end;
+
+    .upload_style {
+      padding: 10px;
+      border: 1px solid #22222280;
+      border-radius: 4px;
+      font-size: 12px;
+
+      &:hover {
+        color: #fff;
+        background-color: #222222;
+      }
+    }
+  }
 
   .review_wrap {
     width: calc(100% - 20px);
