@@ -4,6 +4,29 @@ import { Link } from "react-router-dom";
 export default function Company() {
   return (
     <Main>
+      <div className="notice_container">
+        <nav className="notice_nav">
+          <a href="/notice" className="notice_nav_title">고객센터</a>
+          <ul className="notice_shopinfo">
+            <li className="notice_shopinfo_li">
+              <ul className="notice_shopinfo_sub_ul">
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/notice">공지사항</a>
+                </li>
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/question">자주 묻는 질문</a>
+                </li>
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/standards">검수 기준</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div className="notice_wrap">
+        <div className="notice_wrap_border">
+            <h1 className="notice_wrap_h1">공지사항</h1>
+          </div>
       <div data-v-5b093f8c="" className="dropdown_head">
         <strong data-v-5b093f8c="" className="sort">
           이벤트
@@ -300,6 +323,9 @@ export default function Company() {
       <Link className="noticehome" to={"/notice"}>
         <input type="button" id="notice_button" value="목록보기" />
       </Link>
+
+      </div>
+      </div>
     </Main>
   );
 }

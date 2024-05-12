@@ -24,7 +24,7 @@ export default function HeaderTop() {
   const headerTopMenus = [
     {
       title: "고객센터",
-      src: "/cscenter",
+      src: "/notice",
     },
     {
       title: "마이페이지",

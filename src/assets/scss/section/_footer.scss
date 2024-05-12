@@ -232,10 +232,10 @@
 }
 .accordion-button {
   display: flex;
-  background-color: #f9f9f9;
+  background-color: white;
   border: none;
   outline: none;
-  width: 63%;
+  width: 100%;
   text-align: left;
   padding: 15px;
   transition: background-color 0.2s ease-in-out;
@@ -250,6 +250,8 @@
   padding: 15px;
   font-size: 14px;
   border-bottom: 1px solid #ddd;
+  
+  background-color: #fafafa;
 }
 
 .accordion-button.active + .accordion-content {
@@ -257,8 +259,7 @@
 }
 .content-block {
   font-family: Arial, sans-serif;
-  max-width: 808px;
-  margin: 0px 318px;
+  max-width: 640px;
   padding: 20px;
 }
 .contentq {
@@ -385,13 +386,13 @@
   cursor: pointer;
   display: flex;
   padding: 17px 0 19px;
-  margin: 0px 600px;
 }
 .dropdown_head .sort[data-v-5b093f8c] {
   font-size: 14px;
   letter-spacing: -0.21px;
   min-width: 68px;
   width: 68px;
+  font-weight: 700;
 }
 .dropdown_head .title_box[data-v-5b093f8c] {
   margin-right: 10px;
@@ -401,12 +402,10 @@
   letter-spacing: -0.15px;
 }
 .contentn {
-  max-width: 640px;
   padding: 15px;
   font-size: 14px;
   border-bottom: 1px solid #ddd;
   background-color: #fafafa;
-  margin: 0px 620px;
 }
 .noticehome {
   margin-top: 30px;

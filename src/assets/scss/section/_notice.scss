@@ -1,0 +1,35 @@
+.notice_container {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1280px;
+    padding: 40px 40px 160px;
+  
+    .notice_nav {
+      margin-right: 20px;
+      width: 180px;
+  
+      .notice_nav_title {
+        padding-bottom: 20px;
+        font-weight: bold;
+        font-size: 30px;
+      }
+      .notice_shopinfo_sub_li {
+        margin-top: 12px;
+        color: #b6b4b4;
+        font-size: 15px;
+      }
+  
+    }
+    .notice_wrap {
+      width: 100%;
+      .notice_wrap_border {
+        border-bottom: 3px solid #222;
+        padding-bottom: 16px;
+        .notice_wrap_h1 {
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+    }
+  }

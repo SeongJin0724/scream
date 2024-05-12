@@ -19,7 +19,29 @@ export default function Question() {
 
   return (
     <Main>
-      <h2 className="accordionh2">자주묻는질문</h2>
+      <div className="notice_container">
+        <nav className="notice_nav">
+          <a href="/notice" className="notice_nav_title">고객센터</a>
+          <ul className="notice_shopinfo">
+            <li className="notice_shopinfo_li">
+              <ul className="notice_shopinfo_sub_ul">
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/notice">공지사항</a>
+                </li>
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/question">자주 묻는 질문</a>
+                </li>
+                <li className="notice_shopinfo_sub_li">
+                  <a href="/standards">검수 기준</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div className="notice_wrap">
+        <div className="notice_wrap_border">
+            <h1 className="notice_wrap_h1">자주묻는질문</h1>
+          </div>
       <div className="accordion">
         <div className="accordion-item">
           <button
@@ -792,6 +814,8 @@ export default function Question() {
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </Main>
   );
