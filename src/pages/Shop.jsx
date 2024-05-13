@@ -17,7 +17,7 @@ export default function Shop() {
       top: 0,
       left: 0,
     });
-  }, []);
+  }, [items, category]);
 
   useEffect(() => {
     const fetchItems = async () => {
