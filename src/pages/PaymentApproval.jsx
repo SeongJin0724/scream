@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Main from "../components/section/Main";
 
 export default function PaymentApproval() {
   const location = useLocation();
@@ -10,21 +11,22 @@ export default function PaymentApproval() {
 
   useEffect(() => {
     if (dealKey && pg_token) {
+      console.log(typeof dealKey);
+      console.log(typeof pg_token);
       console.log(dealKey, pg_token);
+
       const fetchData = async () => {
         try {
-          const response = await axios.post(
+          const response = await axios.get(
             `${process.env.REACT_APP_API_URL}/api/payment/approval`,
             {
-              dealKey,
-              pg_token,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
+              params: {
+                dealKey,
+                pg_token,
               },
             }
           );
+
           console.log(response.data);
         } catch (error) {
           console.error("Error:", error);
@@ -35,5 +37,5 @@ export default function PaymentApproval() {
     }
   }, [dealKey, pg_token]);
 
-  return <div>PaymentApproval</div>;
+  return <Main>PaymentApproval</Main>;
 }

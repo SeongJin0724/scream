@@ -42,13 +42,17 @@ export const headerBottomMenus = [
     title: "추천",
     src: "/",
   },
+  // {
+  //   title: "남성",
+  //   src: "/man",
+  // },
+  // {
+  //   title: "여성",
+  //   src: "/woman",
+  // },
   {
-    title: "남성",
-    src: "/man",
-  },
-  {
-    title: "여성",
-    src: "/woman",
+    title: "SHOP",
+    src: "/shop",
   },
   {
     title: "STYLE",
