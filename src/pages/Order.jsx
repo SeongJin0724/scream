@@ -52,8 +52,6 @@ export default function Order() {
     setPayment(e.target.value);
   };
 
-  console.log(dealData);
-
   //결제요청
   const sendOrder = async (e) => {
     e.preventDefault();

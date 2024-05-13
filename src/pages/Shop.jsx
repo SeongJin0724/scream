@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
+import { faSquareCheck, faSort } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Shop = () => {
+export default function Shop() {
   const [category, setCategory] = useState("all");
   const [items, setItems] = useState([]);
+  const [selectSort, setSelectSort] = useState(false);
+  const [sort, setSort] = useState("정렬");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, []);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -17,6 +26,7 @@ const Shop = () => {
           `${process.env.REACT_APP_API_URL}/api/filter?category=${category}`
         );
         setItems(response.data);
+        setSort("정렬");
       } catch (error) {
         console.error("Error:", error);
       }
@@ -25,8 +35,6 @@ const Shop = () => {
     fetchItems();
   }, [category]);
 
-  console.log(items);
-
   const onSetMenu = (e) => {
     const selectedCategory = e.target.getAttribute("data-value");
     if (selectedCategory === category) {
@@ -34,6 +42,50 @@ const Shop = () => {
       return;
     }
     setCategory(selectedCategory);
+  };
+
+  const sortBySaved = (items) => {
+    const sortedItems = [...items].sort((a, b) => {
+      const aSaved = a.saved || 0;
+      const bSaved = b.saved || 0;
+      return bSaved - aSaved;
+    });
+    setItems(sortedItems);
+  };
+
+  const sortByLowerPrice = (items) => {
+    const sortedItems = [...items].sort(
+      (a, b) => a.launchPrice - b.launchPrice
+    );
+    setItems(sortedItems);
+  };
+
+  const sortByHigherPrice = (items) => {
+    const sortedItems = [...items].sort(
+      (a, b) => b.launchPrice - a.launchPrice
+    );
+    setItems(sortedItems);
+  };
+
+  const onSort = (e) => {
+    const { value } = e.target;
+    setSort(value);
+    setSelectSort(false);
+
+    switch (value) {
+      case "인기순":
+        sortBySaved(items);
+        console.log(items);
+        break;
+      case "낮은 발매가순":
+        sortByLowerPrice(items);
+        break;
+      case "높은 발매가순":
+        sortByHigherPrice(items);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -141,7 +193,54 @@ const Shop = () => {
           </ul>
         </aside>
         <div className="shop_items">
-          <h3 className="items_header">상품</h3>
+          <div className="items_header">
+            <p className="items_title">
+              상품 <span className="itemNum">{items.length}</span>
+            </p>
+            <div className="dropdown">
+              <button
+                type="button"
+                className="dropBtn"
+                onClick={() => setSelectSort(!selectSort)}
+              >
+                {sort} <FontAwesomeIcon icon={faSort} />
+              </button>
+              <ul
+                className={selectSort ? "dropdown_menu show" : "dropdown_menu"}
+              >
+                <li>
+                  <button
+                    type="button"
+                    value="인기순"
+                    className="menu"
+                    onClick={onSort}
+                  >
+                    인기순
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    value="낮은 발매가순"
+                    className="menu"
+                    onClick={onSort}
+                  >
+                    낮은 발매가순
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    value="높은 발매가순"
+                    className="menu"
+                    onClick={onSort}
+                  >
+                    높은 발매가순
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
           <ul className="item_list">
             {items.map((item) => (
               <li className="item" key={item.itemKey}>
@@ -160,6 +259,4 @@ const Shop = () => {
       </div>
     </Main>
   );
-};
-
-export default Shop;
+}
