@@ -149,13 +149,13 @@ const OrderSell = () => {
               <div className="order_account">
                 <h3 className="section_header">판매정산계좌</h3>
                 {account ? (
-                  <table>
+                  <table className="account_detail">
                     <tbody>
                       <tr>
                         <th>계좌</th>
                         <td>
-                          {user.bankName}
-                          {user.accountNum}
+                          {`${user.bankName}
+                          ${user.accountNum}`}
                         </td>
                       </tr>
                       <tr>

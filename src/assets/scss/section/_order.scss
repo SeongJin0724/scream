@@ -204,7 +204,23 @@
 
     .order_account {
       @include section-padding();
+      .account_detail {
+        th {
+          width: 15%;
+          font-size: 13px;
+          text-align: left;
+          letter-spacing: -0.07px;
+          min-width: 80px;
+          color: #22222280;
+        }
 
+        td {
+          width: 85%;
+          font-size: 14px;
+          letter-spacing: -0.21px;
+          overflow: hidden;
+        }
+      }
       .no_account {
         display: flex;
         justify-content: space-between;

@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Shop = () => {
   const [category, setCategory] = useState("all");
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/filter?category=${category}`
+        );
+        setItems(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchItems();
+  }, [category]);
+
+  console.log(items);
 
   const onSetMenu = (e) => {
     const selectedCategory = e.target.getAttribute("data-value");
@@ -124,49 +143,18 @@ const Shop = () => {
         <div className="shop_items">
           <h3 className="items_header">상품</h3>
           <ul className="item_list">
-            <li className="item">
-              <Link>
-                <img src="" alt="" className="item_img" />
-                <div className="item_desc">
-                  <p className="brandName">brand</p>
-                  <p className="productName">title</p>
-                  <p className="price"> 원</p>
-                </div>
-              </Link>
-            </li>
-
-            <li className="item">
-              <Link>
-                <img src="" alt="" className="item_img" />
-                <div className="item_desc">
-                  <p className="brandName">brand</p>
-                  <p className="productName">title</p>
-                  <p className="price"> 원</p>
-                </div>
-              </Link>
-            </li>
-
-            <li className="item">
-              <Link>
-                <img src="" alt="" className="item_img" />
-                <div className="item_desc">
-                  <p className="brandName">brand</p>
-                  <p className="productName">title</p>
-                  <p className="price"> 원</p>
-                </div>
-              </Link>
-            </li>
-
-            <li className="item">
-              <Link>
-                <img src="" alt="" className="item_img" />
-                <div className="item_desc">
-                  <p className="brandName">brand</p>
-                  <p className="productName">title</p>
-                  <p className="price"> 원</p>
-                </div>
-              </Link>
-            </li>
+            {items.map((item) => (
+              <li className="item" key={item.itemKey}>
+                <Link to={`/items/${item.itemKey}`}>
+                  <img src={item.img} alt={item.title} className="item_img" />
+                  <div className="item_desc">
+                    <p className="brandName">{item.brand}</p>
+                    <p className="productName">{item.title}</p>
+                    <p className="price"> {item.launchPrice}원</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
