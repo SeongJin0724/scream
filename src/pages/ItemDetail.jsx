@@ -11,12 +11,15 @@ import "swiper/css/navigation";
 import { Navigation, Scrollbar } from "swiper/modules";
 import { Link, useNavigate } from "react-router-dom";
 import { CiBookmark } from "react-icons/ci";
+import { TbTruckDelivery } from "react-icons/tb";
+import { SlArrowRight } from "react-icons/sl";
+import { TbRosetteNumber2 } from "react-icons/tb";
+import { GoCodescanCheckmark } from "react-icons/go";
+import { TfiPackage } from "react-icons/tfi";
+import { FaHandHoldingUsd } from "react-icons/fa";
+import { FaRegHandshake } from "react-icons/fa";
+import { LiaCoinsSolid } from "react-icons/lia";
 
-// const imagePaths = [
-//   `${process.env.PUBLIC_URL}/img/nikeairmax.webp`,
-//   `${process.env.PUBLIC_URL}/img/nikeairmax2.webp`,
-//   `${process.env.PUBLIC_URL}/img/nikeairmax3.webp`,
-// ];
 export default function ItemDetail() {
   const { item, itemKey } = useContext(ItemDetailContext);
   const navigate = useNavigate();
@@ -110,41 +113,142 @@ export default function ItemDetail() {
               <CiBookmark style={{ fontSize: "20px" }} />
               <span style={{ paddingLeft: "6px" }}>관심 상품</span>
             </button>
+            <div className="info_container">
+              <div className="delivery_info">
+                <h3 className="delivery_title">배송 정보</h3>
+                <div className="delivery_inner">
+                  <div className="delivery_img">
+                    <TbTruckDelivery style={{ fontSize: "20px" }} />
+                  </div>
+                  <div className="delivery_content">
+                    <p className="delivery_content_text">
+                      <span>일반배송</span> 3,000원
+                    </p>
+                    <p className="delivery_content_text2">
+                      검수 후 배송 ・ 9-11일 내 도착 예정
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="brand_info">
+                <h3 className="brand_title">브랜드 정보</h3>
+
+                <Link
+                  className="brand_link_wrap"
+                  to={`/brands/${item[0]?.brand}`}
+                >
+                  <div className="brand_inner">
+                    <div className="brand_logo">
+                      <img src={`${item[0]?.logo}`} alt={`${item[0]?.brand}`} />
+                    </div>
+                    <div className="brand_content">
+                      <h3 className="brand_content_title">
+                        {item[0]?.brand}
+                        <SlArrowRight
+                          style={{ color: "#222", fontSize: "14px" }}
+                        />
+                      </h3>
+                      <h4 className="brand_content_kor_title">
+                        더 많은 {item[0]?.korBrandName} 브랜드의 아이템들을
+                        한눈에 만나보세요!
+                      </h4>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <nav className="guide_container">
+                <ul>
+                  <li>
+                    <div className="guide_wrap">
+                      <div className="guide_icon">
+                        <LiaCoinsSolid style={{ fontSize: "30px" }} />
+                      </div>
+                      <div className="guide_content">
+                        <div className="guide_title">
+                          한치의 오차도 없는 정품 보증
+                        </div>
+                        <div className="guide_text">
+                          SCREAM에서 검수한 상품이 정품이 아닐 경우, 구매가의
+                          2배를 보상합니다.
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="guide_wrap">
+                      <div className="guide_icon">
+                        <GoCodescanCheckmark style={{ fontSize: "30px" }} />
+                      </div>
+                      <div className="guide_content">
+                        <div className="guide_title">
+                          엄격한 상품 다중 검증,검수 후 정확한 정보제공
+                        </div>
+                        <div className="guide_text">
+                          SCREAM에서는 상품별 전문가 그룹의 체계적인 검수
+                          시스템을 거쳐 상품의 상태를 정확히 파악하여
+                          구매자분들께 정확한 정보를 제공을 합니다.
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="guide_wrap">
+                      <div className="guide_icon">
+                        <TfiPackage style={{ fontSize: "30px" }} />
+                      </div>
+                      <div className="guide_content">
+                        <div className="guide_title">
+                          정품 인증 패키지와 기존 상품 상태 이미지 제공
+                        </div>
+                        <div className="guide_text">
+                          정품인증과 상품 검수에 합격한 경우에 한하여 SCREAM의
+                          정품 인증 패키지가 포함된 상품이 배송됩니다.
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
-        <div>
-          <h2>판매리스트</h2>
-          {sales.length > 0 ? (
-            <ul>
-              {sales.map((offer) => (
-                <li key={offer.dealKey}>
-                  <p>{offer.size}</p>
-                  <p>{offer.price}</p>
-                  <p>{offer.deadline}</p>
-                  <p>{offer.description}</p>
-                  <Link to={`/order/${offer.dealKey}`}>구매하기</Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>거래 상품이 없습니다.</p>
-          )}
-          <h2>구매리스트</h2>
-          {purchases.length > 0 ? (
-            <ul>
-              {purchases.map((offer) => (
-                <li key={offer.dealKey}>
-                  <p>{offer.size}</p>
-                  <p>{offer.price}</p>
-                  <p>{offer.deadline}</p>
-                  <p>{offer.description}</p>
-                  <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>구매 제안 상품이 없습니다.</p>
-          )}
+        <div className="trade_list_wrap">
+          <div className="sell_wrap">
+            <h2>판매리스트</h2>
+            {sales.length > 0 ? (
+              <ul>
+                {sales.map((offer) => (
+                  <li key={offer.dealKey}>
+                    <p>{offer.size}</p>
+                    <p>{offer.price}</p>
+                    <p>{offer.deadline}</p>
+                    <p>{offer.description}</p>
+                    <Link to={`/order/${offer.dealKey}`}>구매하기</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>거래 상품이 없습니다.</p>
+            )}
+          </div>
+          <div className="buy_wrap">
+            <h2>구매리스트</h2>
+            {purchases.length > 0 ? (
+              <ul>
+                {purchases.map((offer) => (
+                  <li key={offer.dealKey}>
+                    <p>{offer.size}</p>
+                    <p>{offer.price}</p>
+                    <p>{offer.deadline}</p>
+                    <p>{offer.description}</p>
+                    <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>구매 제안 상품이 없습니다.</p>
+            )}
+          </div>
         </div>
       </div>
     </Main>
