@@ -80,14 +80,14 @@ export const uldata5 = [
     content: (
       <p className="p1">
         스크림 주식회사 · 대표 홍길동<span className="blank"></span>
-        사업자등록번호 : 570-88-01618
+        사업자등록번호 : 123-45-678
         <Link className="p10" id="p10" to={"/personal"}>
           사업자정보확인
         </Link>
         <span className="blank"></span>
-        통신판매업 : 제 2021-성남분당C-0093호 사업장소재지 : 경기도 성남시
-        분당구 분당내곡로 131 판교테크원 타워1, 8층
-        <span className="blank"></span>호스팅 서비스 : 네이버 클라우드 ㈜
+        통신판매업 : 제 1234-우리나라C-5678호 사업장소재지 : 우리도 대한시
+        나라구 
+        <span className="blank"></span>호스팅 서비스 : ABC 클라우드
       </p>
     ),
   },
@@ -95,13 +95,13 @@ export const uldata5 = [
 
 export const uldata6 = [
   {
-    content: <p className="p2">신한은행 채무지급보증 안내</p>,
+    content: <p className="p2">채무지급보증 안내</p>,
   },
 
   {
     content: (
       <p className="p3">
-        당사는 고객님의 현금 결제 금액에 대해 신한은행과 채무지급보증 계약을
+        당사는 고객님의 현금 결제 금액에 대해 채무지급보증 계약을
         체결하여 안전거래를 보장하고 있습니다.
         <Link className="p11" id="p11" to={"/footernotice"}>
           서비스가입 사실 확인
