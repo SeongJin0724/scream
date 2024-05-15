@@ -4,8 +4,6 @@ import axios from "axios";
 import { useAuth } from "../components/contents/AuthContext";
 import Main from "../components/section/Main";
 import MyPageUi from "../components/contents/MyPageUi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 const BuyDetail = () => {
   const { user } = useAuth();
@@ -158,7 +156,7 @@ const BuyDetail = () => {
                             to={`/uploadReview/${detail.itemKey}`}
                             className="styleBtn"
                           >
-                            <FontAwesomeIcon icon={faUpload} /> STYLE 작성
+                            STYLE 후기 작성
                           </Link>
                           <p className="item_title">{detail.itemTitle}</p>
                         </div>

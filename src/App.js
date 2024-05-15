@@ -8,8 +8,6 @@ import ItemDetail from "./pages/ItemDetail";
 const Home = lazy(() => import("./pages/Home"));
 const Join = lazy(() => import("./pages/Join"));
 const Login = lazy(() => import("./pages/Login"));
-const Man = lazy(() => import("./pages/Man"));
-const Woman = lazy(() => import("./pages/Woman"));
 const SearchRes = lazy(() => import("./pages/SearchRes"));
 const MyPage = lazy(() => import("./pages/MyPage"));
 const FooterStandards = lazy(() => import("./pages/FooterStandards"));
@@ -59,8 +57,6 @@ function App() {
             <Route path="/join" element={<Join />} />
             <Route path="/login" element={<Login />} />
             <Route path="/mypage" element={<MyPage />} />
-            <Route path="/man" element={<Man />} />
-            <Route path="/woman" element={<Woman />} />
             <Route path="/searchres" element={<SearchRes />} />
             <Route path="/footerstandards" element={<FooterStandards />} />
             <Route path="/policy" element={<Policy />} />

@@ -25,11 +25,6 @@ export default function Style() {
   return (
     <Main>
       <div className="style_container">
-        <div className="upload_section">
-          <Link to="/uploadReview" className="upload_style">
-            게시글 업로드
-          </Link>
-        </div>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 3, 900: 4 }}>
           <Masonry>
             {reviews.map((review) => (
