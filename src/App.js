@@ -46,6 +46,8 @@ const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const OrderSell = lazy(() => import("./pages/OrderSell"));
 const PaymentApproval = lazy(() => import("./pages/PaymentApproval"));
 const Shop = lazy(() => import("./pages/Shop"));
+const BuyDetail = lazy(() => import("./pages/BuyDetail"));
+const SellDetail = lazy(() => import("./pages/SellDetail"));
 
 function App() {
   return (
@@ -119,6 +121,8 @@ function App() {
             <Route path="/ordersell/:dealKey" element={<OrderSell />} />
             <Route path="/payment/approval" element={<PaymentApproval />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/mypage/buyDetail" element={<BuyDetail />} />
+            <Route path="/mypage/sellDetail" element={<SellDetail />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

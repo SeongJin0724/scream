@@ -54,7 +54,10 @@ const DealDetail = ({ type, user }) => {
     <div className="dealDetail_wrap">
       <div className="detail_header">
         <h3 className="header_title">{type}내역</h3>
-        <Link className="showMore_Btn">
+        <Link
+          to={type === "구매" ? "/mypage/buyDetail" : "/mypage/sellDetail"}
+          className="showMore_Btn"
+        >
           더보기 <FontAwesomeIcon icon={faAngleRight} />
         </Link>
       </div>
@@ -70,7 +73,7 @@ const DealDetail = ({ type, user }) => {
           </thead>
           <tbody>
             <tr>
-              <td className="total">
+              <td className={type === "구매" ? "totalBuy" : "total"}>
                 {offerDealDetail.length + orderDetail.length}
               </td>
               <td>{offerDealDetail.length}</td>
@@ -80,31 +83,49 @@ const DealDetail = ({ type, user }) => {
         </table>
 
         <ul className="detail_list_wrap">
-          {offerDealDetail.length > 0 ? (
-            offerDealDetail.map((detail) => (
-              <li key={detail.dealKey}>
-                <div className="detail_type">
-                  <p className="type_title">{type}신청</p>
-                  <p className="apply_date">
-                    {new Date(detail.addDate).toLocaleDateString("ko-KR")}
-                  </p>
-                </div>
-                <div className="detail_desc">
-                  <p>아이템 이름</p>
-                  <p>
-                    사이즈: {detail.size} /
-                    <span> {formatPrice(detail.totalPrice)}원</span>
-                  </p>
-                </div>
-                <p className="deadline">
+          {offerDealDetail.map((detail) => (
+            <li key={detail.dealKey} className="detail_list">
+              <div className="detail_type">
+                <p className="type_title">{type}신청</p>
+                <p className="apply_date">
+                  {new Date(detail.addDate).toLocaleDateString("ko-KR")}
+                </p>
+              </div>
+              <div className="detail_desc">
+                <p className="item_title">{detail.itemTitle}</p>
+                <p className="item_info">
+                  {detail.size} /
+                  <span> {formatPrice(detail.totalPrice)}원</span>
+                </p>
+              </div>
+              <div className="deadline">
+                <p>
                   <span className="deadline_title">마감기한:</span>
                   {new Date(detail.deadline).toLocaleDateString("ko-KR")}
                 </p>
-              </li>
-            ))
-          ) : orderDetail.length > 0 ? (
-            orderDetail.map((detail, index) => <p key={index}>있음</p>)
-          ) : (
+                <p>승인: {detail.sign === 1 ? "완료" : "대기"}</p>
+              </div>
+            </li>
+          ))}
+
+          {orderDetail.map((detail) => (
+            <li key={detail.orderKey} className="detail_list">
+              <div className="detail_type">
+                <p className="type_title">{type}완료</p>
+                <p className="apply_date">
+                  {new Date(detail.orderDate).toLocaleDateString("ko-KR")}
+                </p>
+              </div>
+              <div className="detail_desc">
+                <p className="item_title">{detail.itemTitle}</p>
+                <p className="item_info">
+                  <span> {formatPrice(detail.price)}원</span>
+                </p>
+              </div>
+            </li>
+          ))}
+
+          {offerDealDetail.length === 0 && orderDetail.length === 0 && (
             <div className="noDetail"> 거래 내역이 없습니다.</div>
           )}
         </ul>

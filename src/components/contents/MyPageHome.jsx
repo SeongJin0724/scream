@@ -55,7 +55,12 @@ export default function MyPageHome() {
             더보기 <FontAwesomeIcon icon={faAngleRight} />
           </Link>
         </div>
-        <div className="wish_list">추가하신 관심 상품이 없습니다.</div>
+        <div className="wish_list">
+          <p className="content">추가하신 관심 상품이 없습니다.</p>
+          <Link to="/shop" className="goToShopBtn">
+            SHOP 바로가기
+          </Link>
+        </div>
       </div>
     </div>
   );

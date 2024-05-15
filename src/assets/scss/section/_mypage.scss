@@ -145,6 +145,10 @@
         line-height: 20px;
         margin-top: 2px;
 
+        &.totalBuy {
+          color: #f15746;
+        }
+
         &.total {
           color: #31b46e;
         }
@@ -152,31 +156,45 @@
     }
 
     .detail_list_wrap {
-      .detail_type {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      width: 100%;
+      max-height: 180px;
+      overflow: hidden;
 
-        .type_title {
-          font-size: 14px;
-          font-weight: 700;
-        }
+      .detail_list {
+        padding: 10px;
+        border-bottom: 1.5px solid #eee;
+        margin-bottom: 4px;
 
-        .apply_date {
+        .detail_type {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 4px;
           font-size: 13px;
           color: #222222cc;
+
+          .type_title {
+            font-weight: 700;
+          }
         }
-      }
 
-      .detail_desc {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+        .detail_desc {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 15px;
+          margin-bottom: 2px;
+        }
 
-      .deadline {
-        .deadline_title {
-          margin-right: 10px;
+        .deadline {
+          display: flex;
+          justify-content: space-between;
+          color: #222222cc;
+          font-size: 13px;
+
+          .deadline_title {
+            margin-right: 8px;
+          }
         }
       }
     }
@@ -191,12 +209,29 @@
   }
 
   .wish_list {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: -0.21px;
     color: #22222280;
     background-color: #fafafa;
     border-radius: 12px;
     padding: 90px 0;
     text-align: center;
+
+    .content {
+      margin-bottom: 12px;
+    }
+
+    .goToShopBtn {
+      font-size: 12px;
+      color: #222222cc;
+      border: 1px solid #22222280;
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: all ease-in 100ms;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
   }
 }
