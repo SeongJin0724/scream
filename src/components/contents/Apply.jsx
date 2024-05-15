@@ -74,6 +74,7 @@ export default function Apply({ content, onGetData }) {
       itemKey: itemKey,
       userId: user.user_id,
       dealItem: parseInt(itemKey),
+      itemTitle: item[0].title,
       size: size,
       desc: desc,
       price: price,
@@ -89,7 +90,11 @@ export default function Apply({ content, onGetData }) {
       <div className="apply_content">
         <h3 className="content_header">{content.type}신청</h3>
         <div className="apply_item">
-          <img src={item[0].img} alt={item[0].title} className="item_img" />
+          <img
+            src={item[0].img.split(",", 1)[0]}
+            alt={item[0].title}
+            className="item_img"
+          />
           <div>
             <p className="brand">{item[0].brand}</p>
             <p className="title">{item[0].title}</p>

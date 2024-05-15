@@ -20,6 +20,7 @@ export default function Sell() {
     itemKey: "",
     userId: "",
     dealItem: "",
+    itemTitle: "",
     size: "",
     desc: "",
     price: "",

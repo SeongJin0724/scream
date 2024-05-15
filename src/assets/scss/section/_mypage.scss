@@ -41,178 +41,162 @@
       }
     }
   }
+
   .mypage_wrap {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 42px;
+
     .mypage_profile {
       display: flex;
-      border: 1px solid #b6b4b4;
-      flex-direction: row;
       justify-content: space-between;
+      align-items: center;
       padding: 24px;
+      border: 1px solid #ebebeb;
       border-radius: 10px;
+
       .mypage_userinfo {
-        width: 100%;
         display: flex;
         align-items: center;
-        .mypage_userinfo_image {
+
+        .user_img {
           height: 60px;
           width: 60px;
         }
-        .mypage_userinfo_info_name {
-          font-weight: 700;
+
+        .user_detail {
+          .name {
+            color: #000;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.27px;
+            line-height: 21px;
+          }
+
+          .email {
+            color: #22222280;
+            font-size: 14px;
+            letter-spacing: -0.05px;
+            line-height: 18px;
+          }
         }
       }
-      .mypage_profile_settings {
-        width: 100%;
+
+      .setting_profile {
         display: flex;
+        gap: 7px;
+
+        .goToLink {
+          font-size: 12px;
+          letter-spacing: -0.06px;
+          color: #222222cc;
+          padding: 8px 14px;
+          border: 1px solid #d3d3d3;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+.dealDetail_wrap {
+  color: #222222;
+
+  .detail_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .header_title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.27px;
+    }
+
+    .showMore_Btn {
+      color: #22222280;
+      font-size: 13px;
+      letter-spacing: -0.07px;
+    }
+  }
+
+  .detail_main {
+    .detail_process {
+      width: 100%;
+      text-align: center;
+      background-color: #fafafa;
+      padding: 18px;
+      border-radius: 12px;
+
+      th {
+        color: #222222cc;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: -0.07px;
+      }
+
+      td {
+        width: 33%;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.09px;
+        line-height: 20px;
+        margin-top: 2px;
+
+        &.total {
+          color: #31b46e;
+        }
+      }
+    }
+
+    .detail_list_wrap {
+      .detail_type {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        .mypage_profile_settings_setting {
-          width: 100%;
-          border: 1px solid #b6b4b4;
-          border-radius: 12px;
-          font-size: 13px;
-          a {
-            width: 100%;
-            height: 100%;
-            padding: 4% 2%;
-            text-align: center;
-            display: block;
-          }
-        }
-        .mypage_profile_settings_mystyle {
-          width: 100%;
-          border: 1px solid #b6b4b4;
-          border-radius: 12px;
-          margin-left: 7px;
-          font-size: 13px;
-          a {
-            width: 100%;
-            height: 100%;
-            padding: 4% 2%;
-            text-align: center;
-            display: block;
-          }
-        }
-      }
-    }
-    .mypage_buy {
-      .mypage_buy_title {
-        display: flex;
-        .mypage_buy_title_h3 {
-          font-size: 18px;
+
+        .type_title {
+          font-size: 14px;
           font-weight: 700;
         }
-        .mypage_buy_title_a {
-          display: flex;
-          margin-left: auto;
+
+        .apply_date {
           font-size: 13px;
-          align-items: center;
+          color: #222222cc;
         }
       }
-      .mypage_buy_purchase_list {
-        background-color: #fafafa;
-        border-radius: 12px;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        font-size: 13px;
-        padding: 30px;
-        .mypage_buy_purchase_list1 {
-          display: table-cell;
-          text-align: center;
-        }
-        .mypage_buy_purchase_list2 {
-          display: table-cell;
-          text-align: center;
-        }
-        .mypage_buy_purchase_list3 {
-          display: table-cell;
-          text-align: center;
-        }
-      }
-      .mypage_buy_purchase_all {
-        text-align: center;
-        padding: 10%;
-        p {
-          color: rgba(34, 34, 34, 0.5);
-          font-size: 13px;
-          letter-spacing: -0.07px;
-        }
-      }
-    }
-    .mypage_sell {
-      .mypage_sell_title {
+
+      .detail_desc {
         display: flex;
-        .mypage_sell_title_h3 {
-          font-size: 18px;
-          font-weight: 700;
-        }
-        .mypage_sell_title_a {
-          display: flex;
-          margin-left: auto;
-          font-size: 13px;
-          align-items: center;
-        }
+        justify-content: space-between;
+        align-items: center;
       }
-      .mypage_sell_sale_list {
-        background-color: #fafafa;
-        border-radius: 12px;
-        display: table;
-        table-layout: fixed;
-        width: 100%;
-        font-size: 13px;
-        padding: 30px;
-        .mypage_sell_sale_list1 {
-          display: table-cell;
-          text-align: center;
-        }
-        .mypage_sell_sale_list2 {
-          display: table-cell;
-          text-align: center;
-        }
-        .mypage_sell_sale_list3 {
-          display: table-cell;
-          text-align: center;
-        }
-      }
-      .mypage_sell_sale_all {
-        padding: 10%;
-        text-align: center;
-        p {
-          color: rgba(34, 34, 34, 0.5);
-          font-size: 13px;
-          letter-spacing: -0.07px;
+
+      .deadline {
+        .deadline_title {
+          margin-right: 10px;
         }
       }
     }
-    .mypage_wish {
-      .mypage_wish_title {
-        display: flex;
-        margin-top: 42px;
-        .mypage_wish_title_h3 {
-          font-size: 18px;
-          font-weight: 700;
-        }
-        .mypage_wish_title_a {
-          display: flex;
-          margin-left: auto;
-          font-size: 13px;
-          align-items: center;
-        }
-      }
-      .mypage_wish_all {
-        text-align: center;
-        padding: 10%;
-        background-color: #fafafa;
-        p {
-          color: rgba(34, 34, 34, 0.5);
-          font-size: 13px;
-          letter-spacing: -0.07px;
-        }
-      }
+
+    .noDetail {
+      font-size: 14px;
+      letter-spacing: -0.21px;
+      color: #22222280;
+      padding: 90px 0;
+      text-align: center;
     }
+  }
+
+  .wish_list {
+    font-size: 14px;
+    letter-spacing: -0.21px;
+    color: #22222280;
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 90px 0;
+    text-align: center;
   }
 }

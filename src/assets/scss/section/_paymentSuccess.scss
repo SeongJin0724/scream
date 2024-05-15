@@ -20,6 +20,26 @@
       margin-bottom: 20px;
     }
 
+    .order_detail {
+      width: 300px;
+      background-color: #fff;
+      padding: 20px 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-spacing: 4px 4px;
+
+      th {
+        font-size: 13px;
+        color: #222222cc;
+        font-weight: 600;
+      }
+
+      td {
+        font-size: 14px;
+        padding-left: 10px;
+      }
+    }
+
     .goToBtn {
       display: flex;
       justify-content: center;

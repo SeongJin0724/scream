@@ -20,6 +20,7 @@ export default function Buy() {
     itemKey: "",
     userId: "",
     dealItem: "",
+    itemTitle: "",
     size: "",
     desc: "",
     price: "",
