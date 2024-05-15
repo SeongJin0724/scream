@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ItemDetailContext } from "../components/contents/ItemDetailContext";
 import Main from "../components/section/Main";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useAuth } from "../components/contents/AuthContext";
 import axios from "axios";
 
 import "swiper/css";
@@ -10,7 +11,7 @@ import "swiper/css/navigation";
 
 import { Navigation, Scrollbar } from "swiper/modules";
 import { Link, useNavigate } from "react-router-dom";
-import { CiBookmark } from "react-icons/ci";
+import { FaRegBookmark } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
 import { SlArrowRight } from "react-icons/sl";
 import { TbRosetteNumber2 } from "react-icons/tb";
@@ -19,19 +20,82 @@ import { TfiPackage } from "react-icons/tfi";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { FaRegHandshake } from "react-icons/fa";
 import { LiaCoinsSolid } from "react-icons/lia";
+import { FaBookmark } from "react-icons/fa";
 
 export default function ItemDetail() {
+  const { user } = useAuth();
   const { item, itemKey } = useContext(ItemDetailContext);
   const navigate = useNavigate();
   const [sales, setSales] = useState([]);
   const [purchases, setPurchases] = useState([]);
   const [imagePaths, setImagePaths] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [wishlistBtn, setWishlistBtn] = useState(false);
   const actionHandler = (action) => () => {
     if (action === "sell") {
       navigate(`/items/${itemKey}/sell`);
     } else if (action === "buy") {
       navigate(`/items/${itemKey}/buy`);
     }
+  };
+  const postWishList = async () => {
+    try {
+      if (wishlist.length <= 0) {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/api/post/wishlist`,
+          {
+            user_id: user.user_id,
+            itemKey: itemKey,
+          }
+        );
+      } else {
+        console.log("이미 추가되었습니다");
+      }
+    } catch (error) {
+      console.error(error, "error");
+    }
+  };
+  const getWishlistDetail = async () => {
+    const token = localStorage.getItem("accessToken");
+    const url = `${process.env.REACT_APP_API_URL}/api/get/wishlistDetail`;
+    try {
+      const response = await axios.get(url, {
+        params: {
+          itemKey: itemKey,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setWishlist(response.data.data);
+    } catch (error) {
+      console.error(error, "error");
+    }
+  };
+  const deleteWishlist = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/delete/wishlist`,
+        {
+          user_id: user.user_id,
+          itemKey: Number(itemKey),
+          wishKey: wishlist[0].wishKey,
+        }
+      );
+    } catch (error) {
+      console.error(error, "error");
+    }
+  };
+
+  const wishlistClickHandler = () => {
+    if (wishlistBtn === false) {
+      setWishlistBtn(true);
+      postWishList();
+    } else if (wishlistBtn === true) {
+      setWishlistBtn(false);
+      deleteWishlist();
+    }
+    getWishlistDetail();
   };
 
   useEffect(() => {
@@ -47,11 +111,23 @@ export default function ItemDetail() {
       }
     };
     fetchOffers();
+
     if (item && item.length > 0 && item[0].img) {
       const paths = item[0].img.split(",").map((path) => path.trim());
       setImagePaths(paths);
     }
   }, [itemKey, item]);
+
+  useEffect(() => {
+    getWishlistDetail();
+  }, [wishlistBtn]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, []);
 
   return (
     <Main>
@@ -109,8 +185,12 @@ export default function ItemDetail() {
                 구매신청
               </button>
             </div>
-            <button className="like_btn">
-              <CiBookmark style={{ fontSize: "20px" }} />
+            <button className="like_btn" onClick={wishlistClickHandler}>
+              {wishlist.length > 0 ? (
+                <FaBookmark style={{ fontSize: "20px" }} />
+              ) : (
+                <FaRegBookmark style={{ fontSize: "20px" }} />
+              )}
               <span style={{ paddingLeft: "6px" }}>관심 상품</span>
             </button>
             <div className="info_container">

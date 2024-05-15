@@ -43,9 +43,6 @@ const DealDetail = ({ type, user }) => {
     fetchOrderData();
   }, [type, user]);
 
-  console.log(offerDealDetail);
-  console.log(orderDetail);
-
   function formatPrice(price) {
     return new Intl.NumberFormat("ko-KR").format(price);
   }
