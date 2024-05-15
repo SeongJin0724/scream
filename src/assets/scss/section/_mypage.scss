@@ -127,8 +127,9 @@
       width: 100%;
       text-align: center;
       background-color: #fafafa;
-      padding: 18px;
+      padding: 16px;
       border-radius: 12px;
+      margin-bottom: 8px;
 
       th {
         color: #222222cc;
@@ -182,6 +183,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          color: #000;
           font-size: 15px;
           margin-bottom: 2px;
         }

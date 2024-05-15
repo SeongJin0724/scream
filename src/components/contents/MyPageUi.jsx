@@ -15,10 +15,10 @@ export default function MyPageUi({ children }) {
               <h3 className="mypage_shopinfo_title">쇼핑 정보</h3>
               <ul className="mypage_shopinfo_sub_ul">
                 <li className="mypage_shopinfo_sub_li">
-                  <Link to="/company">구매내역</Link>
+                  <Link to="/mypage/buyDetail">구매내역</Link>
                 </li>
                 <li className="mypage_shopinfo_sub_li">
-                  <Link to="/company">판매내역</Link>
+                  <Link to="/mypage/sellDetail">판매내역</Link>
                 </li>
                 <li className="mypage_shopinfo_sub_li">
                   <Link to="/company">관심</Link>

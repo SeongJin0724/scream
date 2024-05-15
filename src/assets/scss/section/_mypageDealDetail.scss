@@ -1,0 +1,135 @@
+.mypageDealDetail_wrap {
+  width: 100%;
+  color: #222222;
+
+  .header_title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.36px;
+    margin-bottom: 18px;
+  }
+
+  .detail_main {
+    .detail_process {
+      width: 100%;
+      margin-bottom: 20px;
+
+      tbody {
+        display: flex;
+      }
+
+      tr {
+        width: 33%;
+      }
+
+      .detail_section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        outline: none;
+        padding: 10px;
+        border-bottom: 1.5px solid #22222280;
+        cursor: pointer;
+
+        &.selected {
+          border-bottom: 2px solid #222222;
+        }
+
+        td {
+          font-size: 20px;
+          font-weight: 700;
+          letter-spacing: -0.1px;
+          line-height: 24px;
+          margin-top: 0;
+          margin-bottom: 8px;
+
+          &.totalBuy {
+            color: #f15747;
+          }
+
+          &.totalSell {
+            color: #31b46e;
+          }
+        }
+
+        th {
+          font-size: 13px;
+          color: #22222280;
+        }
+      }
+    }
+  }
+
+  .detail_list_wrap {
+    width: 100%;
+
+    .detail_list {
+      padding: 10px;
+      border-bottom: 1.5px solid #eee;
+      margin-bottom: 4px;
+
+      .detail_type {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+        font-size: 13px;
+        color: #222222cc;
+
+        .type_title {
+          font-weight: 700;
+        }
+      }
+
+      .detail_desc {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        margin-bottom: 2px;
+
+        .desc_section {
+          display: flex;
+          align-items: center;
+
+          .styleBtn {
+            font-size: 13px;
+            color: #fff;
+            background-color: #222222;
+            padding: 4px 10px;
+            border: 1px solid #22222280;
+            border-radius: 4px;
+            margin-right: 14px;
+            transition: all ease-in 100ms;
+
+            &:hover {
+              background-color: #222222cc;
+            }
+          }
+        }
+      }
+
+      .deadline {
+        display: flex;
+        justify-content: space-between;
+        color: #222222cc;
+        font-size: 13px;
+
+        .deadline_title {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .noDetail {
+    font-size: 14px;
+    letter-spacing: -0.21px;
+    color: #22222280;
+    padding: 90px 0;
+    text-align: center;
+  }
+}

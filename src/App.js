@@ -87,7 +87,7 @@ function App() {
             <Route path="/viewuser" element={<ViewUserProfile />} />
             <Route path="/style" element={<Style />} />
             <Route path="/post/:reviewKey" element={<Post />} />
-            <Route path="/uploadReview" element={<UploadReview />} />
+            <Route path="/uploadReview/:itemKey" element={<UploadReview />} />
             <Route
               path="/items/:itemKey"
               element={
