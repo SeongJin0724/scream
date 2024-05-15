@@ -91,6 +91,12 @@
         font-size: 15px;
         margin-bottom: 2px;
 
+        .item_info {
+          .size {
+            font-size: 13px;
+          }
+        }
+
         .desc_section {
           display: flex;
           align-items: center;
@@ -100,14 +106,13 @@
             color: #fff;
             background-color: #222222;
             padding: 4px 10px;
-            border: 1px solid #222222;
             border-radius: 4px;
             margin-right: 14px;
             transition: all ease-in 100ms;
 
             &:hover {
               color: #222222;
-              background-color: #fff;
+              background-color: #fafafa;
             }
           }
         }
@@ -121,6 +126,23 @@
 
         .deadline_title {
           margin-right: 8px;
+        }
+      }
+      .option {
+        text-align: end;
+
+        .cancelBtn {
+          font-size: 13px;
+          color: #fff;
+          padding: 2px 4px;
+          border-radius: 4px;
+          background-color: #f15747;
+          transition: all ease-in 100ms;
+
+          &:hover {
+            color: #222222;
+            background-color: #fafafa;
+          }
         }
       }
     }

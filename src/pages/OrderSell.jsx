@@ -58,6 +58,8 @@ const OrderSell = () => {
       user_id: dealData.user_id,
       itemKey: dealData.itemKey,
       dealKey: dealData.dealKey,
+      deal: "판매",
+      itemTitle: dealData.title,
       price: dealData.totalPrice,
     };
 

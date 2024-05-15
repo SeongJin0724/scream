@@ -171,13 +171,26 @@
       gap: 16px;
       width: 100%;
       padding: 20px 32px;
-      border-bottom: 1px solid #eeeeee;
+      border-bottom: 1px solid #eee;
       margin-bottom: 12px;
 
       .item_img {
         width: 80px;
         height: 80px;
+        background-color: #eee;
         border-radius: 10px;
+      }
+
+      .item_detail {
+        font-size: 14px;
+        line-height: 17px;
+
+        .brand {
+          color: #22222280;
+          font-size: 13px;
+          letter-spacing: -0.05px;
+          line-height: 16px;
+        }
       }
     }
 

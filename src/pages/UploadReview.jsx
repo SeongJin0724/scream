@@ -1,15 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 export default function UploadReview() {
+  let { itemKey } = useParams();
   const [previewSrc, setPreviewSrc] = useState("");
   const [img, setImg] = useState(false);
   const [review, setReview] = useState("");
   const fileInputRef = useRef(null);
+  const [item, setItem] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/items/${itemKey}`
+        );
+        setItem(response.data[0]);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [itemKey]);
+
+  console.log(item);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -62,8 +81,11 @@ export default function UploadReview() {
         <div className="uploadReview_wrap">
           <h3 className="review_header">STYLE 작성</h3>
           <div className="review_item">
-            <img src="" alt="" className="item_img" />
-            <p>상품정보</p>
+            <img src={item.img} alt={item.title} className="item_img" />
+            <div className="item_detail">
+              <p className="brand">{item.brand}</p>
+              <p className="title">{item.title}</p>
+            </div>
           </div>
 
           <form className="review_form" onSubmit={handleSubmit}>

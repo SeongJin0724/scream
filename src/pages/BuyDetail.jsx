@@ -18,22 +18,23 @@ const BuyDetail = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const fetchOfferDealData = async () => {
-      try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/offerDealDetail`,
-          {
-            user_id: user.user_id,
-            deal: "구매",
-          }
-        );
-        setOfferDealDetail(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchOfferDealData = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/offerDealDetail`,
+        {
+          user_id: user.user_id,
+          deal: "구매",
+        }
+      );
+      setOfferDealDetail(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
+    fetchOfferDealData();
     const fetchOrderData = async () => {
       try {
         const response = await axios.post(
@@ -49,9 +50,22 @@ const BuyDetail = () => {
       }
     };
 
-    fetchOfferDealData();
     fetchOrderData();
   }, [user]);
+
+  const onDeleteList = async (e) => {
+    const dealKey = e.target.value;
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/deleteOfferDeal/${dealKey}`
+      );
+      console.log("삭제 성공:", response.data);
+      //신청 취소 모달 창 뜨게
+      await fetchOfferDealData();
+    } catch (error) {
+      console.error("삭제 실패:", error);
+    }
+  };
 
   function formatPrice(price) {
     return new Intl.NumberFormat("ko-KR").format(price);
@@ -133,8 +147,20 @@ const BuyDetail = () => {
                             "ko-KR"
                           )}
                         </p>
-                        <p>승인: {detail.sign === 1 ? "완료" : "대기"}</p>
+                        <p>승인: {detail.sign === 1 ? " 완료" : " 대기"}</p>
                       </div>
+                      {detail.sign === 0 && (
+                        <div className="option">
+                          <button
+                            value={detail.dealKey}
+                            type="button"
+                            className="cancelBtn"
+                            onClick={onDeleteList}
+                          >
+                            신청취소
+                          </button>
+                        </div>
+                      )}
                     </li>
                   ))
                 : null}

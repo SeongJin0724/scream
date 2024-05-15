@@ -15,6 +15,13 @@ export default function Apply({ content, onGetData }) {
   const { item, itemKey } = useContext(ItemDetailContext);
   const { user } = useAuth();
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+  }, []);
+
   const changeDeadline = useMemo(() => {
     const today = new Date();
     today.setDate(today.getDate() + parseInt(deadline));
