@@ -62,10 +62,18 @@ const SellDetail = () => {
         `${process.env.REACT_APP_API_URL}/api/deleteOfferDeal/${dealKey}`
       );
       console.log("삭제 성공:", response.data);
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 3000);
+
       await fetchOfferDealData();
     } catch (error) {
       console.error("삭제 실패:", error);
@@ -143,7 +151,7 @@ const SellDetail = () => {
                       <div className="detail_type">
                         <p className="type_title">판매신청</p>
                         <p className="apply_date">
-                          {new Date(detail.addDate).toLocaleDateString("ko-KR")}
+                          {new Date(detail.addDate).toISOString().slice(0, 10)}
                         </p>
                       </div>
                       <div className="detail_desc">
@@ -156,9 +164,7 @@ const SellDetail = () => {
                       <div className="deadline">
                         <p>
                           <span className="deadline_title">마감기한:</span>
-                          {new Date(detail.deadline).toLocaleDateString(
-                            "ko-KR"
-                          )}
+                          {new Date(detail.deadline).toISOString().slice(0, 10)}
                         </p>
                         <p>
                           승인:
@@ -187,9 +193,9 @@ const SellDetail = () => {
                       <div className="detail_type">
                         <p className="type_title">판매완료</p>
                         <p className="apply_date">
-                          {new Date(detail.orderDate).toLocaleDateString(
-                            "ko-KR"
-                          )}
+                          {new Date(detail.orderDate)
+                            .toISOString()
+                            .slice(0, 10)}
                         </p>
                       </div>
                       <div className="detail_desc">
