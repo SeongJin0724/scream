@@ -46,6 +46,7 @@ const Shop = lazy(() => import("./pages/Shop"));
 const BuyDetail = lazy(() => import("./pages/BuyDetail"));
 const SellDetail = lazy(() => import("./pages/SellDetail"));
 const MyStyle = lazy(() => import("./pages/MyStyle"));
+const WishList = lazy(() => import("./pages/WishList"));
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
             <Route path="/notice/3" element={<Notice3 />} />
             <Route path="/mypage/infochange" element={<Infochange />} />
             <Route path="/mypage/profilechange" element={<Profilechange />} />
+            <Route path="/mypage/wishlist" element={<WishList />} />
             <Route path="/viewuser" element={<ViewUserProfile />} />
             <Route path="/style" element={<Style />} />
             <Route path="/post/:reviewKey" element={<Post />} />

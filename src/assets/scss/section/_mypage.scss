@@ -26,7 +26,24 @@
       line-height: 22px;
       margin-bottom: 12px;
     }
-
+    .mypage_shopinfo_sub_li_active {
+      color: #222222;
+      font-size: 15px;
+      letter-spacing: -0.15px;
+      line-height: 18px;
+      margin-bottom: 12px;
+      transition: all ease-in 100ms;
+      font-weight: bold;
+    }
+    .mypage_myinfo_sub_li_active {
+      color: #222222;
+      font-size: 15px;
+      letter-spacing: -0.15px;
+      line-height: 18px;
+      margin-bottom: 12px;
+      transition: all ease-in 100ms;
+      font-weight: bold;
+    }
     .mypage_shopinfo_sub_li,
     .mypage_myinfo_sub_li {
       color: #22222280;
@@ -226,18 +243,18 @@
 
   .wish_list {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     font-size: 13px;
     letter-spacing: -0.21px;
     color: #22222280;
     border-radius: 12px;
-    padding: 90px 0;
     text-align: center;
     .wish_item_container {
-      width: 30%;
+      width: 33.33%;
       height: 100%;
       display: block;
-      margin-left: 2%;
+      padding: 2%;
       &:first-of-type {
         margin-left: 0;
       }
@@ -245,6 +262,7 @@
         .wish_item_img {
           background-color: #fafafa;
           border-radius: 14px;
+          overflow: hidden;
         }
         .wish_item_info {
           text-align: left;
@@ -262,6 +280,12 @@
             width: fit-content;
             padding: 2% 0;
           }
+          .wish_item_info_name {
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-wrap: nowrap;
+          }
         }
       }
     }
@@ -276,10 +300,11 @@
       border: 1px solid #22222280;
       padding: 8px 12px;
       border-radius: 10px;
-      transition: all ease-in 100ms;
 
       &:hover {
-        background-color: #fff;
+        background-color: #222;
+        color: #fff;
+        border-color: #222;
       }
     }
   }

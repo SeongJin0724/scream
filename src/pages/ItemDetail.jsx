@@ -38,6 +38,7 @@ export default function ItemDetail() {
       navigate(`/items/${itemKey}/buy`);
     }
   };
+  console.log(sales);
   const postWishList = async () => {
     try {
       if (wishlist.length <= 0) {
@@ -293,36 +294,110 @@ export default function ItemDetail() {
           </div>
         </div>
         <div className="trade_list_wrap">
-          <div className="sell_wrap">
+          <div className="trade_wrap">
             <h2>판매리스트</h2>
             {sales.length > 0 ? (
-              <ul>
+              <ul className="trade_inner">
                 {sales.map((offer) => (
-                  <li key={offer.dealKey}>
-                    <p>{offer.size}</p>
-                    <p>{offer.price}</p>
-                    <p>{offer.deadline}</p>
-                    <p>{offer.description}</p>
-                    <Link to={`/order/${offer.dealKey}`}>구매하기</Link>
-                  </li>
+                  <div className="trade_list">
+                    <Link className="trade_link">
+                      <li key={offer.dealKey}>
+                        <div className="trade_img">
+                          {imagePaths.length > 0 && (
+                            <img src={imagePaths[0]} alt={imagePaths[0]} />
+                          )}
+                        </div>
+                        <div className="trade_content">
+                          <div>
+                            <p className="trade_content_title">이름</p>
+
+                            <p className="trade_content_desc">
+                              {offer.description}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="trade_content_size">{offer.size}</p>
+                            <p>
+                              <p className="trade_content_price">
+                                {new Intl.NumberFormat("ko-KR").format(
+                                  offer.price
+                                )}
+                                원
+                              </p>
+                            </p>
+                            <p className="trade_content_deadline">
+                              {new Date(offer.deadline).toLocaleDateString(
+                                "ko-KR",
+                                {
+                                  year: "numeric",
+                                  month: "2-digit",
+                                  day: "2-digit",
+                                }
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </Link>
+                    <Link className="sell_btn" to={`/order/${offer.dealKey}`}>
+                      구매하기
+                    </Link>
+                  </div>
                 ))}
               </ul>
             ) : (
               <p>거래 상품이 없습니다.</p>
             )}
           </div>
-          <div className="buy_wrap">
+          <div className="trade_wrap">
             <h2>구매리스트</h2>
             {purchases.length > 0 ? (
-              <ul>
+              <ul className="trade_inner">
                 {purchases.map((offer) => (
-                  <li key={offer.dealKey}>
-                    <p>{offer.size}</p>
-                    <p>{offer.price}</p>
-                    <p>{offer.deadline}</p>
-                    <p>{offer.description}</p>
-                    <Link to={`/ordersell/${offer.dealKey}`}>판매하기</Link>
-                  </li>
+                  <div className="trade_list">
+                    <Link className="trade_link">
+                      <li key={offer.dealKey}>
+                        <div className="trade_img">
+                          {imagePaths.length > 0 && (
+                            <img src={imagePaths[0]} alt={imagePaths[0]} />
+                          )}
+                        </div>
+                        <div className="trade_content">
+                          <div>
+                            <p className="trade_content_title">이름</p>
+
+                            <p className="trade_content_desc">
+                              {offer.description}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="trade_content_size">{offer.size}</p>
+                            <p>
+                              <p className="trade_content_price">
+                                {new Intl.NumberFormat("ko-KR").format(
+                                  offer.price
+                                )}
+                                원
+                              </p>
+                            </p>
+                            <p className="trade_content_deadline">
+                              {new Date(offer.deadline).toLocaleDateString(
+                                "ko-KR",
+                                {
+                                  year: "numeric",
+                                  month: "2-digit",
+                                  day: "2-digit",
+                                }
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </Link>
+                    <Link className="buy_btn" to={`/order/${offer.dealKey}`}>
+                      판매하기
+                    </Link>
+                  </div>
                 ))}
               </ul>
             ) : (

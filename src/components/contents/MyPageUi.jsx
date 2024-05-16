@@ -1,8 +1,9 @@
 import React from "react";
 import Main from "../section/Main";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function MyPageUi({ children }) {
+  const location = useLocation();
   return (
     <Main>
       <div className="mypage_container">
@@ -14,16 +15,40 @@ export default function MyPageUi({ children }) {
             <li className="mypage_shopinfo_li">
               <h3 className="mypage_shopinfo_title">쇼핑 정보</h3>
               <ul className="mypage_shopinfo_sub_ul">
-                <li className="mypage_shopinfo_sub_li">
+                <li
+                  className={
+                    location.pathname === "/mypage/buyDetail"
+                      ? "mypage_shopinfo_sub_li_active"
+                      : "mypage_shopinfo_sub_li"
+                  }
+                >
                   <Link to="/mypage/buyDetail">구매내역</Link>
                 </li>
-                <li className="mypage_shopinfo_sub_li">
+                <li
+                  className={
+                    location.pathname === "/mypage/sellDetail"
+                      ? "mypage_shopinfo_sub_li_active"
+                      : "mypage_shopinfo_sub_li"
+                  }
+                >
                   <Link to="/mypage/sellDetail">판매내역</Link>
                 </li>
-                <li className="mypage_shopinfo_sub_li">
-                  <Link to="/company">관심</Link>
+                <li
+                  className={
+                    location.pathname === "/mypage/wishlist"
+                      ? "mypage_shopinfo_sub_li_active"
+                      : "mypage_shopinfo_sub_li"
+                  }
+                >
+                  <Link to="/mypage/wishlist">관심</Link>
                 </li>
-                <li className="mypage_shopinfo_sub_li">
+                <li
+                  className={
+                    location.pathname === "/mypage/mystyle"
+                      ? "mypage_shopinfo_sub_li_active"
+                      : "mypage_shopinfo_sub_li"
+                  }
+                >
                   <Link to="/mypage/mystyle">내 스타일</Link>
                 </li>
               </ul>
@@ -33,7 +58,13 @@ export default function MyPageUi({ children }) {
             <li className="mypage_myinfo_li">
               <h3 className="mypage_myinfo_title">내 정보</h3>
               <ul className="mypage_myinfo_sub_ul">
-                <li className="mypage_myinfo_sub_li">
+                <li
+                  className={
+                    location.pathname === "/mypage/infochange"
+                      ? "mypage_myinfo_sub_li_active"
+                      : "mypage_myinfo_sub_li"
+                  }
+                >
                   <Link to="/mypage/infochange">개인정보 수정</Link>
                 </li>
               </ul>
