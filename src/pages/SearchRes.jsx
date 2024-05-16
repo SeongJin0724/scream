@@ -44,7 +44,7 @@ const SearchRes = () => {
       navigate(`/searchres?term=${encodeURIComponent(searchTerm)}`);
     }
   };
-
+  console.log(results);
   return (
     <Main>
       <form onSubmit={handleSearch} className="searchres_search">
@@ -69,7 +69,7 @@ const SearchRes = () => {
             <li key={product.itemKey} className="search_result_wrap">
               <Link to={`/items/${product.itemKey}`}>
                 <img
-                  src={product.img}
+                  src={product.img.split(",", 1)[0]}
                   alt={product.title}
                   className="search_item_img"
                 />

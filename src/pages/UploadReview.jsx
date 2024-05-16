@@ -90,7 +90,11 @@ export default function UploadReview() {
         <div className="uploadReview_wrap">
           <h3 className="review_header">STYLE 작성</h3>
           <div className="review_item">
-            <img src={item.img} alt={item.title} className="item_img" />
+            <img
+              src={item.img.split(",", 1)[0]}
+              alt={item.title}
+              className="item_img"
+            />
             <div className="item_detail">
               <p className="brand">{item.brand}</p>
               <p className="title">{item.title}</p>
