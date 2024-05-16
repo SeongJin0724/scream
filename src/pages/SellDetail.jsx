@@ -84,6 +84,7 @@ const SellDetail = () => {
     return new Intl.NumberFormat("ko-KR").format(price);
   }
 
+  console.log(orderDetail);
   return (
     <Main>
       <MyPageUi>
@@ -199,6 +200,7 @@ const SellDetail = () => {
                         </p>
                       </div>
                       <div className="detail_desc">
+                        <p className="item_info">{detail.itemTitle}</p>
                         <p className="item_info">
                           {formatPrice(detail.price)}원
                         </p>
