@@ -60,7 +60,7 @@ export default function Order() {
         `${process.env.REACT_APP_API_URL}/api/payment/kakao`,
         {
           partner_order_id: `${dealData.dealKey}`,
-          partner_user_id: `${dealData.user_id}`,
+          partner_user_id: `${user.user_id}`,
           item_name: `${dealData.title}`,
           item_code: `${dealData.itemKey}`,
           quantity: "1",

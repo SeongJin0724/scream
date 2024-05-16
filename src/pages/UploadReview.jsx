@@ -14,7 +14,7 @@ export default function UploadReview() {
   const [img, setImg] = useState(false);
   const [review, setReview] = useState("");
   const fileInputRef = useRef(null);
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +91,7 @@ export default function UploadReview() {
           <h3 className="review_header">STYLE 작성</h3>
           <div className="review_item">
             <img
-              src={item.img.split(",", 1)[0]}
+              src={item.img ? item.img.split(",")[0] : ""}
               alt={item.title}
               className="item_img"
             />
