@@ -6,6 +6,7 @@ import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import ApplyResultModal from "../components/contents/ApplyResultModal";
 
 export default function UploadReview() {
   const { user } = useAuth();
@@ -15,6 +16,7 @@ export default function UploadReview() {
   const [review, setReview] = useState("");
   const fileInputRef = useRef(null);
   const [item, setItem] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,34 +57,44 @@ export default function UploadReview() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShowModal(true);
+    // if (!fileInputRef.current.files[0]) {
+    //   console.error("No file selected");
+    //   return;
+    // }
 
-    if (!fileInputRef.current.files[0]) {
-      console.error("No file selected");
-      return;
-    }
+    // const formData = new FormData();
+    // formData.append("user_id", user.user_id);
+    // formData.append("itemKey", itemKey);
+    // formData.append("content", review);
+    // formData.append("img", fileInputRef.current.files[0]);
 
-    const formData = new FormData();
-    formData.append("user_id", user.user_id);
-    formData.append("itemKey", itemKey);
-    formData.append("content", review);
-    formData.append("img", fileInputRef.current.files[0]);
+    // const config = {
+    //   headers: { "content-type": "multipart/form-data" },
+    // };
 
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-    };
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/upload-image`,
-        formData,
-        config
-      );
-      const result = response.data;
-      console.log(result);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.REACT_APP_API_URL}/upload-image`,
+    //     formData,
+    //     config
+    //   );
+    //   const result = response.data;
+    //   console.log(result);
+    // } catch (error) {
+    //   console.error("Error:", error);
+    // }
   };
+
+  useEffect(() => {
+    if (showModal) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [showModal]);
 
   return (
     <Main>
@@ -146,6 +158,7 @@ export default function UploadReview() {
           </form>
         </div>
       </div>
+      {showModal && <ApplyResultModal type="스타일 업로드" />}
     </Main>
   );
 }

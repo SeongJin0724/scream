@@ -1,6 +1,6 @@
 .style_container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px 40px;
 
@@ -22,16 +22,24 @@
 
   .review_wrap {
     width: calc(100% - 20px);
-    padding-top: 20px;
+    padding-top: 14px;
     margin: 0 auto;
     cursor: pointer;
 
-    &.vertical {
+    &.level_0 {
       height: 350px;
     }
 
-    &.square {
-      height: 280px;
+    &.level_1 {
+      height: 450px;
+    }
+
+    &.level_2 {
+      height: 480px;
+    }
+
+    &.level_3 {
+      height: 500px;
     }
   }
 

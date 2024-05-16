@@ -40,7 +40,6 @@ const Post = lazy(() => import("./pages/Post"));
 const UploadReview = lazy(() => import("./pages/UploadReview"));
 const AddressSearchPage = lazy(() => import("./pages/AddressSearchPage"));
 const Order = lazy(() => import("./pages/Order"));
-const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const OrderSell = lazy(() => import("./pages/OrderSell"));
 const PaymentApproval = lazy(() => import("./pages/PaymentApproval"));
 const Shop = lazy(() => import("./pages/Shop"));
@@ -114,7 +113,6 @@ function App() {
               element={<AddressSearchPage />}
             />
             <Route path="/order/:dealKey" element={<Order />} />
-            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/ordersell/:dealKey" element={<OrderSell />} />
             <Route path="/payment/approval" element={<PaymentApproval />} />
             <Route path="/shop" element={<Shop />} />
