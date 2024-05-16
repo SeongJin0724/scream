@@ -149,38 +149,44 @@ const BuyDetail = () => {
               {part === "전체" || part === "신청"
                 ? offerDealDetail.map((detail) => (
                     <li key={detail.dealKey} className="detail_list">
-                      <div className="detail_type">
-                        <p className="type_title">구매신청</p>
-                        <p className="apply_date">
-                          {new Date(detail.addDate).toISOString().slice(0, 10)}
-                        </p>
-                      </div>
-                      <div className="detail_desc">
-                        <p className="item_title">{detail.itemTitle}</p>
-                        <p className="item_info">
-                          <span className="size">size:</span> {detail.size} /
-                          <span> {formatPrice(detail.totalPrice)}원</span>
-                        </p>
-                      </div>
-                      <div className="deadline">
-                        <p>
-                          <span className="deadline_title">마감기한:</span>
-                          {new Date(detail.deadline).toISOString().slice(0, 10)}
-                        </p>
-                        <p>승인: {detail.sign === 1 ? " 완료" : " 대기"}</p>
-                      </div>
-                      {detail.sign === 0 && (
-                        <div className="option">
-                          <button
-                            value={detail.dealKey}
-                            type="button"
-                            className="cancelBtn"
-                            onClick={onDeleteList}
-                          >
-                            신청취소
-                          </button>
+                      <Link to={`/items/${detail.itemKey}`}>
+                        <div className="detail_type">
+                          <p className="type_title">구매신청</p>
+                          <p className="apply_date">
+                            {new Date(detail.addDate)
+                              .toISOString()
+                              .slice(0, 10)}
+                          </p>
                         </div>
-                      )}
+                        <div className="detail_desc">
+                          <p className="item_title">{detail.itemTitle}</p>
+                          <p className="item_info">
+                            <span className="size">size:</span> {detail.size} /
+                            <span> {formatPrice(detail.totalPrice)}원</span>
+                          </p>
+                        </div>
+                        <div className="deadline">
+                          <p>
+                            <span className="deadline_title">마감기한:</span>
+                            {new Date(detail.deadline)
+                              .toISOString()
+                              .slice(0, 10)}
+                          </p>
+                          <p>승인: {detail.sign === 1 ? " 완료" : " 대기"}</p>
+                        </div>
+                        {detail.sign === 0 && (
+                          <div className="option">
+                            <button
+                              value={detail.dealKey}
+                              type="button"
+                              className="cancelBtn"
+                              onClick={onDeleteList}
+                            >
+                              신청취소
+                            </button>
+                          </div>
+                        )}
+                      </Link>
                     </li>
                   ))
                 : null}
@@ -188,28 +194,30 @@ const BuyDetail = () => {
               {part === "전체" || part === "완료"
                 ? orderDetail.map((detail) => (
                     <li key={detail.orderKey} className="detail_list">
-                      <div className="detail_type">
-                        <p className="type_title">구매완료</p>
-                        <p className="apply_date">
-                          {new Date(detail.orderDate)
-                            .toISOString()
-                            .slice(0, 10)}
-                        </p>
-                      </div>
-                      <div className="detail_desc">
-                        <div className="desc_section">
-                          <Link
-                            to={`/uploadReview/${detail.itemKey}`}
-                            className="styleBtn"
-                          >
-                            STYLE 후기 작성
-                          </Link>
-                          <p className="item_title">{detail.itemTitle}</p>
+                      <Link to={`/items/${detail.itemKey}`}>
+                        <div className="detail_type">
+                          <p className="type_title">구매완료</p>
+                          <p className="apply_date">
+                            {new Date(detail.orderDate)
+                              .toISOString()
+                              .slice(0, 10)}
+                          </p>
                         </div>
-                        <p className="item_info">
-                          {formatPrice(detail.price)}원
-                        </p>
-                      </div>
+                        <div className="detail_desc">
+                          <div className="desc_section">
+                            <Link
+                              to={`/uploadReview/${detail.itemKey}`}
+                              className="styleBtn"
+                            >
+                              STYLE 후기 작성
+                            </Link>
+                            <p className="item_title">{detail.itemTitle}</p>
+                          </div>
+                          <p className="item_info">
+                            {formatPrice(detail.price)}원
+                          </p>
+                        </div>
+                      </Link>
                     </li>
                   ))
                 : null}

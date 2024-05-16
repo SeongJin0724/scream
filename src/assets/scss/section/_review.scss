@@ -81,70 +81,75 @@
     }
   }
 }
+.post_container_wrap {
+  padding-top: 20px;
 
-.post_container {
-  width: 100%;
-  max-width: 720px;
-  color: #222222;
-  margin: 0 auto;
-  padding: 0 40px;
+  .post_container {
+    width: 100%;
+    max-width: 600px;
+    color: #222222;
+    margin: 0 auto;
+    padding: 20px 0;
+    background-color: #222222;
+    border-radius: 10px;
 
-  .user_info {
-    padding: 12px 0;
+    .user_info {
+      padding: 12px 0;
 
-    .user_name {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: -0.33px;
-    }
-  }
-
-  .post_img {
-    height: 700px;
-    margin-bottom: 25px;
-  }
-
-  .post_tag_wrap {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f4f4f4;
-
-    .tag_header {
-      font-size: 15px;
-      letter-spacing: -0.23px;
-      min-height: 24px;
-      margin-bottom: 8px;
-    }
-
-    .tag_item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .item_img {
-      width: 100px;
-      height: 100px;
-      border-radius: 6px;
-    }
-
-    .item_info {
-      font-size: 16px;
-      letter-spacing: -0.33px;
-      line-height: 16px;
-
-      .item_title {
-        margin-bottom: 4px;
-      }
-
-      .item_price {
-        font-weight: 700;
+      .user_name {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.33px;
       }
     }
-  }
 
-  .post_content {
-    font-size: 17px;
-    padding: 12px 16px;
+    .post_img {
+      height: 500px;
+      margin-bottom: 25px;
+    }
+
+    .post_tag_wrap {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f4f4f4;
+      color: #fff;
+      .tag_header {
+        font-size: 15px;
+        letter-spacing: -0.23px;
+        min-height: 24px;
+        margin-bottom: 8px;
+      }
+
+      .tag_item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .item_img {
+        width: 100px;
+        height: 100px;
+        border-radius: 6px;
+      }
+
+      .item_info {
+        font-size: 16px;
+        letter-spacing: -0.33px;
+        line-height: 16px;
+
+        .item_title {
+          margin-bottom: 4px;
+        }
+
+        .item_price {
+          font-weight: 700;
+        }
+      }
+    }
+
+    .post_content {
+      font-size: 17px;
+      padding: 12px 16px;
+    }
   }
 }
 
