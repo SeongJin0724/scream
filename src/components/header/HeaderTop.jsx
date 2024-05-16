@@ -32,12 +32,12 @@ export default function HeaderTop() {
     },
     {
       title: "관심",
-      src: "/like",
+      src: "/mypage/wishlist",
     },
-    {
-      title: "알림",
-      src: "/notify",
-    },
+    // {
+    //   title: "알림",
+    //   src: "/notify",
+    // },
     isLoggedIn
       ? {
           title: "로그아웃",

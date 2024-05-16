@@ -9,13 +9,13 @@ export const headerTopMenus = [
   },
   {
     title: "관심",
-    src: "/like",
+    src: "/mypage/wishlist",
   },
 
-  {
-    title: "알림",
-    src: "/notify",
-  },
+  // {
+  //   title: "알림",
+  //   src: "/notify",
+  // },
   {
     title: "로그인",
     src: "/login",
