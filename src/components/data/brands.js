@@ -43,7 +43,7 @@ export const brands = [
     logo: Adidas_logo,
   },
   {
-    brand: ["캐피탈", " Kapital"],
+    brand: ["캐피탈", "Kapital"],
     img: kapital,
     logo: Kapital_logo,
   },
