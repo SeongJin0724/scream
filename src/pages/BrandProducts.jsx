@@ -53,7 +53,7 @@ const BrandProductsPage = () => {
               <li key={product.itemKey}>
                 <Link to={`/items/${product.itemKey}`}>
                   <img
-                    src={product.img}
+                    src={product.img.split(",", 1)[0]}
                     alt={product.title}
                     className="brand_item_img"
                   />

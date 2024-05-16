@@ -245,7 +245,11 @@ export default function Shop() {
             {items.map((item) => (
               <li className="item" key={item.itemKey}>
                 <Link to={`/items/${item.itemKey}`}>
-                  <img src={item.img} alt={item.title} className="item_img" />
+                  <img
+                    src={item.img.split(",", 1)[0]}
+                    alt={item.title}
+                    className="item_img"
+                  />
                   <div className="item_desc">
                     <p className="brandName">{item.brand}</p>
                     <p className="productName">{item.title}</p>
