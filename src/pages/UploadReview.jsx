@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../components/contents/AuthContext";
 import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
 export default function UploadReview() {
+  const { user } = useAuth();
   let { itemKey } = useParams();
   const [previewSrc, setPreviewSrc] = useState("");
   const [img, setImg] = useState(false);
@@ -27,8 +29,6 @@ export default function UploadReview() {
     };
     fetchData();
   }, [itemKey]);
-
-  console.log(item);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -55,12 +55,21 @@ export default function UploadReview() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!fileInputRef.current.files[0]) {
+      console.error("No file selected");
+      return;
+    }
+
     const formData = new FormData();
+    formData.append("user_id", user.user_id);
+    formData.append("itemKey", itemKey);
+    formData.append("content", review);
+    formData.append("img", fileInputRef.current.files[0]);
+
     const config = {
-      header: { "content-type": "multipart/form-data" },
+      headers: { "content-type": "multipart/form-data" },
     };
-    formData.append("image", fileInputRef.current.files[0]);
-    formData.append("review", review);
 
     try {
       const response = await axios.post(
