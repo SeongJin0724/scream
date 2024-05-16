@@ -1,44 +1,48 @@
 .mypage_container {
+  max-width: 1280px;
   display: flex;
   gap: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1280px;
+  margin: auto;
   padding: 40px 40px 160px;
 
   .mypage_nav {
-    margin-right: 20px;
     width: 100%;
     max-width: 200px;
+    margin-right: 20px;
 
     .mypage_nav_title {
-      padding-bottom: 30px;
+      font-size: 24px;
+      letter-spacing: -0.15px;
+      line-height: 29px;
       font-weight: 700;
+      margin-bottom: 30px;
     }
-    .mypage_shopinfo_title {
-      margin-bottom: 12px;
+
+    .mypage_shopinfo_title,
+    .mypage_myinfo_title {
       font-size: 18px;
       font-weight: 700;
+      letter-spacing: -0.27px;
+      line-height: 22px;
+      margin-bottom: 12px;
     }
-    .mypage_shopinfo_sub_li {
-      margin-top: 12px;
-      color: #b6b4b4;
+
+    .mypage_shopinfo_sub_li,
+    .mypage_myinfo_sub_li {
+      color: #22222280;
       font-size: 15px;
+      letter-spacing: -0.15px;
+      line-height: 18px;
+      margin-bottom: 12px;
+      transition: all ease-in 100ms;
+
+      &:hover {
+        color: #222222;
+      }
     }
 
     .mypage_myinfo {
       margin-top: 40px;
-
-      .mypage_myinfo_title {
-        margin-bottom: 12px;
-        font-size: 18px;
-        font-weight: 700;
-      }
-      .mypage_myinfo_sub_li {
-        margin-top: 12px;
-        color: #b6b4b4;
-        font-size: 15px;
-      }
     }
   }
 
@@ -52,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px;
+      padding: 20px;
       border: 1px solid #ebebeb;
       border-radius: 10px;
 
@@ -88,12 +92,17 @@
         gap: 7px;
 
         .goToLink {
-          font-size: 12px;
+          font-size: 11px;
           letter-spacing: -0.06px;
           color: #222222cc;
           padding: 8px 14px;
           border: 1px solid #d3d3d3;
           border-radius: 10px;
+          transition: all ease-in 100ms;
+
+          &:hover {
+            border: 1px solid #b6b4b4;
+          }
         }
       }
     }
@@ -119,6 +128,11 @@
       color: #22222280;
       font-size: 13px;
       letter-spacing: -0.07px;
+      transition: all ease-in 100ms;
+
+      &:hover {
+        color: #222222;
+      }
     }
   }
 

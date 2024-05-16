@@ -23,6 +23,9 @@ export default function MyPageUi({ children }) {
                 <li className="mypage_shopinfo_sub_li">
                   <Link to="/company">관심</Link>
                 </li>
+                <li className="mypage_shopinfo_sub_li">
+                  <Link to="/mypage/mystyle">내 스타일</Link>
+                </li>
               </ul>
             </li>
           </ul>

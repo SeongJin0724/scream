@@ -99,7 +99,7 @@ export default function MyPageHome() {
           <Link to="/mypage/infochange" className="goToLink">
             내 정보
           </Link>
-          <Link to="" className="goToLink">
+          <Link to="/mypage/mystyle" className="goToLink">
             내 스타일
           </Link>
         </div>

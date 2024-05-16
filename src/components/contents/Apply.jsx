@@ -248,7 +248,7 @@ export default function Apply({ content, onGetData }) {
             className={apply ? "applyBtn showApplyBtn" : "applyBtn"}
             disabled={!apply}
           >
-            {content.type}입찰 신청
+            {content.type}신청
           </button>
         </form>
       </div>

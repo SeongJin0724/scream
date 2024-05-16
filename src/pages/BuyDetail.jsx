@@ -4,12 +4,15 @@ import axios from "axios";
 import { useAuth } from "../components/contents/AuthContext";
 import Main from "../components/section/Main";
 import MyPageUi from "../components/contents/MyPageUi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
 const BuyDetail = () => {
   const { user } = useAuth();
   const [offerDealDetail, setOfferDealDetail] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
   const [part, setPart] = useState("전체");
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     window.scrollTo({
@@ -60,7 +63,10 @@ const BuyDetail = () => {
         `${process.env.REACT_APP_API_URL}/api/deleteOfferDeal/${dealKey}`
       );
       console.log("삭제 성공:", response.data);
-      //신청 취소 모달 창 뜨게
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
       await fetchOfferDealData();
     } catch (error) {
       console.error("삭제 실패:", error);
@@ -75,6 +81,14 @@ const BuyDetail = () => {
     <Main>
       <MyPageUi>
         <div className="mypageDealDetail_wrap">
+          {alert && (
+            <div className="alertModal">
+              <p>
+                <FontAwesomeIcon icon={faCircleCheck} className="check" />{" "}
+                구매신청 취소 완료
+              </p>
+            </div>
+          )}
           <h3 className="header_title">구매내역</h3>
           <div className="detail_main">
             <table className="detail_process">
@@ -136,7 +150,7 @@ const BuyDetail = () => {
                       <div className="detail_desc">
                         <p className="item_title">{detail.itemTitle}</p>
                         <p className="item_info">
-                          {detail.size} /
+                          <span className="size">size:</span> {detail.size} /
                           <span> {formatPrice(detail.totalPrice)}원</span>
                         </p>
                       </div>
