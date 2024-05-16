@@ -115,13 +115,7 @@ export default function MyPageHome() {
             더보기 <FontAwesomeIcon icon={faAngleRight} />
           </Link>
         </div>
-        <div
-          className="wish_list"
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+        <div className="wish_list">
           {wishItemData.length === 0 ? (
             <>
               <p className="content">추가하신 관심 상품이 없습니다.</p>
@@ -133,15 +127,9 @@ export default function MyPageHome() {
             wishItemData.map((item) => (
               <Link
                 to={`/items/${item.itemKey}`}
-                style={{
-                  width: "300px",
-                  height: "100%",
-                  display: "block",
-                  border: "1px solid red",
-                  marginLeft: "20px",
-                }}
+                className="wish_item_container"
               >
-                <div className="wish_item_wrap" key={item.itemKey} style={{}}>
+                <div className="wish_item_wrap" key={item.itemKey}>
                   <div className="wish_item_img">
                     {
                       imagePaths

@@ -225,13 +225,46 @@
   }
 
   .wish_list {
+    display: flex;
+    align-items: center;
     font-size: 13px;
     letter-spacing: -0.21px;
     color: #22222280;
-    background-color: #fafafa;
     border-radius: 12px;
     padding: 90px 0;
     text-align: center;
+    .wish_item_container {
+      width: 30%;
+      height: 100%;
+      display: block;
+      margin-left: 2%;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      .wish_item_wrap {
+        .wish_item_img {
+          background-color: #fafafa;
+          border-radius: 14px;
+        }
+        .wish_item_info {
+          text-align: left;
+          .wish_item_info_brand {
+            color: #222;
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            max-width: 100%;
+            overflow: hidden;
+            padding-bottom: 2px;
+            text-overflow: ellipsis;
+            vertical-align: top;
+            white-space: nowrap;
+            width: fit-content;
+            padding: 2% 0;
+          }
+        }
+      }
+    }
 
     .content {
       margin-bottom: 12px;
