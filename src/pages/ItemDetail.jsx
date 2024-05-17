@@ -130,6 +130,8 @@ export default function ItemDetail() {
     });
   }, []);
 
+  console.log(purchases);
+
   return (
     <Main>
       <div className="itemDetail_main_container">
@@ -364,7 +366,9 @@ export default function ItemDetail() {
                         </div>
                         <div className="trade_content">
                           <div>
-                            <p className="trade_content_title">이름</p>
+                            <p className="trade_content_title">
+                              {offer.itemTitle}
+                            </p>
 
                             <p className="trade_content_desc">
                               {offer.description}
@@ -394,7 +398,10 @@ export default function ItemDetail() {
                         </div>
                       </li>
                     </Link>
-                    <Link className="buy_btn" to={`/order/${offer.dealKey}`}>
+                    <Link
+                      className="buy_btn"
+                      to={`/orderSell/${offer.dealKey}`}
+                    >
                       판매하기
                     </Link>
                   </div>
