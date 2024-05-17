@@ -1,0 +1,113 @@
+.admin_wrap {
+  width: 100%;
+  max-width: 1280px;
+  padding: 40px;
+  margin: 0 auto;
+  .admin_title {
+    width: 100%;
+    font-size: 24px;
+    border-bottom: 4px solid #222;
+    padding-bottom: 6px;
+  }
+  .admin_content {
+    padding: 2%;
+    display: flex;
+    gap: 14px;
+    .sell_list {
+      width: 100%;
+      max-width: 50%;
+      padding: 2%;
+      border: 1px solid #ddd;
+      .sell_list_title {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .sell_content {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 12px;
+        font-size: 14px;
+        gap: 4px;
+        .admin_btn_wrap {
+          display: flex;
+          gap: 8px;
+          .approval_btn {
+            border: 1px solid rgb(65, 185, 121);
+            background-color: #fff;
+            color: rgb(65, 185, 121);
+            padding: 0 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            &:hover {
+              color: #fff;
+              background-color: rgb(65, 185, 121);
+              border-color: rgb(65, 185, 121);
+            }
+          }
+          .unrecognised_btn {
+            border: 1px solid rgb(239, 98, 83);
+            background-color: #fff;
+            color: rgb(239, 98, 83);
+            padding: 0 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            &:hover {
+              border-color: rgb(239, 98, 83);
+              color: #fff;
+              background-color: rgb(239, 98, 83);
+            }
+          }
+        }
+      }
+    }
+    .buy_list {
+      width: 100%;
+      max-width: 50%;
+      padding: 2%;
+      border: 1px solid #ddd;
+      .buy_list_title {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .buy_content {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 12px;
+        font-size: 14px;
+        gap: 4px;
+        .admin_btn_wrap {
+          display: flex;
+          gap: 8px;
+          .approval_btn {
+            border: 1px solid rgb(65, 185, 121);
+            background-color: #fff;
+            color: rgb(65, 185, 121);
+            padding: 0 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            &:hover {
+              color: #fff;
+              background-color: rgb(65, 185, 121);
+              border-color: rgb(65, 185, 121);
+            }
+          }
+          .unrecognised_btn {
+            border: 1px solid rgb(239, 98, 83);
+            background-color: #fff;
+            color: rgb(239, 98, 83);
+            padding: 0 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            &:hover {
+              border-color: rgb(239, 98, 83);
+              color: #fff;
+              background-color: rgb(239, 98, 83);
+            }
+          }
+        }
+      }
+    }
+  }
+}
