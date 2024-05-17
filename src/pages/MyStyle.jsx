@@ -48,9 +48,6 @@ const MyStyle = () => {
     fetchReview();
   }, [part, user.user_id]);
 
-  console.log(post);
-  console.log(review);
-
   const onDeleteReview = async (e) => {
     const reviewKey = e.target.value;
     try {

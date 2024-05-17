@@ -38,7 +38,7 @@ export default function ItemDetail() {
       navigate(`/items/${itemKey}/buy`);
     }
   };
-  console.log(sales);
+
   const postWishList = async () => {
     try {
       if (wishlist.length <= 0) {
@@ -129,8 +129,6 @@ export default function ItemDetail() {
       left: 0,
     });
   }, []);
-
-  console.log(purchases);
 
   return (
     <Main>

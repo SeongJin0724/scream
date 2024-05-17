@@ -44,8 +44,6 @@ export default function Admin() {
     getOffDealData();
   }, [deleteAdminSign(), postAdminSign()]);
 
-  console.log(data);
-
   return (
     <Main>
       <div className="admin_wrap">

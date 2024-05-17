@@ -78,7 +78,7 @@ export default function MyPageHome() {
   if (loading) {
     return <div>로딩중입니다.</div>;
   }
-  console.log(imagePaths);
+
   return (
     <div className="mypage_wrap">
       <div className="mypage_profile">

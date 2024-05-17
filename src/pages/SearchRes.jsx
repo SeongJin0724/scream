@@ -44,7 +44,7 @@ const SearchRes = () => {
       navigate(`/searchres?term=${encodeURIComponent(searchTerm)}`);
     }
   };
-  console.log(results);
+
   return (
     <Main>
       <form onSubmit={handleSearch} className="searchres_search">

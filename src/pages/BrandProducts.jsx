@@ -9,7 +9,6 @@ const BrandProductsPage = () => {
   const [products, setProducts] = useState([]);
 
   const matchedBrand = brands.find((item) => item.brand[1] === brand);
-  console.log(matchedBrand);
 
   useEffect(() => {
     window.scrollTo({

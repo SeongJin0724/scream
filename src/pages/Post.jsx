@@ -22,8 +22,6 @@ export default function Post() {
     fetchData();
   }, []);
 
-  console.log(styleItem);
-
   return (
     <Main>
       <div className="post_container_wrap">

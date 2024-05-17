@@ -85,9 +85,6 @@ const SellDetail = () => {
     return new Intl.NumberFormat("ko-KR").format(price);
   }
 
-  console.log(offerDealDetail);
-  console.log(orderDetail);
-
   return (
     <Main>
       <MyPageUi>

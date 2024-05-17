@@ -67,7 +67,7 @@ export default function WishList() {
       setImagePaths(paths);
     }
   }, [itemData, wishlistData]);
-  console.log(wishItemData);
+
   return (
     <Main>
       <MyPageUi>
