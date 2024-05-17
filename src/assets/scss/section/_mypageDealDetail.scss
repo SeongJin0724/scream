@@ -158,6 +158,15 @@
       .option {
         text-align: end;
 
+        .onSale {
+          width: 50px;
+          font-size: 13px;
+          color: #fff;
+          padding: 2px 4px;
+          border-radius: 4px;
+          background-color: #31b46e;
+        }
+
         .cancelBtn {
           font-size: 13px;
           color: #fff;

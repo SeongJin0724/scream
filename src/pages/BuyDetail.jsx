@@ -174,6 +174,13 @@ const BuyDetail = () => {
                           </p>
                           <p>승인: {detail.sign === 1 ? " 완료" : " 대기"}</p>
                         </div>
+                        {detail.sign === 1 && (
+                          <div className="option">
+                            <button type="button" className="onSale">
+                              구매중
+                            </button>
+                          </div>
+                        )}
                         {detail.sign === 0 && (
                           <div className="option">
                             <button
