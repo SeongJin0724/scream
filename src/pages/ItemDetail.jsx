@@ -311,7 +311,9 @@ export default function ItemDetail() {
                         </div>
                         <div className="trade_content">
                           <div>
-                            <p className="trade_content_title">이름</p>
+                            <p className="trade_content_title">
+                              {offer.itemTitle}
+                            </p>
 
                             <p className="trade_content_desc">
                               {offer.description}
