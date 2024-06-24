@@ -2,6 +2,7 @@
   "name": "scream",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://scream-q0enq4svv-leeseongjins-projects.vercel.app/",
   "dependencies": {
     "@coreui/coreui": "^5.0.1",
     "@coreui/react": "^5.0.0",
@@ -36,7 +37,6 @@
     "swiper": "^11.1.1",
     "web-vitals": "^2.1.4"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
