@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function MyPageUi({ children }) {
   const location = useLocation();
+  console.log(location);
   return (
     <Main>
       <div className="mypage_container">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contents/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import DealDetail from "./DealDetail";
@@ -49,9 +49,11 @@ export default function MyPageHome() {
   }, [token]);
 
   useEffect(() => {
-    getWishList();
+    if (token) {
+      getWishList();
+    }
     getItems();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     const filteredItems = itemData.filter((item) =>
@@ -90,8 +92,8 @@ export default function MyPageHome() {
             className="thumb_img user_img"
           />
           <div className="user_detail">
-            <p className="name">{user.name}</p>
-            <p className="email">{user.email}</p>
+            <p className="name">{user?.name}</p>
+            <p className="email">{user?.email}</p>
           </div>
         </div>
 
@@ -105,8 +107,8 @@ export default function MyPageHome() {
         </div>
       </div>
 
-      <DealDetail type="구매" user={user.user_id} />
-      <DealDetail type="판매" user={user.user_id} />
+      <DealDetail type="구매" user={user?.user_id} />
+      <DealDetail type="판매" user={user?.user_id} />
 
       <div className="dealDetail_wrap">
         <div className="detail_header">
@@ -136,26 +138,26 @@ export default function MyPageHome() {
           ) : (
             wishItemData.map((item) => (
               <Link
-                to={`/items/${item.itemKey}`}
+                to={`/items/${item?.itemKey}`}
                 className="wish_item_container"
               >
-                <div className="wish_item_wrap" key={item.itemKey}>
+                <div className="wish_item_wrap" key={item?.itemKey}>
                   <div className="wish_item_img">
                     {
                       imagePaths
-                        .filter((imgPath) => imgPath.itemKey === item.itemKey)
+                        .filter((imgPath) => imgPath?.itemKey === item?.itemKey)
                         .map((imgPath) => (
                           <img
-                            src={imgPath.path}
-                            alt={item.title}
-                            key={imgPath.path}
+                            src={imgPath?.path}
+                            alt={item?.title}
+                            key={imgPath?.path}
                           />
                         ))[0] // 첫 번째 이미지만 표시
                     }
                   </div>
                   <div className="wish_item_info">
-                    <h4 className="wish_item_info_brand">{item.brand}</h4>
-                    <p className="wish_item_info_name">{item.title}</p>
+                    <h4 className="wish_item_info_brand">{item?.brand}</h4>
+                    <p className="wish_item_info_name">{item?.title}</p>
                   </div>
                 </div>
               </Link>
