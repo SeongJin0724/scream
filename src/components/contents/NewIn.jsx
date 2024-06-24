@@ -18,13 +18,20 @@ export default function NewIn() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
         );
+        console.log(response.data); // 응답 데이터 로그
         const newProducts = response.data[0];
+
+        if (!Array.isArray(newProducts)) {
+          throw new Error("Expected an array but got: " + typeof newProducts);
+        }
+
         setProducts((prevProducts) => {
           const newUniqueProducts = newProducts.filter(
             (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
           );
           return [...prevProducts, ...newUniqueProducts];
         });
+
         if (offset + 5 >= 15) {
           setShowMore(false);
         }
