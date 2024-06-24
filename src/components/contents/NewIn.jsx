@@ -26,9 +26,11 @@ export default function NewIn() {
         }
 
         setProducts((prevProducts) => {
+          const productSet = new Set(prevProducts.map((pp) => pp.itemKey));
           const newUniqueProducts = newProducts.filter(
-            (np) => !prevProducts.some((pp) => pp.itemKey === np.itemKey)
+            (np) => !productSet.has(np.itemKey)
           );
+
           return [...prevProducts, ...newUniqueProducts];
         });
 
