@@ -9,7 +9,7 @@ export default function Home() {
       <Carousel />
       <div className="home_wrap">
         <TopBrand />
-        {/* <NewIn /> */}
+        <NewIn />
       </div>
     </Main>
   );
