@@ -26,6 +26,7 @@ export default function Shop() {
           `${process.env.REACT_APP_API_URL}/api/filter?category=${category}`
         );
         setItems(response.data);
+        console.log(response.data);
         setSort("정렬");
       } catch (error) {
         console.error("Error:", error);
