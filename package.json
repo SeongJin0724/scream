@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://scream-kappa.vercel.app/",
+  "proxy": "https://scream-kappa.vercel.app/",
   "dependencies": {
     "@coreui/coreui": "^5.0.1",
     "@coreui/react": "^5.0.0",
