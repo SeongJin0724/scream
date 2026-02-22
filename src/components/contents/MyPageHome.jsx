@@ -5,13 +5,14 @@ import DealDetail from "./DealDetail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { getToken } from "../../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
 export default function MyPageHome() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const token = localStorage.getItem("accessToken");
+  const token = getToken();
   const [wishlistData, setWishlistData] = useState([]);
   const [itemData, setItemData] = useState([]);
   const [wishItemData, setWishItemData] = useState([]);

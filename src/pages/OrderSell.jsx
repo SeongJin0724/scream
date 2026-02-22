@@ -6,12 +6,13 @@ import Main from "../components/section/Main";
 import ApplyResultModal from "../components/contents/ApplyResultModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
+import { getToken } from "../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
 const OrderSell = () => {
   const { user } = useAuth();
-  const token = localStorage.getItem("accessToken");
+  const token = getToken();
   const navigate = useNavigate();
   const { dealKey } = useParams();
   const [account, setAccount] = useState(false);

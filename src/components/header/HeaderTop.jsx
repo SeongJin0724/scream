@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../service/authService";
+import { clearToken, getToken } from "../../service/authToken";
 
 export default function HeaderTop() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,7 +9,7 @@ export default function HeaderTop() {
   const handleLogout = async () => {
     try {
       await logOut();
-      localStorage.removeItem("accessToken");
+      clearToken();
       localStorage.removeItem("user");
       setIsLoggedIn(false);
       window.location.reload(); // 여기에 추가
@@ -18,7 +19,7 @@ export default function HeaderTop() {
     }
   };
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = getToken();
     setIsLoggedIn(!!token); // token이 있으면 true, 없으면 false
   }, []);
   const headerTopMenus = [

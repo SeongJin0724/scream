@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { getToken, isGuestSession, setToken } from "../../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       setLoading(true);
-      const token = localStorage.getItem("accessToken");
+      const token = getToken();
 
       if (token) {
         try {
@@ -52,14 +53,17 @@ export const AuthProvider = ({ children }) => {
           });
         }
         setLoading(false);
+        return;
       }
+
+      setLoading(false);
     };
 
     fetchUserData();
   }, []);
 
   const updateUser = async (updatedUserInfo) => {
-    const token = localStorage.getItem("accessToken");
+    const token = getToken();
     if (token && updatedUserInfo) {
       try {
         const response = await axios.post(
@@ -74,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
         if (response.data && response.data.newToken) {
           // 새로운 토큰을 로컬 스토리지에 저장
-          localStorage.setItem("accessToken", response.data.newToken);
+          setToken(response.data.newToken, { persist: !isGuestSession() });
 
           // 새로운 사용자 정보와 토큰을 상태에 저장
           setUser({

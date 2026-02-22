@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import Modal from "react-modal";
+import { getToken } from "../../service/authToken";
 import { IoIosClose } from "react-icons/io";
 import MyPageUi from "./MyPageUi";
 import AccountForm from "./Account";
@@ -71,7 +72,7 @@ export default function InfoChangeHome() {
     setSavedAddresses(newAddresses);
 
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = getToken();
       const data = {
         user_id: user.user_id,
         address: newAddressString,

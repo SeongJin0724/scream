@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { banks } from "../data/bankData";
 import { useAuth } from "./AuthContext";
+import { getToken } from "../../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -18,7 +19,7 @@ const AccountForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("accessToken");
+      const token = getToken();
       const updatedUserInfo = {
         user_id: user.user_id,
         bankName,

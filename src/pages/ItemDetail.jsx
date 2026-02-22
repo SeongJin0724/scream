@@ -21,6 +21,7 @@ import { FaHandHoldingUsd } from "react-icons/fa";
 import { FaRegHandshake } from "react-icons/fa";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { FaBookmark } from "react-icons/fa";
+import { getToken } from "../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -44,11 +45,17 @@ export default function ItemDetail() {
   const postWishList = async () => {
     try {
       if (wishlist.length <= 0) {
+        const token = getToken();
         const response = await axios.post(
           `${API_BASE}/api/post/wishlist`,
           {
             user_id: user.user_id,
             itemKey: itemKey,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
       } else {
@@ -59,7 +66,7 @@ export default function ItemDetail() {
     }
   };
   const getWishlistDetail = async () => {
-    const token = localStorage.getItem("accessToken");
+    const token = getToken();
     const url = `${API_BASE}/api/get/wishlistDetail`;
     try {
       const response = await axios.get(url, {
@@ -77,12 +84,18 @@ export default function ItemDetail() {
   };
   const deleteWishlist = async () => {
     try {
+      const token = getToken();
       const response = await axios.post(
         `${API_BASE}/api/delete/wishlist`,
         {
           user_id: user.user_id,
           itemKey: Number(itemKey),
           wishKey: wishlist[0].wishKey,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
     } catch (error) {

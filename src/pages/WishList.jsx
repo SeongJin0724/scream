@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/contents/AuthContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { getToken } from "../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -13,7 +14,7 @@ export default function WishList() {
   const [wishItemData, setWishItemData] = useState([]);
   const [itemData, setItemData] = useState([]);
   const [imagePaths, setImagePaths] = useState([]);
-  const token = localStorage.getItem("accessToken");
+  const token = getToken();
 
   const getWishList = async () => {
     try {

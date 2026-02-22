@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { style } from "../components/data/style";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -31,7 +30,15 @@ export default function Post() {
           {/* <div className="user_info">
           <p className="user_name">{styleItem?.user_id}</p>
         </div> */}
-          <img src={style ? style[11].img : ""} alt="" className="post_img" />
+          <img
+            src={
+              styleItem?.img
+                ? styleItem.img.split(",")[0].trim()
+                : ""
+            }
+            alt={styleItem ? styleItem.title : ""}
+            className="post_img"
+          />
           <div className="post_tag_wrap">
             <h3 className="tag_header">상품태그</h3>
             <Link to={`/items/${styleItem?.itemKey}`} className="tag_item">

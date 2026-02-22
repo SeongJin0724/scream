@@ -1,5 +1,12 @@
 const { items, mockUser, mockDeals, mockWishlist, mockReviews, MOCK_TOKEN } = require('./_mockData');
 
+const sessionWishlists = new Map();
+let wishKeyCounter = 1000;
+const getWishlistForToken = (token) => {
+  if (!sessionWishlists.has(token)) sessionWishlists.set(token, []);
+  return sessionWishlists.get(token);
+};
+
 module.exports = (req, res) => {
   const urlPathname = (req.url || '').split('?')[0];
   const method = req.method.toUpperCase();
@@ -133,8 +140,9 @@ module.exports = (req, res) => {
 
   if (path === 'login') {
     const { email, password } = body;
-    if (!email || !password) return send({ message: '이메일과 비밀번호를 입력해주세요.' }, 400);
-    return send({ token: MOCK_TOKEN, message: '로그인 성공' });
+    if (!email || !password) return send({ message: 'Email and password are required.' }, 400);
+    const token = `mock_access_token_${Date.now()}`;
+    return send({ token, message: 'Login success' });
   }
 
   if (path === 'logout') return send({ message: '로그아웃 성공' });
@@ -154,21 +162,45 @@ module.exports = (req, res) => {
   // GET /api/wishlist  ← rewritten from /api/get/wishlist
   if (path === 'wishlist' && method === 'GET') {
     if (!auth) return send([[]]);
-    return send([mockWishlist]);
+    const list = getWishlistForToken(auth);
+    return send([list]);
   }
 
-  // GET /api/wishlistDetail  ← rewritten from /api/get/wishlistDetail
+  // GET /api/wishlistDetail  ??rewritten from /api/get/wishlistDetail
   if (path === 'wishlistDetail') {
     if (!auth) return send({ data: [] });
     const itemKey = parseInt(query.itemKey);
-    return send({ data: mockWishlist.filter((w) => w.itemKey === itemKey) });
+    const list = getWishlistForToken(auth);
+    return send({ data: list.filter((w) => w.itemKey === itemKey) });
   }
 
-  // POST /api/wishlistPost  ← rewritten from /api/post/wishlist
-  if (path === 'wishlistPost') return send({ message: '위시리스트에 추가되었습니다.' });
+  // POST /api/wishlistPost  ??rewritten from /api/post/wishlist
+  if (path === 'wishlistPost') {
+    if (!auth) return send({ message: 'Unauthorized' }, 401);
+    const itemKey = parseInt(body.itemKey);
+    if (!itemKey) return send({ message: 'Invalid itemKey' }, 400);
+    const list = getWishlistForToken(auth);
+    const exists = list.some((w) => w.itemKey === itemKey);
+    if (!exists) {
+      list.push({ wishKey: wishKeyCounter++, user_id: body.user_id || 0, itemKey });
+    }
+    return send({ message: 'Wishlist item added.' });
+  }
 
-  // POST /api/wishlistDel  ← rewritten from /api/delete/wishlist
-  if (path === 'wishlistDel') return send({ message: '위시리스트에서 삭제되었습니다.' });
+  // POST /api/wishlistDel  ??rewritten from /api/delete/wishlist
+  if (path === 'wishlistDel') {
+    if (!auth) return send({ message: 'Unauthorized' }, 401);
+    const itemKey = parseInt(body.itemKey);
+    const wishKey = parseInt(body.wishKey);
+    const list = getWishlistForToken(auth);
+    const next = list.filter((w) => {
+      if (Number.isFinite(wishKey)) return w.wishKey !== wishKey;
+      if (Number.isFinite(itemKey)) return w.itemKey !== itemKey;
+      return true;
+    });
+    sessionWishlists.set(auth, next);
+    return send({ message: 'Wishlist item removed.' });
+  }
 
   // ── 거래 ──────────────────────────────────────────────────────────────────
 
@@ -248,7 +280,7 @@ module.exports = (req, res) => {
     const review = mockReviews.find((r) => r.reviewKey === reviewKey);
     if (!review) return send({ message: '리뷰를 찾을 수 없습니다.' }, 404);
     const item = items.find((i) => i.itemKey === review.itemKey) || {};
-    return send({ reviewKey: review.reviewKey, itemKey: review.itemKey, img: item.img || review.img, title: item.title || '', brand: item.brand || '', launchPrice: item.launchPrice || 0, content: review.content });
+    return send({ reviewKey: review.reviewKey, itemKey: review.itemKey, img: review.img || item.img, title: item.title || '', brand: item.brand || '', launchPrice: item.launchPrice || 0, content: review.content });
   }
 
   // DELETE /api/delReview?reviewKey=N  ← rewritten from /api/deleteReview/:reviewKey

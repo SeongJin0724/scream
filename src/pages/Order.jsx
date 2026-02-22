@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import axios from "axios";
+import { getToken } from "../service/authToken";
 import { useAuth } from "../components/contents/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,7 +18,7 @@ const API_BASE = process.env.REACT_APP_API_URL || "";
 
 export default function Order() {
   const { user } = useAuth();
-  const token = localStorage.getItem("accessToken");
+  const token = getToken();
   const navigate = useNavigate();
   const { dealKey } = useParams();
 
