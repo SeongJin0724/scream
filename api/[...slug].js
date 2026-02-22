@@ -1,10 +1,8 @@
 const { items, mockUser, mockDeals, mockWishlist, mockReviews, MOCK_TOKEN } = require('./_mockData');
 
 module.exports = (req, res) => {
-  // req.url에서 직접 경로 파싱 (다중 세그먼트 경로 대응)
   const urlPathname = (req.url || '').split('?')[0];
-  const path = urlPathname.replace(/^\/api\//, '').replace(/\/$/, '');
-  const slug = path.split('/').filter(Boolean);
+  const path = urlPathname.replace(/^\/api\//, '').replace(/^\//, '').replace(/\/$/, '');
   const method = req.method.toUpperCase();
   const body = req.body || {};
   const query = req.query;
@@ -12,10 +10,10 @@ module.exports = (req, res) => {
 
   const send = (data, status = 200) => res.status(status).json(data);
 
-  // OPTIONS (CORS preflight)
   if (method === 'OPTIONS') return res.status(200).end();
 
-  // ── 상품 ────────────────────────────────────────────────────
+  // ── 상품 ──────────────────────────────────────────────────────────────────
+
   // GET /api/newin?offset=N
   if (path === 'newin') {
     const offset = parseInt(query.offset) || 0;
@@ -45,20 +43,20 @@ module.exports = (req, res) => {
     );
   }
 
-  // GET /api/items  →  전체 목록
+  // GET /api/items → 전체 목록
   if (path === 'items' && method === 'GET') return send([items]);
 
-  // GET /api/items/:itemKey
-  if (slug.length === 2 && slug[0] === 'items' && method === 'GET') {
-    const itemKey = parseInt(slug[1]);
+  // GET /api/item?itemKey=N  ← rewritten from /api/items/:itemKey
+  if (path === 'item' && method === 'GET') {
+    const itemKey = parseInt(query.itemKey);
     const item = items.find((i) => i.itemKey === itemKey);
     if (!item) return send({ message: '상품을 찾을 수 없습니다.' }, 404);
     return send([item]);
   }
 
-  // GET /api/items/:itemKey/offers
-  if (slug.length === 3 && slug[0] === 'items' && slug[2] === 'offers') {
-    const itemKey = parseInt(slug[1]);
+  // GET /api/offers?itemKey=N  ← rewritten from /api/items/:itemKey/offers
+  if (path === 'offers') {
+    const itemKey = parseInt(query.itemKey);
     const item = items.find((i) => i.itemKey === itemKey);
     if (!item) return send({ message: '상품을 찾을 수 없습니다.' }, 404);
 
@@ -74,69 +72,62 @@ module.exports = (req, res) => {
     return send({ sales, purchases });
   }
 
-  // GET /api/brands/:brand
-  if (slug.length === 2 && slug[0] === 'brands') {
-    return send([items.filter((i) => i.brand.toLowerCase() === slug[1].toLowerCase())]);
+  // GET /api/brand?brand=X  ← rewritten from /api/brands/:brand
+  if (path === 'brand') {
+    const brand = query.brand || '';
+    return send([items.filter((i) => i.brand.toLowerCase() === brand.toLowerCase())]);
   }
 
-  // ── 인증 ────────────────────────────────────────────────────
-  // POST /api/login
+  // ── 인증 ──────────────────────────────────────────────────────────────────
+
   if (path === 'login') {
     const { email, password } = body;
     if (!email || !password) return send({ message: '이메일과 비밀번호를 입력해주세요.' }, 400);
     return send({ token: MOCK_TOKEN, message: '로그인 성공' });
   }
 
-  // POST /api/logout
   if (path === 'logout') return send({ message: '로그아웃 성공' });
 
-  // GET /api/user
   if (path === 'user' && method === 'GET') {
     if (!auth) return send({ message: '토큰이 없습니다.' }, 401);
     return send({ user: mockUser });
   }
 
-  // POST /api/updateUser
   if (path === 'updateUser') return send({ user: { ...mockUser, ...body }, newToken: MOCK_TOKEN });
-
-  // POST /api/register
   if (path === 'register') return send({ message: '회원가입이 완료되었습니다.' });
-
-  // POST /api/send-verification-code
   if (path === 'send-verification-code') return send({ message: '인증 코드가 발송되었습니다.' });
-
-  // POST /api/verify-code
   if (path === 'verify-code') return send({ message: '이메일이 인증되었습니다.' });
 
-  // ── 위시리스트 ───────────────────────────────────────────────
-  // GET /api/get/wishlist
-  if (path === 'get/wishlist') {
+  // ── 위시리스트 ─────────────────────────────────────────────────────────────
+
+  // GET /api/wishlist  ← rewritten from /api/get/wishlist
+  if (path === 'wishlist' && method === 'GET') {
     if (!auth) return send([[]]);
     return send([mockWishlist]);
   }
 
-  // GET /api/get/wishlistDetail
-  if (path === 'get/wishlistDetail') {
+  // GET /api/wishlistDetail  ← rewritten from /api/get/wishlistDetail
+  if (path === 'wishlistDetail') {
     if (!auth) return send({ data: [] });
     const itemKey = parseInt(query.itemKey);
     return send({ data: mockWishlist.filter((w) => w.itemKey === itemKey) });
   }
 
-  // POST /api/post/wishlist
-  if (path === 'post/wishlist') return send({ message: '위시리스트에 추가되었습니다.' });
+  // POST /api/wishlistPost  ← rewritten from /api/post/wishlist
+  if (path === 'wishlistPost') return send({ message: '위시리스트에 추가되었습니다.' });
 
-  // POST /api/delete/wishlist
-  if (path === 'delete/wishlist') return send({ message: '위시리스트에서 삭제되었습니다.' });
+  // POST /api/wishlistDel  ← rewritten from /api/delete/wishlist
+  if (path === 'wishlistDel') return send({ message: '위시리스트에서 삭제되었습니다.' });
 
-  // ── 거래 ────────────────────────────────────────────────────
-  // POST /api/applyOfferDeal
+  // ── 거래 ──────────────────────────────────────────────────────────────────
+
   if (path === 'applyOfferDeal') {
     return send({ message: '거래 신청이 완료되었습니다.', dealKey: Math.floor(Math.random() * 9000) + 1000 });
   }
 
-  // GET /api/offerDeal/:dealKey
-  if (slug.length === 2 && slug[0] === 'offerDeal') {
-    const dealKey = parseInt(slug[1]);
+  // GET /api/offerDeal?dealKey=N  ← rewritten from /api/offerDeal/:dealKey
+  if (path === 'offerDeal' && method === 'GET') {
+    const dealKey = parseInt(query.dealKey);
     const deal = mockDeals.find((d) => d.dealKey === dealKey);
     if (!deal) {
       const si = items[0];
@@ -146,30 +137,26 @@ module.exports = (req, res) => {
     return send({ ...deal, img: item.img ? item.img.split(',')[0].trim() : '' });
   }
 
-  // POST /api/offerDealDetail
   if (path === 'offerDealDetail') return send([mockDeals.filter((d) => d.deal === body.deal)]);
-
-  // POST /api/orderDetail
   if (path === 'orderDetail') return send([mockDeals.filter((d) => d.deal === body.deal && d.status === '완료')]);
 
-  // DELETE /api/deleteOfferDeal/:dealKey
-  if (slug.length === 2 && slug[0] === 'deleteOfferDeal') return send({ message: '거래가 취소되었습니다.' });
+  // DELETE /api/delDeal?dealKey=N  ← rewritten from /api/deleteOfferDeal/:dealKey
+  if (path === 'delDeal') return send({ message: '거래가 취소되었습니다.' });
 
-  // POST /api/sendOrdersell
   if (path === 'sendOrdersell') return send({ message: '판매 주문이 접수되었습니다.' });
 
-  // ── 마이페이지 ───────────────────────────────────────────────
-  // POST /api/mypage/account
-  if (path === 'mypage/account') return send({ message: '계좌 정보가 저장되었습니다.' });
+  // ── 마이페이지 ─────────────────────────────────────────────────────────────
 
-  // POST /api/mypage/address
-  if (path === 'mypage/address') return send({ message: '주소가 저장되었습니다.' });
+  // POST /api/mypageAccount  ← rewritten from /api/mypage/account
+  if (path === 'mypageAccount') return send({ message: '계좌 정보가 저장되었습니다.' });
 
-  // PUT /api/infochange
+  // POST /api/mypageAddress  ← rewritten from /api/mypage/address
+  if (path === 'mypageAddress') return send({ message: '주소가 저장되었습니다.' });
+
   if (path === 'infochange') return send({ message: '정보가 변경되었습니다.' });
 
-  // ── 관리자 ───────────────────────────────────────────────────
-  // GET /api/admin
+  // ── 관리자 ────────────────────────────────────────────────────────────────
+
   if (path === 'admin' && method === 'GET') {
     const pending = mockDeals
       .filter((d) => !d.sign && d.status === '대기중')
@@ -180,45 +167,42 @@ module.exports = (req, res) => {
     return send([pending]);
   }
 
-  // POST /api/adminSign
   if (path === 'adminSign') return send({ message: '승인 처리되었습니다.' });
 
-  // POST /api/delete/adminSign
-  if (path === 'delete/adminSign') return send({ message: '거래가 취소 처리되었습니다.' });
+  // POST /api/delAdminSign  ← rewritten from /api/delete/adminSign
+  if (path === 'delAdminSign') return send({ message: '거래가 취소 처리되었습니다.' });
 
-  // ── 결제 ────────────────────────────────────────────────────
-  // POST /api/payment/kakao
-  if (path === 'payment/kakao') {
+  // ── 결제 ──────────────────────────────────────────────────────────────────
+
+  // POST /api/payKakao  ← rewritten from /api/payment/kakao
+  if (path === 'payKakao') {
     return send({ tid: 'mock_tid_' + Date.now(), next_redirect_pc_url: '/payment/approval?pg_token=mock_pg_token&dealKey=' + (body.partner_order_id || ''), created_at: new Date().toISOString() });
   }
 
-  // GET /api/payment/approval
-  if (path === 'payment/approval') {
+  // GET /api/payApproval  ← rewritten from /api/payment/approval
+  if (path === 'payApproval') {
     return send({ aid: 'mock_aid_' + Date.now(), partner_order_id: query.dealKey || '', item_name: 'SCREAM 상품', amount: { total: 0 }, approved_at: new Date().toISOString(), message: '결제가 완료되었습니다.' });
   }
 
-  // ── 스타일/리뷰 ─────────────────────────────────────────────
-  // GET /api/reviews  or  POST /api/reviews {user_id}
+  // ── 스타일/리뷰 ───────────────────────────────────────────────────────────
+
   if (path === 'reviews') {
     if (method === 'GET') return send([mockReviews]);
-    if (method === 'POST') {
-      return send([mockReviews.filter((r) => String(r.user_id) === String(body.user_id))]);
-    }
+    if (method === 'POST') return send([mockReviews.filter((r) => String(r.user_id) === String(body.user_id))]);
   }
 
-  // GET /api/styleItem/:reviewKey
-  if (slug.length === 2 && slug[0] === 'styleItem') {
-    const reviewKey = parseInt(slug[1]);
+  // GET /api/styleItem?reviewKey=N  ← rewritten from /api/styleItem/:reviewKey
+  if (path === 'styleItem') {
+    const reviewKey = parseInt(query.reviewKey);
     const review = mockReviews.find((r) => r.reviewKey === reviewKey);
     if (!review) return send({ message: '리뷰를 찾을 수 없습니다.' }, 404);
     const item = items.find((i) => i.itemKey === review.itemKey) || {};
     return send({ reviewKey: review.reviewKey, itemKey: review.itemKey, img: item.img || review.img, title: item.title || '', brand: item.brand || '', launchPrice: item.launchPrice || 0, content: review.content });
   }
 
-  // DELETE /api/deleteReview/:reviewKey
-  if (slug.length === 2 && slug[0] === 'deleteReview') return send({ message: '리뷰가 삭제되었습니다.' });
+  // DELETE /api/delReview?reviewKey=N  ← rewritten from /api/deleteReview/:reviewKey
+  if (path === 'delReview') return send({ message: '리뷰가 삭제되었습니다.' });
 
-  // POST /api/posts
   if (path === 'posts') {
     return send([mockReviews.filter((r) => String(r.user_id) === String(body.user_id))]);
   }
