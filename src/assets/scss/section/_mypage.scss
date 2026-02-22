@@ -258,11 +258,22 @@
       &:first-of-type {
         margin-left: 0;
       }
-      .wish_item_wrap {
+        .wish_item_wrap {
         .wish_item_img {
           background-color: #fafafa;
           border-radius: 14px;
           overflow: hidden;
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
         }
         .wish_item_info {
           text-align: left;
@@ -305,6 +316,47 @@
         background-color: #222;
         color: #fff;
         border-color: #222;
+      }
+    }
+  }
+}
+
+@media (max-width: 980px) {
+  .mypage_container {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 20px 80px;
+
+    .mypage_nav {
+      max-width: none;
+      margin-right: 0;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .dealDetail_wrap {
+    .wish_list {
+      .wish_item_container {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .mypage_container {
+    .mypage_nav {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .dealDetail_wrap {
+    .wish_list {
+      .wish_item_container {
+        width: 100%;
       }
     }
   }
