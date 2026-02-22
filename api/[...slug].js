@@ -221,5 +221,5 @@ module.exports = (req, res) => {
     return send([mockReviews.filter((r) => String(r.user_id) === String(body.user_id))]);
   }
 
-  return send({ message: 'Not Found' }, 404);
+  return send({ message: 'Not Found', debug_slug: req.query.slug, debug_path: path, debug_method: method }, 404);
 };
