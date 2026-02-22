@@ -41,7 +41,7 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/wishlist">관심</Link>
+                  <Link to="/mypage/wishlist">????</Link>
                 </li>
                 <li
                   className={
@@ -50,7 +50,7 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/mystyle">내 스타일</Link>
+                  <Link to="/mypage/mystyle">? ???</Link>
                 </li>
               </ul>
             </li>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/contents/AuthContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { getWishlist } from "../service/wishlistStorage";
 import { getToken } from "../service/authToken";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
@@ -16,21 +17,9 @@ export default function WishList() {
   const [imagePaths, setImagePaths] = useState([]);
   const token = getToken();
 
-  const getWishList = async () => {
-    try {
-      const response = await axios.get(
-        `${API_BASE}/api/get/wishlist`,
-        {
-          userId: user.user_id,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setWishlistData(response.data[0]);
-    } catch (error) {
-      console.error(error, "error");
-    }
+  const loadWishList = () => {
+    const keys = getWishlist();
+    setWishlistData(keys.map((itemKey) => ({ itemKey })));
   };
 
   const getItems = async () => {
@@ -45,7 +34,7 @@ export default function WishList() {
   };
 
   useEffect(() => {
-    getWishList();
+    loadWishList();
     getItems();
   }, []);
 

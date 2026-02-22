@@ -22,6 +22,12 @@ import { FaRegHandshake } from "react-icons/fa";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { FaBookmark } from "react-icons/fa";
 import { getToken } from "../service/authToken";
+import {
+  addWishlistItem,
+  getWishlist,
+  hasWishlistItem,
+  removeWishlistItem,
+} from "../service/wishlistStorage";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -44,53 +50,37 @@ export default function ItemDetail() {
 
   const postWishList = async () => {
     try {
-      if (wishlist.length <= 0) {
-        const token = getToken();
-        const response = await axios.post(
-          `${API_BASE}/api/post/wishlist`,
-          {
-            user_id: user.user_id,
-            itemKey: itemKey,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      } else {
-        console.log("이미 추가되었습니다");
-      }
-    } catch (error) {
-      console.error(error, "error");
-    }
-  };
-  const getWishlistDetail = async () => {
-    const token = getToken();
-    const url = `${API_BASE}/api/get/wishlistDetail`;
-    try {
-      const response = await axios.get(url, {
-        params: {
+      const token = getToken();
+      await axios.post(
+        `${API_BASE}/api/post/wishlist`,
+        {
+          user_id: user.user_id,
           itemKey: itemKey,
         },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setWishlist(response.data.data);
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.error(error, "error");
     }
   };
+
+  const getWishlistDetail = () => {
+    setWishlist(getWishlist());
+  };
+
   const deleteWishlist = async () => {
     try {
       const token = getToken();
-      const response = await axios.post(
+      await axios.post(
         `${API_BASE}/api/delete/wishlist`,
         {
           user_id: user.user_id,
           itemKey: Number(itemKey),
-          wishKey: wishlist[0].wishKey,
+          wishKey: wishlist[0]?.wishKey,
         },
         {
           headers: {
@@ -104,14 +94,17 @@ export default function ItemDetail() {
   };
 
   const wishlistClickHandler = () => {
-    if (wishlistBtn === false) {
+    if (!hasWishlistItem(itemKey)) {
+      addWishlistItem(itemKey);
       setWishlistBtn(true);
+      setWishlist(getWishlist());
       postWishList();
-    } else if (wishlistBtn === true) {
+    } else {
+      removeWishlistItem(itemKey);
       setWishlistBtn(false);
+      setWishlist(getWishlist());
       deleteWishlist();
     }
-    getWishlistDetail();
   };
 
   useEffect(() => {
@@ -132,11 +125,10 @@ export default function ItemDetail() {
       const paths = item[0].img.split(",").map((path) => path.trim());
       setImagePaths(paths);
     }
-  }, [itemKey, item]);
 
-  useEffect(() => {
-    getWishlistDetail();
-  }, [wishlistBtn]);
+    setWishlist(getWishlist());
+    setWishlistBtn(hasWishlistItem(itemKey));
+  }, [itemKey, item]);
 
   useEffect(() => {
     window.scrollTo({
@@ -202,7 +194,7 @@ export default function ItemDetail() {
               </button>
             </div>
             <button className="like_btn" onClick={wishlistClickHandler}>
-              {wishlist.length > 0 ? (
+              {hasWishlistItem(itemKey) ? (
                 <FaBookmark style={{ fontSize: "20px" }} />
               ) : (
                 <FaRegBookmark style={{ fontSize: "20px" }} />

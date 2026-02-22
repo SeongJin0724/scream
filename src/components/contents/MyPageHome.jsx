@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { getToken } from "../../service/authToken";
+import { getWishlist } from "../../service/wishlistStorage";
 
 const API_BASE = process.env.REACT_APP_API_URL || "";
 
@@ -18,21 +19,9 @@ export default function MyPageHome() {
   const [wishItemData, setWishItemData] = useState([]);
   const [imagePaths, setImagePaths] = useState([]);
 
-  const getWishList = async () => {
-    try {
-      const response = await axios.get(
-        `${API_BASE}/api/get/wishlist`,
-        {
-          userId: user.user_id,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setWishlistData(response.data[0]);
-    } catch (error) {
-      console.error(error, "error");
-    }
+  const loadWishList = () => {
+    const keys = getWishlist();
+    setWishlistData(keys.map((itemKey) => ({ itemKey })));
   };
 
   const getItems = async () => {
@@ -53,7 +42,7 @@ export default function MyPageHome() {
 
   useEffect(() => {
     if (token) {
-      getWishList();
+      loadWishList();
     }
     getItems();
   }, [token]);
