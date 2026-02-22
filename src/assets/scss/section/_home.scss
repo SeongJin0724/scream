@@ -98,3 +98,44 @@
     }
   }
 }
+
+@media (max-width: 980px) {
+  .home_wrap {
+    padding: 0 20px;
+
+    .topBrand_items_wrap {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .newIn_lists_wrap {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      .newIn_item {
+        .newIn_item_img {
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .home_wrap {
+    padding: 0 16px;
+
+    .topBrand_items_wrap {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .newIn_lists_wrap {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 12px;
+
+      .newIn_item {
+        .newIn_item_img {
+          height: 180px;
+        }
+      }
+    }
+  }
+}
