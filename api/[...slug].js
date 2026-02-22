@@ -1,9 +1,10 @@
 const { items, mockUser, mockDeals, mockWishlist, mockReviews, MOCK_TOKEN } = require('./_mockData');
 
 module.exports = (req, res) => {
-  const rawSlug = req.query['...slug'];
-  const slug = Array.isArray(rawSlug) ? rawSlug : [rawSlug || ''];
-  const path = slug.join('/');
+  // req.url에서 직접 경로 파싱 (다중 세그먼트 경로 대응)
+  const urlPathname = (req.url || '').split('?')[0];
+  const path = urlPathname.replace(/^\/api\//, '').replace(/\/$/, '');
+  const slug = path.split('/').filter(Boolean);
   const method = req.method.toUpperCase();
   const body = req.body || {};
   const query = req.query;
