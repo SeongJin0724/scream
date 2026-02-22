@@ -2,22 +2,7 @@
   "buildCommand": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
   "outputDirectory": "build",
   "rewrites": [
-    { "source": "/api/items/:itemKey/offers", "destination": "/api/offers?itemKey=:itemKey" },
-    { "source": "/api/items/:itemKey",        "destination": "/api/item?itemKey=:itemKey" },
-    { "source": "/api/brands/:brand",         "destination": "/api/brand?brand=:brand" },
-    { "source": "/api/offerDeal/:dealKey",    "destination": "/api/offerDeal?dealKey=:dealKey" },
-    { "source": "/api/deleteOfferDeal/:dealKey", "destination": "/api/delDeal?dealKey=:dealKey" },
-    { "source": "/api/styleItem/:reviewKey",  "destination": "/api/styleItem?reviewKey=:reviewKey" },
-    { "source": "/api/deleteReview/:reviewKey", "destination": "/api/delReview?reviewKey=:reviewKey" },
-    { "source": "/api/get/wishlist",          "destination": "/api/wishlist" },
-    { "source": "/api/get/wishlistDetail",    "destination": "/api/wishlistDetail" },
-    { "source": "/api/post/wishlist",         "destination": "/api/wishlistPost" },
-    { "source": "/api/delete/wishlist",       "destination": "/api/wishlistDel" },
-    { "source": "/api/mypage/account",        "destination": "/api/mypageAccount" },
-    { "source": "/api/mypage/address",        "destination": "/api/mypageAddress" },
-    { "source": "/api/payment/kakao",         "destination": "/api/payKakao" },
-    { "source": "/api/payment/approval",      "destination": "/api/payApproval" },
-    { "source": "/api/delete/adminSign",      "destination": "/api/delAdminSign" },
-    { "source": "/((?!api/).*)",              "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/api?path=$1" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

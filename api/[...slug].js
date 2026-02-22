@@ -2,10 +2,61 @@ const { items, mockUser, mockDeals, mockWishlist, mockReviews, MOCK_TOKEN } = re
 
 module.exports = (req, res) => {
   const urlPathname = (req.url || '').split('?')[0];
-  const path = urlPathname.replace(/^\/api\//, '').replace(/^\//, '').replace(/\/$/, '');
   const method = req.method.toUpperCase();
   const body = req.body || {};
-  const query = req.query;
+  const query = req.query || {};
+  const rawQueryPath = query.path;
+  let path = Array.isArray(rawQueryPath) ? rawQueryPath.join('/') : rawQueryPath;
+
+  if (!path) {
+    path = urlPathname.replace(/^\/api\//, '').replace(/^\//, '').replace(/\/$/, '');
+  }
+
+  path = String(path || '').replace(/^\//, '').replace(/\/$/, '');
+
+  const remap = {
+    'get/wishlist': 'wishlist',
+    'get/wishlistDetail': 'wishlistDetail',
+    'post/wishlist': 'wishlistPost',
+    'delete/wishlist': 'wishlistDel',
+    'mypage/account': 'mypageAccount',
+    'mypage/address': 'mypageAddress',
+    'payment/kakao': 'payKakao',
+    'payment/approval': 'payApproval',
+    'delete/adminSign': 'delAdminSign',
+  };
+  if (remap[path]) path = remap[path];
+
+  if (path.startsWith('items/') && path.endsWith('/offers')) {
+    const parts = path.split('/');
+    query.itemKey = query.itemKey || parts[1];
+    path = 'offers';
+  } else if (path.startsWith('items/')) {
+    const parts = path.split('/');
+    query.itemKey = query.itemKey || parts[1];
+    path = 'item';
+  } else if (path.startsWith('brands/')) {
+    const parts = path.split('/');
+    query.brand = query.brand || parts[1];
+    path = 'brand';
+  } else if (path.startsWith('offerDeal/')) {
+    const parts = path.split('/');
+    query.dealKey = query.dealKey || parts[1];
+    path = 'offerDeal';
+  } else if (path.startsWith('deleteOfferDeal/')) {
+    const parts = path.split('/');
+    query.dealKey = query.dealKey || parts[1];
+    path = 'delDeal';
+  } else if (path.startsWith('styleItem/')) {
+    const parts = path.split('/');
+    query.reviewKey = query.reviewKey || parts[1];
+    path = 'styleItem';
+  } else if (path.startsWith('deleteReview/')) {
+    const parts = path.split('/');
+    query.reviewKey = query.reviewKey || parts[1];
+    path = 'delReview';
+  }
+
   const auth = (req.headers.authorization || '').replace(/^bearer\s+/i, '');
 
   const send = (data, status = 200) => res.status(status).json(data);
