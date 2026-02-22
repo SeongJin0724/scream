@@ -87,6 +87,14 @@ const SellDetail = () => {
     return new Intl.NumberFormat("ko-KR").format(price);
   }
 
+  function formatDate(value) {
+    if (!value) return "-";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "-";
+    return date.toISOString().slice(0, 10);
+  }
+
+
   return (
     <Main>
       <MyPageUi>
@@ -155,9 +163,7 @@ const SellDetail = () => {
                         <div className="detail_type">
                           <p className="type_title">판매신청</p>
                           <p className="apply_date">
-                            {new Date(detail.addDate)
-                              .toISOString()
-                              .slice(0, 10)}
+                            {formatDate(detail.addDate || detail.deadline)}
                           </p>
                         </div>
                         <div className="detail_desc">
@@ -170,9 +176,7 @@ const SellDetail = () => {
                         <div className="deadline">
                           <p>
                             <span className="deadline_title">마감기한:</span>
-                            {new Date(detail.deadline)
-                              .toISOString()
-                              .slice(0, 10)}
+                            {formatDate(detail.deadline)}
                           </p>
                           <p>
                             승인:
@@ -210,9 +214,7 @@ const SellDetail = () => {
                         <div className="detail_type">
                           <p className="type_title">판매완료</p>
                           <p className="apply_date">
-                            {new Date(detail.orderDate)
-                              .toISOString()
-                              .slice(0, 10)}
+                            {formatDate(detail.orderDate || detail.deadline)}
                           </p>
                         </div>
                         <div className="detail_desc">

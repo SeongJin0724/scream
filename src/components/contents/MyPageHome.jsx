@@ -26,14 +26,13 @@ export default function MyPageHome() {
 
   const getItems = async () => {
     try {
-      const response = await axios.get(
-        `${API_BASE}/api/items`
-      );
+      const response = await axios.get(`${API_BASE}/api/items`);
       setItemData(response.data[0]);
     } catch (error) {
       console.error(error, "error");
     }
   };
+
   useEffect(() => {
     if (!token) {
       return navigate("/login");
@@ -54,23 +53,21 @@ export default function MyPageHome() {
 
     setWishItemData(filteredItems);
 
-    if (wishItemData && wishItemData.length > 0) {
-      const paths = wishItemData
-        .map((item) =>
-          item.img
-            ? {
-                path: item.img.split(",").map((path) => path.trim())[0], // 첫 번째 이미지만 선택
-                itemKey: item.itemKey,
-              }
-            : null
-        )
-        .filter((path) => path !== null); // null 항목 제거
-      setImagePaths(paths);
-    }
+    const paths = filteredItems
+      .map((item) =>
+        item.img
+          ? {
+              path: item.img.split(",").map((path) => path.trim())[0],
+              itemKey: item.itemKey,
+            }
+          : null
+      )
+      .filter((path) => path !== null);
+    setImagePaths(paths);
   }, [itemData, wishlistData]);
 
   if (loading) {
-    return <div>로딩중입니다.</div>;
+    return <div>{"로딩중입니다."}</div>;
   }
 
   return (
@@ -91,22 +88,22 @@ export default function MyPageHome() {
 
         <div className="setting_profile">
           <Link to="/mypage/infochange" className="goToLink">
-            내 정보
+            {"내 정보"}
           </Link>
           <Link to="/mypage/mystyle" className="goToLink">
-            내 스타일
+            {"내 스타일"}
           </Link>
         </div>
       </div>
 
-      <DealDetail type="구매" user={user?.user_id} />
-      <DealDetail type="판매" user={user?.user_id} />
+      <DealDetail type={"구매"} user={user?.user_id} />
+      <DealDetail type={"판매"} user={user?.user_id} />
 
       <div className="dealDetail_wrap">
         <div className="detail_header">
-          <h3 className="header_title">위시리스트</h3>
+          <h3 className="header_title">{"관심상품"}</h3>
           <Link className="showMore_Btn" to={"/mypage/wishlist"}>
-            더보기 <FontAwesomeIcon icon={faAngleRight} />
+            {"더보기"}<FontAwesomeIcon icon={faAngleRight} />
           </Link>
         </div>
         <div className="wish_list">
@@ -122,9 +119,9 @@ export default function MyPageHome() {
                 color: "rgba(34, 34, 34, 0.5019607843)",
               }}
             >
-              <p className="content">추가하신 관심 상품이 없습니다.</p>
+              <p className="content">{"추가하신 관심상품이 없습니다."}</p>
               <Link to="/shop" className="goToShopBtn">
-                SHOP 바로가기
+                {"SHOP 바로가기"}
               </Link>
             </div>
           ) : (
@@ -132,8 +129,9 @@ export default function MyPageHome() {
               <Link
                 to={`/items/${item?.itemKey}`}
                 className="wish_item_container"
+                key={item?.itemKey}
               >
-                <div className="wish_item_wrap" key={item?.itemKey}>
+                <div className="wish_item_wrap">
                   <div className="wish_item_img">
                     {
                       imagePaths
@@ -144,7 +142,7 @@ export default function MyPageHome() {
                             alt={item?.title}
                             key={imgPath?.path}
                           />
-                        ))[0] // 첫 번째 이미지만 표시
+                        ))[0]
                     }
                   </div>
                   <div className="wish_item_info">

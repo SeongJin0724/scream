@@ -10,11 +10,11 @@ export default function MyPageUi({ children }) {
       <div className="mypage_container">
         <nav className="mypage_nav">
           <h3 className="mypage_nav_title">
-            <Link to="/mypage">마이페이지</Link>
+            <Link to="/mypage">{"마이페이지"}</Link>
           </h3>
           <ul className="mypage_shopinfo">
             <li className="mypage_shopinfo_li">
-              <h3 className="mypage_shopinfo_title">쇼핑 정보</h3>
+              <h3 className="mypage_shopinfo_title">{"쇼핑 정보"}</h3>
               <ul className="mypage_shopinfo_sub_ul">
                 <li
                   className={
@@ -23,7 +23,7 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/buyDetail">구매내역</Link>
+                  <Link to="/mypage/buyDetail">{"구매내역"}</Link>
                 </li>
                 <li
                   className={
@@ -32,7 +32,7 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/sellDetail">판매내역</Link>
+                  <Link to="/mypage/sellDetail">{"판매내역"}</Link>
                 </li>
                 <li
                   className={
@@ -41,7 +41,7 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/wishlist">????</Link>
+                  <Link to="/mypage/wishlist">{"관심상품"}</Link>
                 </li>
                 <li
                   className={
@@ -50,23 +50,23 @@ export default function MyPageUi({ children }) {
                       : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/mystyle">? ???</Link>
+                  <Link to="/mypage/mystyle">{"내 스타일"}</Link>
                 </li>
               </ul>
             </li>
           </ul>
           <ul className="mypage_myinfo">
             <li className="mypage_myinfo_li">
-              <h3 className="mypage_myinfo_title">내 정보</h3>
+              <h3 className="mypage_myinfo_title">{"내 정보"}</h3>
               <ul className="mypage_myinfo_sub_ul">
                 <li
                   className={
                     location.pathname === "/mypage/infochange"
-                      ? "mypage_myinfo_sub_li_active"
-                      : "mypage_myinfo_sub_li"
+                      ? "mypage_shopinfo_sub_li_active"
+                      : "mypage_shopinfo_sub_li"
                   }
                 >
-                  <Link to="/mypage/infochange">개인정보 수정</Link>
+                  <Link to="/mypage/infochange">{"개인정보 수정"}</Link>
                 </li>
               </ul>
             </li>
