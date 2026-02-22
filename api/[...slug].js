@@ -1,7 +1,8 @@
 const { items, mockUser, mockDeals, mockWishlist, mockReviews, MOCK_TOKEN } = require('./_mockData');
 
 module.exports = (req, res) => {
-  const slug = Array.isArray(req.query.slug) ? req.query.slug : [req.query.slug || ''];
+  const rawSlug = req.query['...slug'];
+  const slug = Array.isArray(rawSlug) ? rawSlug : [rawSlug || ''];
   const path = slug.join('/');
   const method = req.method.toUpperCase();
   const body = req.body || {};
@@ -221,5 +222,5 @@ module.exports = (req, res) => {
     return send([mockReviews.filter((r) => String(r.user_id) === String(body.user_id))]);
   }
 
-  return send({ message: 'Not Found', debug_query: req.query, debug_url: req.url, debug_path: path }, 404);
+  return send({ message: 'Not Found' }, 404);
 };
