@@ -41,14 +41,12 @@ export default function Sell() {
     if (apply) {
       const handleSubmit = async () => {
         try {
-          const response = await axios.post(
+          await axios.post(
             `${process.env.REACT_APP_API_URL}/api/applyOfferDeal`,
             formData
           );
-          if (response.data.success) {
-            setApply(false);
-            setSuccess(true);
-          }
+          setApply(false);
+          setSuccess(true);
         } catch (error) {
           console.error("Error:", error);
         }

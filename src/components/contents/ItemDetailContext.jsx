@@ -6,7 +6,7 @@ const ItemDetailContext = createContext();
 
 const ItemKeyProvider = ({ children }) => {
   const { itemKey } = useParams();
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState([]);
 
   useEffect(() => {
     const fetchItemDetail = async () => {

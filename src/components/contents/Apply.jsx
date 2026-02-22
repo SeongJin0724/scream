@@ -92,6 +92,14 @@ export default function Apply({ content, onGetData }) {
     });
   };
 
+  if (!item || item.length === 0) {
+    return (
+      <div className="apply_wrap">
+        <div className="apply_content">로딩 중...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="apply_wrap">
       <div className="apply_content">
