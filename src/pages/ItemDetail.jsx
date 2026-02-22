@@ -22,6 +22,8 @@ import { FaRegHandshake } from "react-icons/fa";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { FaBookmark } from "react-icons/fa";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function ItemDetail() {
   const { user } = useAuth();
   const { item, itemKey } = useContext(ItemDetailContext);
@@ -43,7 +45,7 @@ export default function ItemDetail() {
     try {
       if (wishlist.length <= 0) {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/post/wishlist`,
+          `${API_BASE}/api/post/wishlist`,
           {
             user_id: user.user_id,
             itemKey: itemKey,
@@ -58,7 +60,7 @@ export default function ItemDetail() {
   };
   const getWishlistDetail = async () => {
     const token = localStorage.getItem("accessToken");
-    const url = `${process.env.REACT_APP_API_URL}/api/get/wishlistDetail`;
+    const url = `${API_BASE}/api/get/wishlistDetail`;
     try {
       const response = await axios.get(url, {
         params: {
@@ -76,7 +78,7 @@ export default function ItemDetail() {
   const deleteWishlist = async () => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/delete/wishlist`,
+        `${API_BASE}/api/delete/wishlist`,
         {
           user_id: user.user_id,
           itemKey: Number(itemKey),
@@ -103,7 +105,7 @@ export default function ItemDetail() {
     const fetchOffers = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/items/${itemKey}/offers`
+          `${API_BASE}/api/items/${itemKey}/offers`
         );
         setSales(response.data.sales);
         setPurchases(response.data.purchases);

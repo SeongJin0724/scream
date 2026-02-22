@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function MyPageHome() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export default function MyPageHome() {
   const getWishList = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/get/wishlist`,
+        `${API_BASE}/api/get/wishlist`,
         {
           userId: user.user_id,
           headers: {
@@ -35,7 +37,7 @@ export default function MyPageHome() {
   const getItems = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/items`
+        `${API_BASE}/api/items`
       );
       setItemData(response.data[0]);
     } catch (error) {

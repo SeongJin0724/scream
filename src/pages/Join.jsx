@@ -3,6 +3,8 @@ import axios from "axios";
 import Main from "../components/section/Main";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +17,7 @@ function Register() {
   const sendVerificationCode = async () => {
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/send-verification-code`,
+        `${API_BASE}/api/send-verification-code`,
         { email }
       );
       alert("인증 코드가 이메일로 발송되었습니다.");
@@ -26,7 +28,7 @@ function Register() {
 
   const verifyCode = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/verify-code`, {
+      await axios.post(`${API_BASE}/api/verify-code`, {
         email,
         verificationCode,
       });
@@ -38,7 +40,7 @@ function Register() {
 
   const register = async () => {
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/register`, {
+      await axios.post(`${API_BASE}/api/register`, {
         email,
         password,
         name,

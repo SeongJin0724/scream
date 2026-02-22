@@ -8,6 +8,8 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import ApplyResultModal from "../components/contents/ApplyResultModal";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function UploadReview() {
   const { user } = useAuth();
   let { itemKey } = useParams();
@@ -22,7 +24,7 @@ export default function UploadReview() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/items/${itemKey}`
+          `${API_BASE}/api/items/${itemKey}`
         );
         setItem(response.data[0]);
       } catch (err) {
@@ -75,7 +77,7 @@ export default function UploadReview() {
 
     // try {
     //   const response = await axios.post(
-    //     `${process.env.REACT_APP_API_URL}/upload-image`,
+    //     `${API_BASE}/upload-image`,
     //     formData,
     //     config
     //   );

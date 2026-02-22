@@ -7,6 +7,8 @@ import MyPageUi from "../components/contents/MyPageUi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const BuyDetail = () => {
   const { user } = useAuth();
   const [offerDealDetail, setOfferDealDetail] = useState([]);
@@ -24,7 +26,7 @@ const BuyDetail = () => {
   const fetchOfferDealData = async () => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/offerDealDetail`,
+        `${API_BASE}/api/offerDealDetail`,
         {
           user_id: user.user_id,
           deal: "구매",
@@ -41,7 +43,7 @@ const BuyDetail = () => {
     const fetchOrderData = async () => {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/orderDetail`,
+          `${API_BASE}/api/orderDetail`,
           {
             user_id: user.user_id,
             deal: "구매",
@@ -60,7 +62,7 @@ const BuyDetail = () => {
     const dealKey = e.target.value;
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/deleteOfferDeal/${dealKey}`
+        `${API_BASE}/api/deleteOfferDeal/${dealKey}`
       );
       console.log("삭제 성공:", response.data);
 

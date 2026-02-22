@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const ItemDetailContext = createContext();
 
 const ItemKeyProvider = ({ children }) => {
@@ -12,7 +14,7 @@ const ItemKeyProvider = ({ children }) => {
     const fetchItemDetail = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/items/${itemKey}`
+          `${API_BASE}/api/items/${itemKey}`
         );
         setItem(response.data);
       } catch (error) {

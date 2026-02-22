@@ -13,6 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Order() {
   const { user } = useAuth();
   const token = localStorage.getItem("accessToken");
@@ -32,7 +34,7 @@ export default function Order() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/offerDeal/${dealKey}`
+          `${API_BASE}/api/offerDeal/${dealKey}`
         );
         setDealData(response.data[0]);
         setTotalPrice(true);
@@ -57,7 +59,7 @@ export default function Order() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/payment/kakao`,
+        `${API_BASE}/api/payment/kakao`,
         {
           partner_order_id: `${dealData.dealKey}`,
           partner_user_id: `${user.user_id}`,

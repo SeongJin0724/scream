@@ -4,11 +4,15 @@ import Main from "../components/section/Main";
 import axios from "axios";
 import { brands } from "../components/data/brands";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const BrandProductsPage = () => {
   const { brand } = useParams();
   const [products, setProducts] = useState([]);
 
   const matchedBrand = brands.find((item) => item.brand[1] === brand);
+  const brandLogo = matchedBrand?.logo;
+  const brandKorName = matchedBrand?.brand?.[0] || "";
 
   useEffect(() => {
     window.scrollTo({
@@ -21,7 +25,7 @@ const BrandProductsPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/brands/${brand}`
+          `${API_BASE}/api/brands/${brand}`
         );
         setProducts(response.data[0]);
       } catch (error) {
@@ -35,14 +39,16 @@ const BrandProductsPage = () => {
     <Main>
       <div className="brands_wrap">
         <div className="brand_header">
-          <img
-            src={matchedBrand.logo}
-            alt={brand}
-            className="brand_header_img"
-          />
+          {brandLogo && (
+            <img
+              src={brandLogo}
+              alt={brand}
+              className="brand_header_img"
+            />
+          )}
           <div>
             <h2 className="brand_header_title">{brand}</h2>
-            <p className="subTitle">{matchedBrand.brand[0]}</p>
+            {brandKorName && <p className="subTitle">{brandKorName}</p>}
           </div>
         </div>
 

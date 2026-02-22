@@ -3,6 +3,8 @@ import axios from "axios";
 import { banks } from "../data/bankData";
 import { useAuth } from "./AuthContext";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const AccountForm = () => {
   const [accountNum, setAccountNumber] = useState("");
   const [accountOwner, setAccountOwner] = useState("");
@@ -24,7 +26,7 @@ const AccountForm = () => {
         accountOwner,
       };
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/mypage/account`,
+        `${API_BASE}/api/mypage/account`,
         updatedUserInfo,
         {
           headers: {

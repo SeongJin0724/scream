@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Main from "../components/section/Main";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Admin() {
   const [data, setData] = useState([]);
 
   const getOffDealData = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/admin`
+        `${API_BASE}/api/admin`
       );
       setData(response.data);
     } catch (error) {
@@ -19,7 +21,7 @@ export default function Admin() {
   const postAdminSign = async (dealKey) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/adminSign`,
+        `${API_BASE}/api/adminSign`,
         {
           dealKey,
         }
@@ -31,7 +33,7 @@ export default function Admin() {
   const deleteAdminSign = async (dealKey) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/delete/adminSign`,
+        `${API_BASE}/api/delete/adminSign`,
         {
           dealKey,
         }

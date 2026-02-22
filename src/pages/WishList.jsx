@@ -5,6 +5,8 @@ import { useAuth } from "../components/contents/AuthContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function WishList() {
   const { user } = useAuth();
   const [wishlistData, setWishlistData] = useState([]);
@@ -16,7 +18,7 @@ export default function WishList() {
   const getWishList = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/get/wishlist`,
+        `${API_BASE}/api/get/wishlist`,
         {
           userId: user.user_id,
           headers: {
@@ -33,7 +35,7 @@ export default function WishList() {
   const getItems = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/items`
+        `${API_BASE}/api/items`
       );
       setItemData(response.data[0]);
     } catch (error) {

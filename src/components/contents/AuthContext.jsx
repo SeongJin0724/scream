@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -17,7 +19,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/user`,
+            `${API_BASE}/api/user`,
             {
               headers: {
                 authorization: `Bearer ${token}`,
@@ -61,7 +63,7 @@ export const AuthProvider = ({ children }) => {
     if (token && updatedUserInfo) {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/updateUser`,
+          `${API_BASE}/api/updateUser`,
           updatedUserInfo,
           {
             headers: {

@@ -6,6 +6,8 @@ import { IoIosClose } from "react-icons/io";
 import MyPageUi from "./MyPageUi";
 import AccountForm from "./Account";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function InfoChangeHome() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,7 +78,7 @@ export default function InfoChangeHome() {
       };
 
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/mypage/address`,
+        `${API_BASE}/api/mypage/address`,
         data,
         {
           headers: {
@@ -117,7 +119,7 @@ export default function InfoChangeHome() {
 
   const updateUserHandler = () => {
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/infochange`, {
+      .put(`${API_BASE}/api/infochange`, {
         email,
         password,
         tel,

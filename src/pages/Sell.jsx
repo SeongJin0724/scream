@@ -5,6 +5,8 @@ import Apply from "../components/contents/Apply";
 import ApplyResultModal from "../components/contents/ApplyResultModal";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Sell() {
   const token = localStorage.getItem("accessToken");
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ export default function Sell() {
       const handleSubmit = async () => {
         try {
           await axios.post(
-            `${process.env.REACT_APP_API_URL}/api/applyOfferDeal`,
+            `${API_BASE}/api/applyOfferDeal`,
             formData
           );
           setApply(false);

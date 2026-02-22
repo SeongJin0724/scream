@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const DealDetail = ({ type, user }) => {
   const [offerDealDetail, setOfferDealDetail] = useState([]);
   const [orderDetail, setOrderDetail] = useState([]);
@@ -12,7 +14,7 @@ const DealDetail = ({ type, user }) => {
     const fetchOfferDealData = async () => {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/offerDealDetail`,
+          `${API_BASE}/api/offerDealDetail`,
           {
             user_id: user,
             deal: type,
@@ -27,7 +29,7 @@ const DealDetail = ({ type, user }) => {
     const fetchOrderData = async () => {
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/api/orderDetail`,
+          `${API_BASE}/api/orderDetail`,
           {
             user_id: user,
             deal: type,

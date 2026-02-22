@@ -7,6 +7,8 @@ import MyPageUi from "../components/contents/MyPageUi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const MyStyle = () => {
   const { user } = useAuth();
   const [part, setPart] = useState("post");
@@ -17,7 +19,7 @@ const MyStyle = () => {
   async function fetchPost() {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/posts`,
+        `${API_BASE}/api/posts`,
         {
           user_id: user.user_id,
         }
@@ -31,7 +33,7 @@ const MyStyle = () => {
   async function fetchReview() {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/reviews`,
+        `${API_BASE}/api/reviews`,
         {
           user_id: user.user_id,
           review: false,
@@ -52,7 +54,7 @@ const MyStyle = () => {
     const reviewKey = e.target.value;
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/deleteReview/${reviewKey}`
+        `${API_BASE}/api/deleteReview/${reviewKey}`
       );
       console.log("삭제 성공:", response.data);
       setAlert(true);

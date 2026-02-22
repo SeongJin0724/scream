@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { style } from "../components/data/style";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Post() {
   const [styleItem, setStyleItem] = useState();
   const { reviewKey } = useParams();
@@ -12,7 +14,7 @@ export default function Post() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/styleItem/${reviewKey}`
+          `${API_BASE}/api/styleItem/${reviewKey}`
         );
         setStyleItem(response.data);
       } catch (err) {

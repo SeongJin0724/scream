@@ -5,6 +5,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const SearchRes = () => {
   const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,7 +23,7 @@ const SearchRes = () => {
         try {
           const result = await axios.get(
             `${
-              process.env.REACT_APP_API_URL
+              API_BASE
             }/api/search?term=${encodeURIComponent(term)}`
           );
           setResults(result.data);

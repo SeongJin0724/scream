@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function NewIn() {
   const [products, setProducts] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -16,7 +18,7 @@ export default function NewIn() {
 
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/newin?offset=${offset}`
+          `${API_BASE}/api/newin?offset=${offset}`
         );
         console.log(response.data); // 응답 데이터 로그
         const newProducts = response.data[0];

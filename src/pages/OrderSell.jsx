@@ -7,6 +7,8 @@ import ApplyResultModal from "../components/contents/ApplyResultModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 const OrderSell = () => {
   const { user } = useAuth();
   const token = localStorage.getItem("accessToken");
@@ -31,7 +33,7 @@ const OrderSell = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/offerDeal/${dealKey}`
+          `${API_BASE}/api/offerDeal/${dealKey}`
         );
         setDealData(response.data[0]);
         setTotalPrice(true);
@@ -65,7 +67,7 @@ const OrderSell = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/sendOrdersell`,
+        `${API_BASE}/api/sendOrdersell`,
         ordersellData,
         {
           headers: {

@@ -6,6 +6,8 @@ import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Shop() {
   const [category, setCategory] = useState("all");
   const [items, setItems] = useState([]);
@@ -23,7 +25,7 @@ export default function Shop() {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/filter?category=${category}`
+          `${API_BASE}/api/filter?category=${category}`
         );
         setItems(response.data);
         console.log(response.data);

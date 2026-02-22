@@ -5,6 +5,8 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Review from "../components/contents/Review";
 import { style } from "../components/data/style";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function Style() {
   const [reviews, setReviews] = useState([]);
 
@@ -12,7 +14,7 @@ export default function Style() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/reviews`
+          `${API_BASE}/api/reviews`
         );
         setReviews(response.data[0]);
       } catch (error) {

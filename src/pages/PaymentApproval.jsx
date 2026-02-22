@@ -5,6 +5,8 @@ import Main from "../components/section/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
+const API_BASE = process.env.REACT_APP_API_URL || "";
+
 export default function PaymentApproval() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -18,7 +20,7 @@ export default function PaymentApproval() {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/api/payment/approval`,
+            `${API_BASE}/api/payment/approval`,
             {
               params: {
                 dealKey,
